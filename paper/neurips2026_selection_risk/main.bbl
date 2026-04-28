@@ -1,0 +1,306 @@
+\begin{thebibliography}{35}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Arjovsky et~al.(2019)Arjovsky, Bottou, Gulrajani, and
+  Lopez-Paz]{arjovsky2019irm}
+Martin Arjovsky, L{\'e}on Bottou, Ishaan Gulrajani, and David Lopez-Paz.
+\newblock Invariant risk minimization, 2019.
+\newblock URL \url{https://arxiv.org/abs/1907.02893}.
+
+\bibitem[Arpit et~al.(2022)Arpit, Wang, Zhou, and
+  Xiong]{arpit2022ensembleaverages}
+Devansh Arpit, Huan Wang, Yingbo Zhou, and Caiming Xiong.
+\newblock Ensemble of averages: Improving model selection and boosting
+  performance in domain generalization.
+\newblock In \emph{Advances in Neural Information Processing Systems},
+  volume~35, 2022.
+\newblock URL
+  \url{https://proceedings.neurips.cc/paper_files/paper/2022/hash/372cb7805eaccb2b7eed641271a30eec-Abstract-Conference.html}.
+
+\bibitem[Bejnordi et~al.(2017)Bejnordi, Veta, Johannes~van Diest,
+  et~al.]{bejnordi2017camelyon}
+Babak~Ehteshami Bejnordi, Mitko Veta, Paul Johannes~van Diest, et~al.
+\newblock Diagnostic assessment of deep learning algorithms for detection of
+  lymph node metastases in women with breast cancer.
+\newblock \emph{JAMA}, 318\penalty0 (22):\penalty0 2199--2210, 2017.
+\newblock \doi{10.1001/jama.2017.14585}.
+
+\bibitem[Berta et~al.(2025)Berta, Holzm{\"u}ller, Jordan, and
+  Bach]{berta2025refinethencalibrate}
+Eugene Berta, David Holzm{\"u}ller, Michael~I. Jordan, and Francis~R. Bach.
+\newblock Rethinking early stopping: Refine, then calibrate, 2025.
+\newblock URL \url{https://openreview.net/forum?id=NfpdbQJE6X}.
+\newblock CoRR.
+
+\bibitem[Brier(1950)]{brier1950verification}
+Glenn~W. Brier.
+\newblock Verification of forecasts expressed in terms of probability.
+\newblock \emph{Monthly Weather Review}, 78\penalty0 (1):\penalty0 1--3, 1950.
+\newblock \doi{10.1175/1520-0493(1950)078<0001:VOFEIT>2.0.CO;2}.
+
+\bibitem[Cha et~al.(2021)Cha, Chun, Lee, Cho, Park, Lee, and Park]{cha2021swad}
+Junbum Cha, Sanghyuk Chun, Kyungjae Lee, Han-Cheol Cho, Seunghyun Park, Yunsung
+  Lee, and Sungrae Park.
+\newblock {SWAD}: Domain generalization by seeking flat minima.
+\newblock In \emph{Advances in Neural Information Processing Systems}, 2021.
+\newblock URL \url{https://openreview.net/forum?id=zkHlu_3sJYU}.
+
+\bibitem[D'Amour et~al.(2022)D'Amour, Heller, Moldovan, Adlam, Alipanahi,
+  Beutel, Chen, Deaton, Eisenstein, Hoffman, Hormozdiari, Houlsby, Hou, Jerfel,
+  Karthikesalingam, Lucic, Ma, McLean, Mincu, Mitani, Montanari, Nado,
+  Natarajan, Nielson, Osborne, Raman, Ramasamy, Sayres, Schrouff, Seneviratne,
+  Sequeira, Suresh, Veitch, Vladymyrov, Wang, Webster, Yadlowsky, Yun, Zhai,
+  and Sculley]{damour2022underspecification}
+Alexander D'Amour, Katherine Heller, Dan Moldovan, Ben Adlam, Babak Alipanahi,
+  Alex Beutel, Christina Chen, Jonathan Deaton, Jacob Eisenstein, Matthew~D.
+  Hoffman, Farhad Hormozdiari, Neil Houlsby, Shaobo Hou, Ghassen Jerfel, Alan
+  Karthikesalingam, Mario Lucic, Yian Ma, Cory McLean, Diana Mincu, Akinori
+  Mitani, Andrea Montanari, Zachary Nado, Vivek Natarajan, Christopher Nielson,
+  Thomas~F. Osborne, Rajiv Raman, Kim Ramasamy, Rory Sayres, Jessica Schrouff,
+  Martin Seneviratne, Shannon Sequeira, Harini Suresh, Victor Veitch, Max
+  Vladymyrov, Xuezhi Wang, Kellie Webster, Steve Yadlowsky, Taedong Yun,
+  Xiaohua Zhai, and D.~Sculley.
+\newblock Underspecification presents challenges for credibility in modern
+  machine learning.
+\newblock \emph{Journal of Machine Learning Research}, 23\penalty0
+  (226):\penalty0 1--61, 2022.
+\newblock URL \url{https://jmlr.org/papers/v23/20-1335.html}.
+
+\bibitem[DeGroot and Fienberg(1983)]{degroot1983comparingforecasters}
+Morris~H. DeGroot and Stephen~E. Fienberg.
+\newblock The comparison and evaluation of forecasters.
+\newblock \emph{The Statistician}, 32\penalty0 (1/2):\penalty0 12--22, 1983.
+\newblock \doi{10.2307/2987588}.
+
+\bibitem[Englesson and
+  Azizpour(2024)]{englesson2024robustclassificationregression}
+Erik Englesson and Hossein Azizpour.
+\newblock Robust classification via regression for learning with noisy labels.
+\newblock In \emph{International Conference on Learning Representations}, 2024.
+\newblock URL
+  \url{https://proceedings.iclr.cc/paper_files/paper/2024/hash/1cb5b3d64bdf3c6642c8d9a8fbecd019-Abstract-Conference.html}.
+
+\bibitem[Gao et~al.(2023)Gao, Schulman, and Hilton]{gao2023scalinglawsreward}
+Leo Gao, John Schulman, and Jacob Hilton.
+\newblock Scaling laws for reward model overoptimization.
+\newblock In \emph{Proceedings of the 40th International Conference on Machine
+  Learning}, volume 202 of \emph{Proceedings of Machine Learning Research},
+  2023.
+\newblock URL \url{https://proceedings.mlr.press/v202/gao23h.html}.
+
+\bibitem[Geirhos et~al.(2020)Geirhos, Jacobsen, Michaelis, Zemel, Brendel,
+  Bethge, and Wichmann]{geirhos2020shortcutlearning}
+Robert Geirhos, J{\"o}rn-Henrik Jacobsen, Claudio Michaelis, Richard Zemel,
+  Wieland Brendel, Matthias Bethge, and Felix~A. Wichmann.
+\newblock Shortcut learning in deep neural networks.
+\newblock \emph{Nature Machine Intelligence}, 2:\penalty0 665--673, 2020.
+\newblock \doi{10.1038/s42256-020-00257-z}.
+
+\bibitem[Gneiting and Raftery(2007)]{gneiting2007strictlyproper}
+Tilmann Gneiting and Adrian~E. Raftery.
+\newblock Strictly proper scoring rules, prediction, and estimation.
+\newblock \emph{Journal of the American Statistical Association}, 102\penalty0
+  (477):\penalty0 359--378, 2007.
+\newblock \doi{10.1198/016214506000001437}.
+
+\bibitem[Gong et~al.(2024)Gong, Bisht, and Xu]{gong2024lspll}
+Xiuwen Gong, Nitin Bisht, and Guandong Xu.
+\newblock Does label smoothing help deep partial label learning?
+\newblock In \emph{Proceedings of the 41st International Conference on Machine
+  Learning}, volume 235 of \emph{Proceedings of Machine Learning Research},
+  pages 15823--15838, 2024.
+\newblock URL \url{https://proceedings.mlr.press/v235/gong24b.html}.
+
+\bibitem[Gulrajani and Lopez-Paz(2021)]{gulrajani2020domainbed}
+Ishaan Gulrajani and David Lopez-Paz.
+\newblock In search of lost domain generalization.
+\newblock In \emph{International Conference on Learning Representations}, 2021.
+\newblock URL \url{https://openreview.net/forum?id=lQdXeXDoWtI}.
+
+\bibitem[Guo et~al.(2017)Guo, Pleiss, Sun, and Weinberger]{guo2017calibration}
+Chuan Guo, Geoff Pleiss, Yu~Sun, and Kilian~Q. Weinberger.
+\newblock On calibration of modern neural networks.
+\newblock In \emph{Proceedings of the 34th International Conference on Machine
+  Learning}, volume~70 of \emph{Proceedings of Machine Learning Research},
+  2017.
+\newblock URL \url{https://proceedings.mlr.press/v70/guo17a.html}.
+
+\bibitem[Kirichenko et~al.(2023)Kirichenko, Izmailov, and
+  Wilson]{kirichenko2023lastlayer}
+Pavel Kirichenko, Polina Izmailov, and Andrew~Gordon Wilson.
+\newblock Last layer re-training is sufficient for robustness to spurious
+  correlations.
+\newblock In \emph{International Conference on Learning Representations}, 2023.
+\newblock URL \url{https://openreview.net/forum?id=Zb6c8A1Uu0}.
+
+\bibitem[Koh et~al.(2021)Koh, Sagawa, Marklund, Xie, Zhang, Balsubramani, Hu,
+  Yasunaga, Mou, Chen, et~al.]{koh2021wilds}
+Pang~Wei Koh, Shiori Sagawa, Henrik Marklund, Sang~Michael Xie, Marvin Zhang,
+  Akshay Balsubramani, Weihua Hu, Michihiro Yasunaga, Weijie Mou, Hui Chen,
+  et~al.
+\newblock {WILDS}: A benchmark of in-the-wild distribution shifts.
+\newblock In \emph{Proceedings of the 38th International Conference on Machine
+  Learning}, volume 139 of \emph{Proceedings of Machine Learning Research},
+  2021.
+\newblock URL \url{https://proceedings.mlr.press/v139/koh21a.html}.
+
+\bibitem[Komisarenko and Kull(2024)]{komisarenko2024improvingcalibration}
+Viacheslav Komisarenko and Meelis Kull.
+\newblock Improving calibration by relating focal loss, temperature scaling,
+  and properness.
+\newblock In \emph{ECAI 2024}, volume 392 of \emph{Frontiers in Artificial
+  Intelligence and Applications}, pages 1535--1542, 2024.
+\newblock \doi{10.3233/FAIA240658}.
+\newblock URL \url{https://ebooks.iospress.nl/doi/10.3233/FAIA240658}.
+
+\bibitem[Kwa et~al.(2024)Kwa, Thomas, and
+  Garriga-Alonso]{kwa2024catastrophicgoodhart}
+Thomas Kwa, Drake Thomas, and Adria Garriga-Alonso.
+\newblock Catastrophic {Goodhart}: Regularizing {RLHF} with {KL} divergence
+  does not mitigate heavy-tailed reward misspecification.
+\newblock In \emph{Advances in Neural Information Processing Systems}, 2024.
+\newblock \doi{10.52202/079017-0466}.
+\newblock URL
+  \url{https://proceedings.neurips.cc/paper_files/paper/2024/hash/1a8189929f3d7bd6183718f42c3f4309-Abstract-Conference.html}.
+
+\bibitem[Laidlaw et~al.(2025)Laidlaw, Singhal, and
+  Dragan]{laidlaw2025correlatedproxies}
+Cassidy Laidlaw, Shivam Singhal, and Anca Dragan.
+\newblock Correlated proxies: A new definition and improved mitigation for
+  reward hacking.
+\newblock In \emph{International Conference on Learning Representations}, 2025.
+\newblock URL
+  \url{https://proceedings.iclr.cc/paper_files/paper/2025/hash/dbe2cfe4767f3255160b73a36ae3162e-Abstract-Conference.html}.
+
+\bibitem[Lin et~al.(2017)Lin, Goyal, Girshick, He, and
+  Doll{\'a}r]{lin2017focalloss}
+Tsung-Yi Lin, Priya Goyal, Ross Girshick, Kaiming He, and Piotr Doll{\'a}r.
+\newblock Focal loss for dense object detection.
+\newblock In \emph{Proceedings of the IEEE International Conference on Computer
+  Vision (ICCV)}, pages 2980--2988, 2017.
+\newblock \doi{10.1109/ICCV.2017.324}.
+
+\bibitem[Manheim and Garrabrant(2018)]{manheim2018categorizinggoodhart}
+David Manheim and Scott Garrabrant.
+\newblock Categorizing variants of {Goodhart}'s law, 2018.
+\newblock URL \url{https://arxiv.org/abs/1803.04585}.
+
+\bibitem[Naganuma et~al.(2025)Naganuma, Hataya, Yoshida, and
+  Mitliagkas]{naganuma2025pretrainedmodelselection}
+Hiroki Naganuma, Ryuichiro Hataya, Kotaro Yoshida, and Ioannis Mitliagkas.
+\newblock An empirical study of pre-trained model selection for
+  out-of-distribution generalization and calibration.
+\newblock \emph{Transactions on Machine Learning Research}, 2025.
+\newblock URL \url{https://openreview.net/forum?id=tYjoHjShxF}.
+
+\bibitem[Natarajan et~al.(2013)Natarajan, Dhillon, Ravikumar, and
+  Tewari]{natarajan2013noisylabels}
+Nagarajan Natarajan, Inderjit~S. Dhillon, Pradeep~K. Ravikumar, and Ambuj
+  Tewari.
+\newblock Learning with noisy labels.
+\newblock In \emph{Advances in Neural Information Processing Systems}, 2013.
+\newblock URL
+  \url{https://proceedings.neurips.cc/paper/2013/file/3871bd64012152bfb53fdf04b401193f-Paper.pdf}.
+
+\bibitem[Ovadia et~al.(2019)Ovadia, Fertig, Ren, Nado, Sculley, Nowozin,
+  Dillon, Lakshminarayanan, and Snoek]{ovadia2019uncertaintyshift}
+Yaniv Ovadia, Emily Fertig, Jie Ren, Zachary Nado, D.~Sculley, Sebastian
+  Nowozin, Joshua Dillon, Balaji Lakshminarayanan, and Jasper Snoek.
+\newblock Can you trust your model's uncertainty? evaluating predictive
+  uncertainty under dataset shift.
+\newblock In \emph{Advances in Neural Information Processing Systems},
+  volume~32, 2019.
+\newblock URL
+  \url{https://proceedings.neurips.cc/paper/2019/hash/8558cb408c1d76621371888657d2eb1d-Abstract.html}.
+
+\bibitem[Patrini et~al.(2017)Patrini, Rozza, Menon, Nock, and
+  Qu]{patrini2017losscorrection}
+Giorgio Patrini, Alessandro Rozza, Aditya~Krishna Menon, Richard Nock, and
+  Lizhen Qu.
+\newblock Making deep neural networks robust to label noise: A loss correction
+  approach.
+\newblock In \emph{Proceedings of the IEEE Conference on Computer Vision and
+  Pattern Recognition (CVPR)}, pages 2233--2241, 2017.
+\newblock \doi{10.1109/CVPR.2017.240}.
+
+\bibitem[Reed et~al.(2015)Reed, Lee, Anguelov, Szegedy, Erhan, and
+  Rabinovich]{reed2014bootstrapping}
+Scott Reed, Honglak Lee, Dragomir Anguelov, Christian Szegedy, Dumitru Erhan,
+  and Andrew Rabinovich.
+\newblock Training deep neural networks on noisy labels with bootstrapping,
+  2015.
+\newblock URL \url{https://arxiv.org/abs/1412.6596}.
+
+\bibitem[Reid and Williamson(2010)]{reid2010composite}
+Mark~D. Reid and Robert~C. Williamson.
+\newblock Composite binary losses.
+\newblock \emph{Journal of Machine Learning Research}, 11:\penalty0 2387--2422,
+  2010.
+\newblock URL \url{https://www.jmlr.org/papers/v11/reid10a.html}.
+
+\bibitem[Sagawa et~al.(2020)Sagawa, Koh, Hashimoto, and
+  Liang]{sagawa2020groupdro}
+Shiori Sagawa, Pang~Wei Koh, Tatsunori Hashimoto, and Percy Liang.
+\newblock Distributionally robust neural networks for group shifts: On the
+  importance of regularization for worst-case generalization.
+\newblock In \emph{International Conference on Learning Representations}, 2020.
+\newblock URL \url{https://arxiv.org/abs/1911.08731}.
+
+\bibitem[Savage(1971)]{savage1971elicitation}
+Leonard~J. Savage.
+\newblock Elicitation of personal probabilities and expectations.
+\newblock \emph{Journal of the American Statistical Association}, 66\penalty0
+  (336):\penalty0 783--801, 1971.
+\newblock \doi{10.1080/01621459.1971.10482346}.
+
+\bibitem[Teterwak et~al.(2025)Teterwak, Saito, Tsiligkaridis, Saenko, and
+  Plummer]{teterwak2025ermpp}
+Piotr Teterwak, Kuniaki Saito, Theodoros Tsiligkaridis, Kate Saenko, and Bryan
+  Plummer.
+\newblock {ERM++}: An improved baseline for domain generalization.
+\newblock In \emph{Proceedings of the Winter Conference on Applications of
+  Computer Vision (WACV)}, pages 8514--8524, 2025.
+\newblock URL
+  \url{https://openaccess.thecvf.com/content/WACV2025/html/Teterwak_ERM_An_Improved_Baseline_for_Domain_Generalization_WACV_2025_paper.html}.
+
+\bibitem[Wang et~al.(2019)Wang, Ma, Chen, Luo, Yi, and
+  Bailey]{wang2019symmetriccrossentropy}
+Yisen Wang, Xingjun Ma, Zaiyi Chen, Yuan Luo, Jinfeng Yi, and James Bailey.
+\newblock Symmetric cross entropy for robust learning with noisy labels.
+\newblock In \emph{Proceedings of the IEEE/CVF International Conference on
+  Computer Vision (ICCV)}, pages 322--330, 2019.
+\newblock \doi{10.1109/ICCV.2019.00041}.
+\newblock URL
+  \url{https://openaccess.thecvf.com/content_ICCV_2019/html/Wang_Symmetric_Cross_Entropy_for_Robust_Learning_With_Noisy_Labels_ICCV_2019_paper.html}.
+
+\bibitem[Wei et~al.(2022)Wei, Liu, Liu, Niu, Sugiyama, and
+  Liu]{wei2022smoothnoisy}
+Jiaheng Wei, Hangyu Liu, Tongliang Liu, Gang Niu, Masashi Sugiyama, and Yang
+  Liu.
+\newblock To smooth or not? when label smoothing meets noisy labels.
+\newblock In \emph{Proceedings of the 39th International Conference on Machine
+  Learning}, volume 162 of \emph{Proceedings of Machine Learning Research},
+  pages 23589--23614, 2022.
+\newblock URL \url{https://proceedings.mlr.press/v162/wei22b.html}.
+
+\bibitem[Yang et~al.(2023)Yang, Zhang, Katabi, and
+  Ghassemi]{yang2023changeishard}
+Yuzhe Yang, Haoran Zhang, Dina Katabi, and Marzyeh Ghassemi.
+\newblock Change is hard: A closer look at subpopulation shift.
+\newblock In \emph{Proceedings of the 40th International Conference on Machine
+  Learning}, volume 202 of \emph{Proceedings of Machine Learning Research},
+  pages 39584--39622, 2023.
+\newblock URL \url{https://proceedings.mlr.press/v202/yang23s.html}.
+
+\bibitem[Zhang and Sabuncu(2018)]{zhang2018generalizedcrossentropy}
+Zhilu Zhang and Mert~R. Sabuncu.
+\newblock Generalized cross entropy loss for training deep neural networks with
+  noisy labels.
+\newblock In \emph{Advances in Neural Information Processing Systems}, 2018.
+\newblock URL \url{https://arxiv.org/abs/1805.07836}.
+
+\end{thebibliography}

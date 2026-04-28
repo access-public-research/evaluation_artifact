@@ -1,0 +1,5 @@
+# ERM with soft-clipped loss (CelebA P99, alpha=0.10)
+name: erm_softclip_p99_a10
+objective: erm
+clip_loss: 2.2305514574
+clip_alpha: 0.10

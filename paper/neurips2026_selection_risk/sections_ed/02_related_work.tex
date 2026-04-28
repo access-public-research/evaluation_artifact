@@ -1,0 +1,22 @@
+\section{Related Work}
+Our framing is closest to work showing that model selection under shift is itself an evaluation-design problem.
+DomainBed foregrounds careful tuning and fair comparison in domain generalization \citep{gulrajani2020domainbed}, SWAD and Ensemble of Averages modify averaging and stopping behavior to stabilize out-of-domain selection \citep{cha2021swad,arpit2022ensembleaverages}, Change is Hard studies how selector choice changes subgroup-robustness conclusions \citep{yang2023changeishard}, ERM++ strengthens the ERM baseline partly through more disciplined selection choices \citep{teterwak2025ermpp}, and recent OOD work studies how stopping rules affect both generalization and calibration \citep{naganuma2025pretrainedmodelselection,berta2025refinethencalibrate}.
+Underspecification gives a nearby framing at the pipeline level: predictors that look equivalent on the in-distribution validation surface can still diverge materially at deployment \citep{damour2022underspecification}.
+What is different here is not the generic claim that selection matters.
+It is the narrower protocol claim that, under suppressive objectives, a run can become misleading when selected by its own proxy, that validation loss can still fail on a cross-modal anchor, and that the resulting selector mismatch can be transient or persistent depending on how suppressive orientation evolves over training.
+In that sense, underspecification is about deployment-divergent models returned by a pipeline, while this paper studies underspecification of the \emph{selection protocol} inside a suppressive training workflow.
+
+The paper also connects to proxy misspecification and Goodhart-style overoptimization, where optimizing a measurable proxy ceases to track the quantity that actually matters \citep{manheim2018categorizinggoodhart,gao2023scalinglawsreward,kwa2024catastrophicgoodhart,laidlaw2025correlatedproxies}.
+We study the same basic failure mode in a supervised-learning setting.
+The issue is not reward optimization at inference time, but checkpoint selection under shaped training objectives and distribution shift.
+What is selected as the ``best'' checkpoint can therefore be an artifact of the evaluation protocol itself.
+
+Cross-entropy is a strictly proper scoring rule, while shaped objectives can distort that relationship \citep{savage1971elicitation,gneiting2007strictlyproper,reid2010composite}.
+This matters here because the selected-checkpoint failures are not only about higher held-out loss; they also show systematic calibration degradation under shift, linking our selector hazard to a broader reliability literature on calibration and uncertainty under distribution shift \citep{guo2017calibration,ovadia2019uncertaintyshift,komisarenko2024improvingcalibration,brier1950verification,degroot1983comparingforecasters}.
+
+We also build on the distribution-shift and robust-learning literature around GroupDRO, domain generalization, shortcut learning, and WILDS benchmarks \citep{sagawa2020groupdro,koh2021wilds,arjovsky2019irm,gulrajani2020domainbed,geirhos2020shortcutlearning,kirichenko2023lastlayer,bejnordi2017camelyon}.
+Our goal is different from proposing a new robust optimizer.
+Instead, we ask whether the checkpoint preferred by a suppressive objective remains trustworthy when judged by standard held-out loss and tail-sensitive or group-sensitive diagnostics.
+
+Finally, we connect to work on reshaping hard-example gradients, including focal loss and noisy-label objectives \citep{lin2017focalloss,natarajan2013noisylabels,patrini2017losscorrection,reed2014bootstrapping,zhang2018generalizedcrossentropy}.
+Our same-stack family controls show that these families are not interchangeable for evaluation: the sign of tail movement differs across families even on the same Camelyon17 ERM stack, and the strongest loss, calibration, and tail degradation concentrate in the suppressive family.

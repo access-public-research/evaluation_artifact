@@ -1,0 +1,6 @@
+# CivilComments dataset config
+name: civilcomments
+wilds_dataset: civilcomments
+data_dir: ./data
+spurious_metadata_field: black
+max_token_length: 300

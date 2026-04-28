@@ -1,0 +1,4 @@
+family,regime,baseline_regime,n,delta_heldout_loss,delta_heldout_acc,delta_tail_cvar,delta_ece
+SoftClip P95,erm_softclip_p95_a10_cam_finetune,erm_finetune,10,0.22106124165064722,0.04654925106402985,6.625987946987153,0.024527350537460108
+Label smoothing 0.10,erm_labelsmooth_e10_cam_finetune,erm_finetune,10,-0.27589530482823155,0.029090930467702836,-2.6474831342697143,0.013866765856932466
+Focal 2,erm_focal_g2_cam_finetune,erm_finetune,10,-0.27972080716955183,-0.02643144355350735,-2.5260262727737426,0.02422834771446239

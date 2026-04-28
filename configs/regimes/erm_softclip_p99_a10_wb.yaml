@@ -1,0 +1,5 @@
+# ERM with soft-clipped loss (Waterbirds P99, alpha=0.10)
+name: erm_softclip_p99_a10_wb
+objective: erm
+clip_loss: 1.6665156531
+clip_alpha: 0.10

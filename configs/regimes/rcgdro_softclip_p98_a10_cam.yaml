@@ -1,0 +1,6 @@
+# Camelyon17 soft-clip P98 (alpha=0.10)
+name: rcgdro_softclip_p98_a10_cam
+objective: rcgdro
+eta: 0.1
+clip_loss: 1.3947149396
+clip_alpha: 0.10

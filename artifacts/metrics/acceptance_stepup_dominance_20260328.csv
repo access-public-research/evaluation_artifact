@@ -1,0 +1,4 @@
+suite_label,n,n_proxy_better,n_proxy_better_and_val_loss_worse,n_proxy_better_and_test_loss_worse,n_proxy_better_and_tail_worse,n_proxy_better_and_ece_worse,mean_test_acc_delta,n_proxy_better_and_wg_loss_worse,mean_wg_acc_delta
+Camelyon17 ERM,10,10,10,10,10,10,0.0009852564253297427,,
+Camelyon17 Finetune,10,8,8,7,7,8,0.025108754438356827,,
+CivilComments,10,10,10,10,0,10,-0.00398708346414313,10.0,-0.14737886382623222

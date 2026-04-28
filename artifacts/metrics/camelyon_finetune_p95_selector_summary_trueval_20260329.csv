@@ -1,0 +1,5 @@
+suite,suite_label,selection_policy,selector_label,accept_rate,delta_loss,delta_acc,delta_tail
+camelyon_finetune_p95,Camelyon17 Finetune,baseline,Baseline,1.0,0.0,0.0,0.0
+camelyon_finetune_p95,Camelyon17 Finetune,proxy_only,Proxy-only,1.0,0.6185242155409866,0.02510875443835684,6.2263586044311525
+camelyon_finetune_p95,Camelyon17 Finetune,val_loss_only,Val-loss-only,1.0,0.6088803221801042,-0.006058504009217647,2.8022512197494507
+camelyon_finetune_p95,Camelyon17 Finetune,guardrail,1.25x guardrail,0.4,0.06794714215657438,0.009692665835821967,0.45952452421188356

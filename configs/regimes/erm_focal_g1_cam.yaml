@@ -1,0 +1,4 @@
+# ERM with focal loss gamma=1.0 (Camelyon)
+name: erm_focal_g1_cam
+objective: erm
+focal_gamma: 1.0

@@ -1,0 +1,33 @@
+\section{Experiments}
+We focus the main paper on the smallest set of settings needed to establish the scientific case.
+
+\paragraph{Datasets and held-out metrics.}
+Camelyon17 is the primary persistent anchor under hospital shift, evaluated with held-out hospital-2 loss, accuracy, calibration, and the teacher-tail stress diagnostic.
+CelebA is the transient subgroup-shift contrast, CivilComments is the clearest non-vision selector-verdict reversal under overall loss and official WILDS worst-group loss, and ACSIncome is the geographic-shift regression extension with held-out MSE and tail MSE.
+Because hospital~2 is the held-out deployment domain in Camelyon17, held-out hospital-2 loss is the primary reliability view and coincides with worst-domain loss there.
+ACSIncome trains on Census divisions $\{1,2,3,5,7,9\}$, validates on $\{4,8\}$, and tests on $\{6\}$ under geographic shift.
+
+\paragraph{Training families.}
+The main paper uses two core training stacks:
+ERM on frozen embeddings and end-to-end Camelyon17 finetuning.
+CivilComments uses frozen DistilBERT embeddings with linear probes in the main text, while the strongest end-to-end anchor is tested on Camelyon17.
+Table~\ref{tab:selector-comparison} keeps the absolute Camelyon17 selector comparison, including the baseline reference row, and adds compact selector-verdict rows for frozen CivilComments and ACSIncome.
+Appendix~\ref{app:civilcomments-text-e2e} adds a ten-seed end-to-end CivilComments corroboration on an official-group-aware validation surface, but Camelyon17 remains the cleaner end-to-end anchor.
+Supporting adaptive runs are deferred to the appendix because the paper's main claim is selection-level, not optimizer-level.
+
+\paragraph{Main stress-test setting.}
+We use soft-clipped P95 as the main suppressive stress-test setting.
+Appendix dose-response sweeps show that the selected-checkpoint harm weakens at P97/P99 but does not disappear immediately on the strongest Camelyon anchors.
+Higher clip thresholds are retained as supportive appendix sweep detail rather than as co-equal main-text settings.
+
+\paragraph{Selected versus fixed checkpoints.}
+Each suite reports two views.
+The main view uses the actual proxy-selected checkpoint.
+The robustness view compares against a matched fixed horizon: epoch 30 for frozen-embedding ERM and epoch 10 for end-to-end finetuning.
+This matters because the CelebA ERM result is transient while the Camelyon17 cases are persistent.
+
+\paragraph{Sample sizes and controls.}
+The core ERM, objective-family, and finetuning sweeps use $n=10$ seeds.
+The objective-family control section compares soft clipping, focal loss \citep{lin2017focalloss}, and label smoothing on the same Camelyon17 ERM stack, with end-to-end Camelyon17 finetune controls summarized in the appendix.
+Appendix Table~\ref{tab:bootstrap-camelyon-support} adds a ten-seed hard-bootstrap corroboration on the same Camelyon17 ERM stack.
+Additional sweep detail, uncertainty summaries, and supporting adaptive controls are moved to the appendix.

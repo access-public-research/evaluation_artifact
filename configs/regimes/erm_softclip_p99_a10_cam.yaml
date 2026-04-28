@@ -1,0 +1,5 @@
+# ERM with soft-clipped loss (Camelyon17 P99, alpha=0.10)
+name: erm_softclip_p99_a10_cam
+objective: erm
+clip_loss: 2.0538500309
+clip_alpha: 0.10

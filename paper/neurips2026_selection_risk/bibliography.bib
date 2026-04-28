@@ -1,0 +1,518 @@
+% Consolidated bibliography for the NeurIPS 2026 E&D submission.
+% Source: project references and verified related-work entries.
+
+% =========================
+% Proxy optimization / Goodhart / reward overoptimization
+% =========================
+
+@inproceedings{kwa2024catastrophicgoodhart,
+  title        = {Catastrophic {Goodhart}: Regularizing {RLHF} with {KL} Divergence Does Not Mitigate Heavy-Tailed Reward Misspecification},
+  author       = {Kwa, Thomas and Thomas, Drake and Garriga-Alonso, Adria},
+  booktitle    = {Advances in Neural Information Processing Systems},
+  year         = {2024},
+  doi          = {10.52202/079017-0466},
+  url          = {https://proceedings.neurips.cc/paper_files/paper/2024/hash/1a8189929f3d7bd6183718f42c3f4309-Abstract-Conference.html}
+}
+
+@inproceedings{laidlaw2025correlatedproxies,
+  title        = {Correlated Proxies: A New Definition and Improved Mitigation for Reward Hacking},
+  author       = {Laidlaw, Cassidy and Singhal, Shivam and Dragan, Anca},
+  booktitle    = {International Conference on Learning Representations},
+  year         = {2025},
+  url          = {https://proceedings.iclr.cc/paper_files/paper/2025/hash/dbe2cfe4767f3255160b73a36ae3162e-Abstract-Conference.html}
+}
+
+@inproceedings{gao2023scalinglawsreward,
+  title        = {Scaling Laws for Reward Model Overoptimization},
+  author       = {Gao, Leo and Schulman, John and Hilton, Jacob},
+  booktitle    = {Proceedings of the 40th International Conference on Machine Learning},
+  series       = {Proceedings of Machine Learning Research},
+  volume       = {202},
+  year         = {2023},
+  url          = {https://proceedings.mlr.press/v202/gao23h.html}
+}
+
+@inproceedings{rafailov2024scalinglawsdirectalignment,
+  title        = {Scaling Laws for Reward Model Overoptimization in Direct Alignment Algorithms},
+  author       = {Rafailov, Rafael and Chittepu, Yaswanth and Park, Ryan and Sikchi, Harshit and Hejna, Joey and Knox, W. Bradley and Finn, Chelsea and Niekum, Scott},
+  booktitle    = {Advances in Neural Information Processing Systems},
+  year         = {2024},
+  doi          = {10.52202/079017-4009},
+  url          = {https://proceedings.neurips.cc/paper_files/paper/2024/hash/e45caa3d5273d105b8d045e748636957-Abstract-Conference.html}
+}
+
+@misc{maier2025takegoodhart,
+  title        = {Take Goodhart Seriously: Principled Limit on General-Purpose {AI} Optimization},
+  author       = {Maier, Antoine and Maier, Aude and David, Tom},
+  year         = {2025},
+  eprint       = {2510.02840},
+  archivePrefix= {arXiv},
+  primaryClass = {cs.AI},
+  url          = {https://arxiv.org/abs/2510.02840}
+}
+
+@inproceedings{ren2026riskpo,
+  title        = {{RiskPO}: Risk-based Policy Optimization with Verifiable Reward for {LLM} Post-Training},
+  author       = {Ren, Tao and Jiang, Jinyang and Yang, Hui and Tian, Wan and Zou, Minhao and Li, Guanghao and Zhang, Zishi and Wang, Qinghao and Qin, Shentao and Zhao, Yanjun and Tao, Rui and Shao, Hui and Peng, Yijie},
+  booktitle    = {International Conference on Learning Representations},
+  year         = {2026},
+  url          = {https://openreview.net/forum?id=KjHB7rebQO}
+}
+
+@misc{bal2025eslm,
+  title        = {{ESLM}: Risk-Averse Selective Language Modeling for Efficient Pretraining},
+  author       = {Bal, Melis Ilayda and Cevher, Volkan and Muehlebach, Michael},
+  year         = {2025},
+  eprint       = {2505.19893},
+  archivePrefix= {arXiv},
+  primaryClass = {cs.LG},
+  url          = {https://arxiv.org/abs/2505.19893}
+}
+
+@misc{hsu2026bestoftails,
+  title        = {Best-of-Tails: Bridging Optimism and Pessimism in Inference-Time Alignment},
+  author       = {Hsu, Hsiang and Lei, Eric and Chen, Chun-Fu},
+  year         = {2026},
+  eprint       = {2603.06797},
+  archivePrefix= {arXiv},
+  primaryClass = {cs.AI},
+  url          = {https://arxiv.org/abs/2603.06797}
+}
+
+@misc{manheim2018categorizinggoodhart,
+  title        = {Categorizing Variants of {Goodhart}'s Law},
+  author       = {Manheim, David and Garrabrant, Scott},
+  year         = {2018},
+  eprint       = {1803.04585},
+  archivePrefix= {arXiv},
+  primaryClass = {cs.AI},
+  url          = {https://arxiv.org/abs/1803.04585}
+}
+
+@misc{amodei2016concreteproblems,
+  title        = {Concrete Problems in {AI} Safety},
+  author       = {Amodei, Dario and Olah, Chris and Steinhardt, Jacob and Christiano, Paul and Schulman, John and Man{\'e}, Dan},
+  year         = {2016},
+  eprint       = {1606.06565},
+  archivePrefix= {arXiv},
+  primaryClass = {cs.AI},
+  url          = {https://arxiv.org/abs/1606.06565}
+}
+
+% =========================
+% Proper scoring rules / properness / calibration
+% =========================
+
+@article{savage1971elicitation,
+  title        = {Elicitation of Personal Probabilities and Expectations},
+  author       = {Savage, Leonard J.},
+  journal      = {Journal of the American Statistical Association},
+  volume       = {66},
+  number       = {336},
+  pages        = {783--801},
+  year         = {1971},
+  doi          = {10.1080/01621459.1971.10482346}
+}
+
+@article{gneiting2007strictlyproper,
+  title        = {Strictly Proper Scoring Rules, Prediction, and Estimation},
+  author       = {Gneiting, Tilmann and Raftery, Adrian E.},
+  journal      = {Journal of the American Statistical Association},
+  volume       = {102},
+  number       = {477},
+  pages        = {359--378},
+  year         = {2007},
+  doi          = {10.1198/016214506000001437}
+}
+
+@article{reid2010composite,
+  title        = {Composite Binary Losses},
+  author       = {Reid, Mark D. and Williamson, Robert C.},
+  journal      = {Journal of Machine Learning Research},
+  volume       = {11},
+  pages        = {2387--2422},
+  year         = {2010},
+  url          = {https://www.jmlr.org/papers/v11/reid10a.html}
+}
+
+@inproceedings{guo2017calibration,
+  title        = {On Calibration of Modern Neural Networks},
+  author       = {Guo, Chuan and Pleiss, Geoff and Sun, Yu and Weinberger, Kilian Q.},
+  booktitle    = {Proceedings of the 34th International Conference on Machine Learning},
+  series       = {Proceedings of Machine Learning Research},
+  volume       = {70},
+  year         = {2017},
+  url          = {https://proceedings.mlr.press/v70/guo17a.html}
+}
+
+@inproceedings{ovadia2019uncertaintyshift,
+  title        = {Can You Trust Your Model's Uncertainty? Evaluating Predictive Uncertainty Under Dataset Shift},
+  author       = {Ovadia, Yaniv and Fertig, Emily and Ren, Jie and Nado, Zachary and Sculley, D. and Nowozin, Sebastian and Dillon, Joshua and Lakshminarayanan, Balaji and Snoek, Jasper},
+  booktitle    = {Advances in Neural Information Processing Systems},
+  volume       = {32},
+  year         = {2019},
+  url          = {https://proceedings.neurips.cc/paper/2019/hash/8558cb408c1d76621371888657d2eb1d-Abstract.html}
+}
+
+@article{damour2022underspecification,
+  title        = {Underspecification Presents Challenges for Credibility in Modern Machine Learning},
+  author       = {D'Amour, Alexander and Heller, Katherine and Moldovan, Dan and Adlam, Ben and Alipanahi, Babak and Beutel, Alex and Chen, Christina and Deaton, Jonathan and Eisenstein, Jacob and Hoffman, Matthew D. and Hormozdiari, Farhad and Houlsby, Neil and Hou, Shaobo and Jerfel, Ghassen and Karthikesalingam, Alan and Lucic, Mario and Ma, Yian and McLean, Cory and Mincu, Diana and Mitani, Akinori and Montanari, Andrea and Nado, Zachary and Natarajan, Vivek and Nielson, Christopher and Osborne, Thomas F. and Raman, Rajiv and Ramasamy, Kim and Sayres, Rory and Schrouff, Jessica and Seneviratne, Martin and Sequeira, Shannon and Suresh, Harini and Veitch, Victor and Vladymyrov, Max and Wang, Xuezhi and Webster, Kellie and Yadlowsky, Steve and Yun, Taedong and Zhai, Xiaohua and Sculley, D.},
+  journal      = {Journal of Machine Learning Research},
+  volume       = {23},
+  number       = {226},
+  pages        = {1--61},
+  year         = {2022},
+  url          = {https://jmlr.org/papers/v23/20-1335.html}
+}
+
+
+@article{degroot1983comparingforecasters,
+  title        = {The Comparison and Evaluation of Forecasters},
+  author       = {DeGroot, Morris H. and Fienberg, Stephen E.},
+  journal      = {The Statistician},
+  volume       = {32},
+  number       = {1/2},
+  pages        = {12--22},
+  year         = {1983},
+  doi          = {10.2307/2987588}
+}
+
+@article{brier1950verification,
+  title        = {Verification of Forecasts Expressed in Terms of Probability},
+  author       = {Brier, Glenn W.},
+  journal      = {Monthly Weather Review},
+  volume       = {78},
+  number       = {1},
+  pages        = {1--3},
+  year         = {1950},
+  doi          = {10.1175/1520-0493(1950)078<0001:VOFEIT>2.0.CO;2}
+}
+
+@inproceedings{natarajan2013noisylabels,
+  title        = {Learning with Noisy Labels},
+  author       = {Natarajan, Nagarajan and Dhillon, Inderjit S. and Ravikumar, Pradeep K. and Tewari, Ambuj},
+  booktitle    = {Advances in Neural Information Processing Systems},
+  year         = {2013},
+  url          = {https://proceedings.neurips.cc/paper/2013/file/3871bd64012152bfb53fdf04b401193f-Paper.pdf}
+}
+
+@misc{frohlich2024subsetscoringrules,
+  title        = {Scoring Rules and Calibration for Imprecise Probabilities},
+  author       = {Fr{\"o}hlich, Christian and Williamson, Robert C.},
+  year         = {2024},
+  eprint       = {2410.23001},
+  archivePrefix= {arXiv},
+  primaryClass = {cs.LG},
+  url          = {https://arxiv.org/abs/2410.23001}
+}
+
+@inproceedings{komisarenko2024improvingcalibration,
+  title        = {Improving Calibration by Relating Focal Loss, Temperature Scaling, and Properness},
+  author       = {Komisarenko, Viacheslav and Kull, Meelis},
+  booktitle    = {ECAI 2024},
+  series       = {Frontiers in Artificial Intelligence and Applications},
+  volume       = {392},
+  pages        = {1535--1542},
+  year         = {2024},
+  doi          = {10.3233/FAIA240658},
+  url          = {https://ebooks.iospress.nl/doi/10.3233/FAIA240658}
+}
+
+% =========================
+% Improper / robust losses (clipping, saturation, label noise)
+% =========================
+
+@inproceedings{zhang2018generalizedcrossentropy,
+  title        = {Generalized Cross Entropy Loss for Training Deep Neural Networks with Noisy Labels},
+  author       = {Zhang, Zhilu and Sabuncu, Mert R.},
+  booktitle    = {Advances in Neural Information Processing Systems},
+  year         = {2018},
+  eprint       = {1805.07836},
+  archivePrefix= {arXiv},
+  primaryClass = {cs.LG},
+  url          = {https://arxiv.org/abs/1805.07836}
+}
+
+@inproceedings{lin2017focalloss,
+  title        = {Focal Loss for Dense Object Detection},
+  author       = {Lin, Tsung-Yi and Goyal, Priya and Girshick, Ross and He, Kaiming and Doll{\'a}r, Piotr},
+  booktitle    = {Proceedings of the IEEE International Conference on Computer Vision (ICCV)},
+  year         = {2017},
+  pages        = {2980--2988},
+  doi          = {10.1109/ICCV.2017.324}
+}
+
+@inproceedings{patrini2017losscorrection,
+  title        = {Making Deep Neural Networks Robust to Label Noise: A Loss Correction Approach},
+  author       = {Patrini, Giorgio and Rozza, Alessandro and Menon, Aditya Krishna and Nock, Richard and Qu, Lizhen},
+  booktitle    = {Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year         = {2017},
+  pages        = {2233--2241},
+  doi          = {10.1109/CVPR.2017.240}
+}
+
+@misc{reed2014bootstrapping,
+  title        = {Training Deep Neural Networks on Noisy Labels with Bootstrapping},
+  author       = {Reed, Scott and Lee, Honglak and Anguelov, Dragomir and Szegedy, Christian and Erhan, Dumitru and Rabinovich, Andrew},
+  booktitle    = {3rd International Conference on Learning Representations, Workshop Track},
+  year         = {2015},
+  url          = {https://arxiv.org/abs/1412.6596}
+}
+
+@inproceedings{wei2022smoothnoisy,
+  title        = {To Smooth or Not? When Label Smoothing Meets Noisy Labels},
+  author       = {Wei, Jiaheng and Liu, Hangyu and Liu, Tongliang and Niu, Gang and Sugiyama, Masashi and Liu, Yang},
+  booktitle    = {Proceedings of the 39th International Conference on Machine Learning},
+  series       = {Proceedings of Machine Learning Research},
+  volume       = {162},
+  pages        = {23589--23614},
+  year         = {2022},
+  url          = {https://proceedings.mlr.press/v162/wei22b.html}
+}
+
+@inproceedings{gong2024lspll,
+  title        = {Does Label Smoothing Help Deep Partial Label Learning?},
+  author       = {Gong, Xiuwen and Bisht, Nitin and Xu, Guandong},
+  booktitle    = {Proceedings of the 41st International Conference on Machine Learning},
+  series       = {Proceedings of Machine Learning Research},
+  volume       = {235},
+  pages        = {15823--15838},
+  year         = {2024},
+  url          = {https://proceedings.mlr.press/v235/gong24b.html}
+}
+
+@inproceedings{wang2019symmetriccrossentropy,
+  title        = {Symmetric Cross Entropy for Robust Learning With Noisy Labels},
+  author       = {Wang, Yisen and Ma, Xingjun and Chen, Zaiyi and Luo, Yuan and Yi, Jinfeng and Bailey, James},
+  booktitle    = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
+  pages        = {322--330},
+  year         = {2019},
+  doi          = {10.1109/ICCV.2019.00041},
+  url          = {https://openaccess.thecvf.com/content_ICCV_2019/html/Wang_Symmetric_Cross_Entropy_for_Robust_Learning_With_Noisy_Labels_ICCV_2019_paper.html}
+}
+
+@inproceedings{englesson2024robustclassificationregression,
+  title        = {Robust Classification via Regression for Learning with Noisy Labels},
+  author       = {Englesson, Erik and Azizpour, Hossein},
+  booktitle    = {International Conference on Learning Representations},
+  year         = {2024},
+  url          = {https://proceedings.iclr.cc/paper_files/paper/2024/hash/1cb5b3d64bdf3c6642c8d9a8fbecd019-Abstract-Conference.html}
+}
+
+% =========================
+% Tail risk / CVaR / distributionally robust optimization
+% =========================
+
+@article{rockafellar2000cvar,
+  title        = {Optimization of Conditional Value-at-Risk},
+  author       = {Rockafellar, R. Tyrrell and Uryasev, Stanislav},
+  journal      = {Journal of Risk},
+  volume       = {2},
+  number       = {3},
+  pages        = {21--42},
+  year         = {2000},
+  doi          = {10.21314/JOR.2000.038}
+}
+
+@article{rockafellar2002cvar,
+  title        = {Conditional Value-at-Risk for General Loss Distributions},
+  author       = {Rockafellar, R. Tyrrell and Uryasev, Stanislav},
+  journal      = {Journal of Banking \& Finance},
+  volume       = {26},
+  number       = {7},
+  pages        = {1443--1471},
+  year         = {2002},
+  doi          = {10.1016/S0378-4266(02)00271-6}
+}
+
+@book{bental2009robustoptimization,
+  title        = {Robust Optimization},
+  author       = {Ben-Tal, Aharon and El Ghaoui, Laurent and Nemirovski, Arkadi},
+  publisher    = {Princeton University Press},
+  year         = {2009},
+  isbn         = {9780691143682}
+}
+
+@book{shapiro2014stochasticprogramming,
+  title        = {Lectures on Stochastic Programming: Modeling and Theory},
+  author       = {Shapiro, Alexander and Dentcheva, Darinka and Ruszczy{\'n}ski, Andrzej},
+  publisher    = {Society for Industrial and Applied Mathematics},
+  year         = {2014},
+  edition      = {2},
+  doi          = {10.1137/1.9781611973433}
+}
+
+@article{duchi2018distributionalrobustness,
+  title        = {Learning Models with Uniform Performance via Distributionally Robust Optimization},
+  author       = {Duchi, John and Namkoong, Hongseok},
+  journal      = {The Annals of Statistics},
+  volume       = {49},
+  number       = {3},
+  pages        = {1378--1406},
+  year         = {2021},
+  doi          = {10.1214/20-AOS2004},
+  url          = {https://doi.org/10.1214/20-AOS2004}
+}
+
+% =========================
+% Spurious correlations / group robustness / domain shift (benchmarks + baselines)
+% =========================
+
+@inproceedings{sagawa2020groupdro,
+  title        = {Distributionally Robust Neural Networks for Group Shifts: On the Importance of Regularization for Worst-Case Generalization},
+  author       = {Sagawa, Shiori and Koh, Pang Wei and Hashimoto, Tatsunori and Liang, Percy},
+  booktitle    = {International Conference on Learning Representations},
+  year         = {2020},
+  url          = {https://arxiv.org/abs/1911.08731}
+}
+
+@inproceedings{sagawa2020overparameterization,
+  title        = {An Investigation of Why Overparameterization Exacerbates Spurious Correlations},
+  author       = {Sagawa, Shiori and Raghunathan, Aditi and Koh, Pang Wei and Liang, Percy},
+  booktitle    = {Proceedings of the 37th International Conference on Machine Learning},
+  series       = {Proceedings of Machine Learning Research},
+  volume       = {119},
+  year         = {2020},
+  url          = {https://proceedings.mlr.press/v119/sagawa20a.html}
+}
+
+@inproceedings{koh2021wilds,
+  title        = {{WILDS}: A Benchmark of In-the-Wild Distribution Shifts},
+  author       = {Koh, Pang Wei and Sagawa, Shiori and Marklund, Henrik and Xie, Sang Michael and Zhang, Marvin and Balsubramani, Akshay and Hu, Weihua and Yasunaga, Michihiro and Mou, Weijie and Chen, Hui and others},
+  booktitle    = {Proceedings of the 38th International Conference on Machine Learning},
+  series       = {Proceedings of Machine Learning Research},
+  volume       = {139},
+  year         = {2021},
+  url          = {https://proceedings.mlr.press/v139/koh21a.html}
+}
+
+@misc{arjovsky2019irm,
+  title        = {Invariant Risk Minimization},
+  author       = {Arjovsky, Martin and Bottou, L{\'e}on and Gulrajani, Ishaan and Lopez-Paz, David},
+  year         = {2019},
+  eprint       = {1907.02893},
+  archivePrefix= {arXiv},
+  primaryClass = {cs.LG},
+  url          = {https://arxiv.org/abs/1907.02893}
+}
+
+@inproceedings{gulrajani2020domainbed,
+  title        = {In Search of Lost Domain Generalization},
+  author       = {Gulrajani, Ishaan and Lopez-Paz, David},
+  booktitle    = {International Conference on Learning Representations},
+  year         = {2021},
+  url          = {https://openreview.net/forum?id=lQdXeXDoWtI}
+}
+
+@inproceedings{cha2021swad,
+  title        = {{SWAD}: Domain Generalization by Seeking Flat Minima},
+  author       = {Cha, Junbum and Chun, Sanghyuk and Lee, Kyungjae and Cho, Han-Cheol and Park, Seunghyun and Lee, Yunsung and Park, Sungrae},
+  booktitle    = {Advances in Neural Information Processing Systems},
+  year         = {2021},
+  url          = {https://openreview.net/forum?id=zkHlu_3sJYU}
+}
+
+@inproceedings{arpit2022ensembleaverages,
+  title        = {Ensemble of Averages: Improving Model Selection and Boosting Performance in Domain Generalization},
+  author       = {Arpit, Devansh and Wang, Huan and Zhou, Yingbo and Xiong, Caiming},
+  booktitle    = {Advances in Neural Information Processing Systems},
+  volume       = {35},
+  year         = {2022},
+  url          = {https://proceedings.neurips.cc/paper_files/paper/2022/hash/372cb7805eaccb2b7eed641271a30eec-Abstract-Conference.html}
+}
+
+@inproceedings{yang2023changeishard,
+  title        = {Change is Hard: A Closer Look at Subpopulation Shift},
+  author       = {Yang, Yuzhe and Zhang, Haoran and Katabi, Dina and Ghassemi, Marzyeh},
+  booktitle    = {Proceedings of the 40th International Conference on Machine Learning},
+  series       = {Proceedings of Machine Learning Research},
+  volume       = {202},
+  pages        = {39584--39622},
+  year         = {2023},
+  url          = {https://proceedings.mlr.press/v202/yang23s.html}
+}
+
+@inproceedings{teterwak2025ermpp,
+  title        = {{ERM++}: An Improved Baseline for Domain Generalization},
+  author       = {Teterwak, Piotr and Saito, Kuniaki and Tsiligkaridis, Theodoros and Saenko, Kate and Plummer, Bryan},
+  booktitle    = {Proceedings of the Winter Conference on Applications of Computer Vision (WACV)},
+  year         = {2025},
+  pages        = {8514--8524},
+  url          = {https://openaccess.thecvf.com/content/WACV2025/html/Teterwak_ERM_An_Improved_Baseline_for_Domain_Generalization_WACV_2025_paper.html}
+}
+
+@article{naganuma2025pretrainedmodelselection,
+  title        = {An Empirical Study of Pre-trained Model Selection for Out-of-Distribution Generalization and Calibration},
+  author       = {Naganuma, Hiroki and Hataya, Ryuichiro and Yoshida, Kotaro and Mitliagkas, Ioannis},
+  journal      = {Transactions on Machine Learning Research},
+  year         = {2025},
+  url          = {https://openreview.net/forum?id=tYjoHjShxF}
+}
+
+@misc{berta2025refinethencalibrate,
+  title        = {Rethinking Early Stopping: Refine, Then Calibrate},
+  author       = {Berta, Eugene and Holzm{\"u}ller, David and Jordan, Michael I. and Bach, Francis R.},
+  year         = {2025},
+  note         = {CoRR},
+  url          = {https://openreview.net/forum?id=NfpdbQJE6X}
+}
+
+@inproceedings{kirichenko2023lastlayer,
+  title        = {Last Layer Re-Training is Sufficient for Robustness to Spurious Correlations},
+  author       = {Kirichenko, Pavel and Izmailov, Polina and Wilson, Andrew Gordon},
+  booktitle    = {International Conference on Learning Representations},
+  year         = {2023},
+  url          = {https://openreview.net/forum?id=Zb6c8A1Uu0}
+}
+
+@article{geirhos2020shortcutlearning,
+  title        = {Shortcut Learning in Deep Neural Networks},
+  author       = {Geirhos, Robert and Jacobsen, J{\"o}rn-Henrik and Michaelis, Claudio and Zemel, Richard and Brendel, Wieland and Bethge, Matthias and Wichmann, Felix A.},
+  journal      = {Nature Machine Intelligence},
+  volume       = {2},
+  pages        = {665--673},
+  year         = {2020},
+  doi          = {10.1038/s42256-020-00257-z}
+}
+
+% =========================
+% Datasets / architectures
+% =========================
+
+@inproceedings{ding2021folktables,
+  title        = {Retiring Adult: New Datasets for Fair Machine Learning},
+  author       = {Ding, Frances and Hardt, Moritz and Miller, John and Schmidt, Ludwig},
+  booktitle    = {Advances in Neural Information Processing Systems},
+  volume       = {34},
+  year         = {2021},
+  url          = {https://proceedings.neurips.cc/paper/2021/hash/32e54441e6382a7fbacbbbaf3c450059-Abstract.html}
+}
+
+@inproceedings{liu2015celeba,
+  title        = {Deep Learning Face Attributes in the Wild},
+  author       = {Liu, Ziwei and Luo, Ping and Wang, Xiaogang and Tang, Xiaoou},
+  booktitle    = {Proceedings of the IEEE International Conference on Computer Vision (ICCV)},
+  year         = {2015},
+  pages        = {3730--3738},
+  doi          = {10.1109/ICCV.2015.425}
+}
+
+@inproceedings{he2016resnet,
+  title        = {Deep Residual Learning for Image Recognition},
+  author       = {He, Kaiming and Zhang, Xiangyu and Ren, Shaoqing and Sun, Jian},
+  booktitle    = {Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year         = {2016},
+  pages        = {770--778},
+  doi          = {10.1109/CVPR.2016.90}
+}
+
+@article{bejnordi2017camelyon,
+  title        = {Diagnostic Assessment of Deep Learning Algorithms for Detection of Lymph Node Metastases in Women with Breast Cancer},
+  author       = {Bejnordi, Babak Ehteshami and Veta, Mitko and Johannes van Diest, Paul and others},
+  journal      = {JAMA},
+  volume       = {318},
+  number       = {22},
+  pages        = {2199--2210},
+  year         = {2017},
+  doi          = {10.1001/jama.2017.14585}
+}

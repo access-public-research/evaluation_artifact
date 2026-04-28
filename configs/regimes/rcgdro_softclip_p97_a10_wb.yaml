@@ -1,0 +1,6 @@
+# RCGDRO with soft clipped loss proxy objective (Waterbirds P97, alpha=0.10)
+name: rcgdro_softclip_p97_a10_wb
+objective: rcgdro
+eta: 0.1
+clip_loss: 1.459846
+clip_alpha: 0.1

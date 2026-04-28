@@ -1,0 +1,3 @@
+scope,n,sign_accuracy_rw_lt1,pearson_corr,spearman_corr
+seed,100,0.97,-0.6284840714958627,-0.943054305430543
+regime,10,1.0,-0.6509084772575908,-0.9515151515151514

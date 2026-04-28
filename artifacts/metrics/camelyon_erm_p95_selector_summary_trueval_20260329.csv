@@ -1,0 +1,5 @@
+suite,suite_label,selection_policy,selector_label,accept_rate,delta_loss,delta_acc,delta_tail
+camelyon_erm_p95,Camelyon17 ERM,baseline,Baseline,1.0,0.0,0.0,0.0
+camelyon_erm_p95,Camelyon17 ERM,proxy_only,Proxy-only,1.0,0.05531463038955373,0.0009852564253297613,5.501472663879394
+camelyon_erm_p95,Camelyon17 ERM,val_loss_only,Validation-loss,1.0,0.03528993972924954,-0.0023737860653232244,3.492360973358154
+camelyon_erm_p95,Camelyon17 ERM,guardrail,1.25x guardrail,0.7,0.025846197049562303,-0.0016166200296282352,2.51318473815918

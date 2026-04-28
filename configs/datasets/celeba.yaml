@@ -1,0 +1,5 @@
+# CelebA dataset config
+name: celeba
+wilds_dataset: celebA
+data_dir: data
+spurious_metadata_field: male

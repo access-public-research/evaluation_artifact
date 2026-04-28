@@ -1,0 +1,14 @@
+\begin{tabular}{llcccc}
+  \toprule
+  Suite & Rule & Accept rate & $\Delta$Held-out loss$\downarrow$ & $\Delta$Held-out acc$\uparrow$ & $\Delta$Tail CVaR$\downarrow$ \\
+  \midrule
+  Camelyon17 ERM & Proxy-only & 1.00 & +0.055 & +0.001 & +5.501 \\
+   & 1.10x budget & 0.00 & +0.000 & +0.000 & +0.000 \\
+   & 1.25x budget & 0.70 & +0.026 & -0.002 & +2.513 \\
+   & 1.50x budget & 1.00 & +0.052 & +0.001 & +5.324 \\
+  Camelyon17 Finetune & Proxy-only & 1.00 & +0.619 & +0.025 & +6.226 \\
+   & 1.10x budget & 0.10 & +0.000 & +0.000 & -0.156 \\
+   & 1.25x budget & 0.40 & +0.068 & +0.010 & +0.460 \\
+   & 1.50x budget & 0.70 & +0.318 & +0.000 & +1.992 \\
+  \bottomrule
+\end{tabular}

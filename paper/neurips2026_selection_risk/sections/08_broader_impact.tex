@@ -1,0 +1,8 @@
+\section{Broader Impact}
+The positive impact of this work is practical reliability.
+Many ML pipelines still report accuracy as the main model-selection signal, even when training objectives are already heavily shaped.
+Our results show that this can hide meaningful degradation in held-out loss, calibration, and group- or tail-sensitive behavior, including under end-to-end finetuning.
+
+The main misuse risk is the opposite lesson: under suppressive objectives, proxy-aligned checkpoint selection can sometimes improve headline metrics while concealing reliability regressions.
+That makes it easier to overstate progress if only proxy-aligned metrics are reported.
+We therefore emphasize conservative reporting, explicit held-out-loss reporting and pre-specified safety-budget cross-checks, and lightweight diagnostic vetoes rather than proposing a stronger distortion-based selector.

@@ -1,0 +1,92 @@
+# Base config for Camelyon17 runs (scientific-valid finetune rerun tag variant)
+project:
+  root: .
+  artifacts_dir: ${project.root}/artifacts
+  runs_dir: ${project.root}/runs
+  figures_dir: ${project.root}/figures
+
+paths:
+  wilds_data_dir: ${project.root}/data
+
+data:
+  fractions:
+    train: 1.0
+    val: 1.0
+    test: 1.0
+  subset_seed: 0
+
+compute:
+  device: cuda
+  num_workers: 8
+  amp: true
+
+embeddings:
+  backbone: resnet50
+  cache_dtype: float16
+  batch_size: 256
+  store_metadata: true
+  store_train_sub: false
+
+training:
+  epochs: 30
+  batch_size: 512
+  lr: 1e-3
+  weight_decay: 1e-4
+  hidden_dim: 0
+  dropout: 0.0
+  eval_batch_size: 2048
+  grad_clip: 1.0
+  seeds: [0,1,2]
+  tag_suffix: scivalid
+
+validation:
+  skewed_val:
+    enabled: true
+    source_split: val
+    seed: 0
+    size: 2000
+    worst_group_frac: 0.15
+    worst_group_source: train
+    worst_group_id: null
+    label_noise: 0.0
+
+analysis:
+  snr_null_trials: 25
+  snr_null_trials_sweep: 10
+  val_size_sweep: [200, 400, 800, 1200, 1600, 2000]
+  val_size_resamples: 5
+
+partitions:
+  version: v1
+  proxy:
+    family: confidence_bins
+    num_partitions: 1
+    num_cells: 64
+    seed: 0
+  decoupled:
+    family: random_proj_bins
+    num_cells: 10
+    num_partitions: 4
+  eval_banks:
+    banks: [A, B]
+    proxy_seeds: [101, 202]
+    within_label_seeds: [301, 402]
+    decoupled_seeds: [501, 602]
+
+selectors:
+  portfolio: [overall, hybrid, proxy_acc, tailmoderated, router]
+  tailmoderated_lambda: 0.5
+  hybrid_topk_frac: 0.1
+  router:
+    snr_threshold: 1.5
+
+finetune:
+  enabled: true
+  epochs: 10
+  lr: 1e-4
+  unfreeze_layers: [layer4]
+  batch_size: 128
+  eval_batch_size: 256
+  train_frac: 0.2
+  weight_decay: 1e-4
+  grad_clip: 1.0

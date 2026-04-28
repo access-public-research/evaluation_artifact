@@ -1,0 +1,89 @@
+\section{Setup}
+We study a controlled suppressive modification of cross-entropy.
+For per-example loss $\ell(x,y;\theta)$, threshold $\tau$, and slope $\alpha \in (0,1]$, the soft-clipped objective is
+\begin{equation}
+\tilde{\ell}(x,y;\theta)=
+\begin{cases}
+\ell(x,y;\theta), & \ell \le \tau,\\
+\tau + \alpha(\ell-\tau), & \ell > \tau.
+\end{cases}
+\label{eq:softclip}
+\end{equation}
+Our main experiments use $\alpha=0.10$ and a fixed P95 threshold calibrated once per stack from the epoch-1 train-loss quantile of the matched baseline run; higher clip thresholds appear only as appendix support.
+We use soft clipping only as a controlled suppressive perturbation, not as a proposed training recipe.
+
+\paragraph{Selection problem.}
+For a training run that produces checkpoints $\{\theta_t\}_{t=1}^T$, let $P_{\mathrm{val}}(\theta_t)$ denote the validation proxy induced by the training objective.
+The standard proxy-only selector is
+\begin{equation}
+\hat{\theta}_{\mathrm{proxy}}=\arg\min_t P_{\mathrm{val}}(\theta_t).
+\end{equation}
+The baseline checkpoint $\hat{\theta}_{\mathrm{base}}$ is defined analogously under the undistorted objective.
+
+\paragraph{Units of comparison.}
+We use two comparison units throughout the paper.
+\emph{Baseline-referenced} comparisons compare the suppressive proxy-selected checkpoint with the baseline-selected checkpoint from the undistorted run.
+\emph{Within-trajectory} comparisons compare alternative selectors on the same suppressive run.
+Only the second comparison isolates selector choice alone.
+
+\begin{center}
+\footnotesize
+\begin{tabular}{@{}p{0.28\linewidth}p{0.22\linewidth}p{0.38\linewidth}@{}}
+\toprule
+Claim type & What varies & Supports \\
+\midrule
+Baseline-referenced workflow hazard & objective, trajectory, selector & workflow-level hazard under suppressive reporting pipelines; not selector-only causality \\
+Within-trajectory selector disagreement & selector / admissibility rule on one suppressive run & literal same-trajectory verdict reversals; not broad selector universality \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{Reliability metrics.}
+We evaluate checkpoints in two ways: a held-out loss on the deployment split (worst-group loss on CelebA, hospital-2 loss on Camelyon17, overall loss plus official WILDS worst-group loss on CivilComments, raw MSE on ACSIncome) and a tail-sensitive diagnostic (teacher-difficulty $\mathrm{CVaR}_{0.1}$ on the vision anchors, tail MSE on ACSIncome).
+For the vision suites, teacher-difficulty $\mathrm{CVaR}_{0.1}$ is computed on two fixed teacher-difficulty evaluation banks (A/B), each with $K=64$ cells and minimum cell size $20$, and then averaged across banks, so the tail comparison is not redefined per checkpoint.
+We refer to this vision metric as the teacher-tail stress diagnostic.
+It is a diagnostic stress-test metric for the tested vision stacks rather than a universal tail-risk definition.
+It is not intended to identify clinical subgroups or replace WILDS-style group metrics; it tests whether proxy selection shifts risk into a fixed teacher-defined hard-example slice.
+On the vision anchors, held-out loss and calibration carry the primary reliability claim; the teacher-tail stress diagnostic is supporting fixed-bank evidence.
+Held-out accuracy is reported but not treated as sufficient evidence of reliability.
+Calibration is reported through ECE and Brier score; ECE uses $15$ confidence bins.
+All selectors use validation-side quantities only (proxy, validation loss, admissibility budget), while held-out loss, calibration, and final tail/group metrics are report-only.
+
+\paragraph{Workflow hazard.}
+We call a case a \emph{baseline-referenced workflow hazard} when the suppressive proxy-selected checkpoint improves the proxy relative to baseline but worsens the suite's held-out reliability checks.
+On the vision anchors, the primary checks are held-out loss and calibration, while the teacher-tail stress diagnostic is supporting fixed-bank evidence; on CivilComments, the reliability check is official WILDS worst-group loss; on ACSIncome, it is tail MSE.
+We call the hazard \emph{transient} if a matched fixed-horizon comparison no longer shows simultaneous loss and tail worsening, and \emph{persistent} if it does.
+For CivilComments, where the cross-modal support case is carried by official WILDS worst-group metrics, we use the same matched fixed-horizon comparison with overall-loss and worst-group degradation as the corresponding persistence check.
+Within-trajectory selector disagreement is assessed separately by comparing proxy-only, validation-loss-only, and diagnostic-veto selection on the same suppressive trajectory.
+
+\paragraph{Validation-loss veto diagnostic.}
+As a simple diagnostic rather than a full solution, we define a budgeted selector, which we call a validation-loss veto (guardrail), that only admits checkpoints whose validation loss stays within a multiplicative budget of the baseline-selected checkpoint:
+\begin{equation}
+\hat{\theta}_{\mathrm{guard}}(\rho)=
+\arg\min_t P_{\mathrm{val}}(\theta_t)
+\;\;\text{s.t.}\;\;
+L_{\mathrm{val}}(\theta_t) \le \rho \, L_{\mathrm{val}}(\hat{\theta}_{\mathrm{base}}).
+\label{eq:guardrail}
+\end{equation}
+If no checkpoint from the suppressive run satisfies the budget, we fall back to the baseline checkpoint.
+We report a small budget sweep $\rho \in \{1.10,1.25,1.50\}$ and treat $\rho=1.25$ as an empirical operating point rather than a derived constant.
+When fallback happens, we report the suppressive-run admissibility verdict separately from the fallback performance so the veto is read as a diagnostic rather than as a same-trajectory selector win.
+Appendix~\ref{app:adaptive-guardrail} also reports an adaptive threshold that uses only baseline validation-loss fluctuations.
+
+\paragraph{Compact mechanistic formalization.}
+Appendix~\ref{app:theory-bridge} records the short formal results that organize the empirical findings.
+First, suppressive weighting creates a non-empty local lure region in which the proxy still improves while standard risk worsens, and stronger suppression widens that region.
+Second, the matched fixed-horizon split is persistent when early suppressive harm exceeds later recovery and transient when later recovery offsets it.
+The appendix also records the baseline-referenced loss cap behind the diagnostic veto.
+These results are descriptive bridges for the empirical analysis, not a general theory of shaped objectives.
+
+\paragraph{Mechanism statistic.}
+To compare objective families on a common Camelyon17 ERM stack, we use the stabilized tail/core gradient-amplification ratio
+\begin{equation}
+R_w =
+\frac{\mathbb{E}[g_i^{\mathrm{obj}}\mid \mathrm{tail}] / \mathbb{E}[g_i^{\mathrm{CE}}\mid \mathrm{tail}]}
+{\mathbb{E}[g_i^{\mathrm{obj}}\mid \mathrm{core}] / \mathbb{E}[g_i^{\mathrm{CE}}\mid \mathrm{core}]},
+\end{equation}
+where $R_w<1$ indicates relative tail suppression and $R_w>1$ indicates relative tail upweighting.
+We use $R_w$ as an operational same-stack warning statistic, not as a theorem about all shaped objectives or a causal proof by itself.
+Practically, $R_w<1$ early in training is treated as a warning that proxy-only checkpoint selection may be misaligned with downstream reliability criteria on the tested family-control stack.

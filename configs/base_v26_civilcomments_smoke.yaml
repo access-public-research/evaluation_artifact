@@ -1,0 +1,84 @@
+# CivilComments frozen-embedding smoke config
+project:
+  root: .
+  artifacts_dir: ${project.root}/artifacts
+  runs_dir: ${project.root}/runs
+  figures_dir: ${project.root}/figures
+
+paths:
+  wilds_data_dir: ${project.root}/data
+
+data:
+  fractions:
+    train: 0.05
+    val: 0.20
+    test: 0.20
+  subset_seed: 0
+
+compute:
+  device: cuda
+  num_workers: 0
+  amp: true
+
+embeddings:
+  backbone: distilbert-base-uncased
+  cache_dtype: float32
+  batch_size: 16
+  store_metadata: true
+  store_train_sub: false
+
+training:
+  epochs: 10
+  batch_size: 512
+  lr: 1e-3
+  weight_decay: 1e-4
+  hidden_dim: 0
+  dropout: 0.0
+  eval_batch_size: 2048
+  grad_clip: 1.0
+  seeds: [0,1]
+  tag_suffix: v26civilcomments_smoke
+
+validation:
+  skewed_val:
+    enabled: true
+    source_split: val
+    seed: 0
+    size: 1000
+    worst_group_frac: 0.15
+    worst_group_source: train
+    worst_group_id: null
+    label_noise: 0.0
+
+analysis:
+  snr_null_trials: 10
+  snr_null_trials_sweep: 5
+  val_size_sweep: [200, 400, 800, 1000]
+  val_size_resamples: 3
+
+partitions:
+  version: v26_civilcomments_smoke
+  proxy:
+    family: random_hash
+    num_partitions: 1
+    num_cells: 64
+    seed: 0
+  decoupled:
+    family: random_proj_bins
+    num_cells: 64
+    num_partitions: 4
+  eval_banks:
+    banks: [A, B]
+    proxy_seeds: [101, 202]
+    within_label_seeds: [301, 402]
+    decoupled_seeds: [501, 602]
+
+selectors:
+  portfolio: [overall, hybrid, proxy_acc, tailmoderated, router]
+  tailmoderated_lambda: 0.5
+  hybrid_topk_frac: 0.1
+  router:
+    snr_threshold: 1.5
+
+finetune:
+  enabled: false

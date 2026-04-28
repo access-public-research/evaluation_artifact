@@ -1,0 +1,10 @@
+\begin{tabular}{llcrrrrl}
+  \toprule
+  Case & Fixed horizon & $n$ & $\Delta$Loss (sel.) & $\Delta$Loss (fixed) & $\Delta$Rel. (sel.) & $\Delta$Rel. (fixed) & Verdict \\
+  \midrule
+  Camelyon17 ERM & ep30 & 10 & +0.055 & +0.053 & +5.501 & +5.434 & Persistent \\
+  Camelyon17 Finetune & ep10 & 10 & +0.619 & +0.491 & +6.226 & mean $>0^{\dagger}$ & Persistent \\
+  Frozen CivilComments & ep30 & 10 & +0.104 & +0.124 & +1.829 & +1.923 & Persistent \\
+  ACSIncome & ep50 & 10 & +0.027 & +0.017 & +0.376 & +0.284 & Persistent \\
+  \bottomrule
+\end{tabular}

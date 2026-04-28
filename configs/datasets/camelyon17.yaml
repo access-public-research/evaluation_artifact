@@ -1,0 +1,5 @@
+# Camelyon17 dataset config
+name: camelyon17
+wilds_dataset: camelyon17
+data_dir: ./data
+spurious_metadata_field: hospital

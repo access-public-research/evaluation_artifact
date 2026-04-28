@@ -1,0 +1,4 @@
+# ERM with binary label smoothing eps=0.02 (CelebA)
+name: erm_labelsmooth_e02_celeba
+objective: erm
+label_smoothing: 0.02

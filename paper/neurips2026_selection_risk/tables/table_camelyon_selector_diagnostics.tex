@@ -1,0 +1,11 @@
+\begin{tabular}{@{}llrrrrrl@{}}
+  \toprule
+  Suite & Contrast & $\Delta$Loss & $\Delta$Acc & $\Delta$ECE & $\Delta$Brier & $\Delta$Tail & Harm counts \\
+  \midrule
+  Camelyon17 ERM & workflow: proxy - baseline & +0.055 [+0.046,+0.066] & +0.001 [-0.001,+0.003] & +0.0321 [+0.0305,+0.0334] & +0.0027 [+0.0013,+0.0038] & +5.50 [+5.00,+6.04] & loss/ECE/tail 10/10,10/10,10/10; Brier 8/10 \\
+  Camelyon17 Finetune & workflow: proxy - baseline & +0.619 [+0.328,+0.916] & +0.025 [-0.021,+0.071] & +0.0214 [+0.0177,+0.0248] & +0.0006 [-0.0034,+0.0051] & +6.23 [+3.46,+9.06] & loss/ECE/tail 9/10,10/10,9/10; Brier 4/10 \\
+  \midrule
+  Camelyon17 ERM & same trajectory: proxy - val-loss & +0.020 [+0.011,+0.030] & +0.003 [+0.002,+0.005] & +0.0068 [+0.0047,+0.0090] & -0.0011 [-0.0023,+0.0001] & +2.01 [+1.47,+2.60] & loss/ECE/tail 10/10,10/10,10/10; Brier 3/10 \\
+  Camelyon17 Finetune & same trajectory: proxy - val-loss & +0.010 [-0.135,+0.145] & +0.031 [+0.008,+0.055] & -0.0026 [-0.0081,+0.0029] & -0.0050 [-0.0118,+0.0008] & +3.42 [+0.75,+6.13] & loss/ECE/tail 2/10,1/10,4/10; Brier 1/10 \\
+  \bottomrule
+\end{tabular}

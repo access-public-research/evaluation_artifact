@@ -1,0 +1,9 @@
+{
+  "rw_winsorized": 0.4146896223319367,
+  "rw_huber": 0.5348145817986198,
+  "estimand": "cross_run_proxy_selected_vs_baseline_selected",
+  "wins_lure_count_raw": 10,
+  "wins_lure_count_tail": 10,
+  "huber_lure_count_raw": 3,
+  "huber_lure_count_tail": 9
+}

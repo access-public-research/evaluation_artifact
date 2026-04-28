@@ -1,0 +1,6 @@
+# Camelyon17 LOO-h4 calibrated soft-clip P99 (alpha=0.10)
+name: rcgdro_softclip_p99_a10_cam_loo_h4cal
+objective: rcgdro
+eta: 0.1
+clip_loss: 2.2564086914
+clip_alpha: 0.10

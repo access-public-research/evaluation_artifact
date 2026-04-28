@@ -1,0 +1,4 @@
+# ERM with hard bootstrapped cross-entropy beta=0.60 (Camelyon17)
+name: erm_bootstrap_h60_cam
+objective: erm
+bootstrap_hard_beta: 0.60

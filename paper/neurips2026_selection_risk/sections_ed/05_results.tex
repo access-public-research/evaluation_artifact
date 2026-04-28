@@ -1,0 +1,166 @@
+\section{Results}
+We begin with the main workflow-level evidence, then compare selector and admissibility rules directly, and finally add supporting results on scope and mechanism.
+The main evidence comes from Camelyon17 ERM, Camelyon17 finetuning, and frozen CivilComments.
+ACSIncome is a narrower regression support case, and the remaining analyses are supporting evidence.
+
+\subsection{Core Evidence: Proxy-Selected Reporting Hides Reliability Failures}
+Camelyon17 ERM is the cleanest anchor.
+Across $10/10$ seeds, proxy-only selection improves the clipped proxy but worsens held-out loss ($+0.055$), ECE ($+0.032$), and the teacher-tail stress diagnostic ($+5.50$).
+Mean Brier also worsens ($+0.003$), though only on $8/10$ seeds (Table~\ref{tab:core-cases}).
+The paired $95\%$ intervals remain fully on the harmful side for loss ($[+0.045,+0.066]$), tail ($[+5.00,+6.04]$), and ECE ($[+0.030,+0.033]$).
+A matched epoch-30 check preserves the sign, so the result is not a pure early-stopping artifact.
+Figure~\ref{fig:main-divergence} shows the effect visually, Table~\ref{tab:core-cases} summarizes the main deltas, and the appendix gives the seed-matched counts and paired intervals.
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=\textwidth]{fig_main_divergence_ed}
+  \caption{
+    Camelyon17 anchor suites under baseline-referenced and within-trajectory selector views.
+    Points are mean deltas from the baseline-selected checkpoint.
+    Proxy-only, val-loss, and diagnostic-veto selections are evaluated on the suppressive P95 trajectory; the veto may fall back to baseline when no suppressive checkpoint is admissible.
+    In both suites, proxy-only moves up on held-out loss; on finetuning, it also moves right on mean held-out accuracy.
+    Calibration is a primary reliability check in the tables, while the plotted teacher-tail movement is a fixed-bank stress diagnostic.
+    The dashed fixed-horizon arrow tests whether the baseline-referenced harm is only an early-stopping artifact.
+  }
+  \label{fig:main-divergence}
+\end{figure*}
+
+\begin{table}[t]
+  \centering
+  \small
+  \setlength{\tabcolsep}{3.5pt}
+  \input{tables/table_core_case_summary}
+  \caption{
+    Core workflow-hazard cases at P95.
+    All deltas are baseline-referenced against the baseline-selected checkpoint from the undistorted run.
+    Vision rows use held-out loss and calibration as primary reliability checks; ECE is held-out for the ERM anchors and validation-side for the Camelyon17 finetune anchor, matching the saved calibration artifacts.
+    The tail/reliability diagnostic column is a teacher-tail stress diagnostic.
+    CivilComments reports official WILDS worst-group loss, and ACSIncome reports tail MSE.
+    CelebA ERM is transient; all other rows are persistent, with $\dagger$ marking a qualitative fixed-horizon tail check for Camelyon17 finetuning.
+    Baseline held-out losses, for scale, are $0.211$ (Camelyon17 ERM), $1.557$ (CelebA ERM), $0.902$ (Camelyon17 finetune), and $0.258$ (CivilComments).
+    Every row also satisfies proxy improvement relative to baseline.
+    Appendix Tables~\ref{tab:seed-lure-dominance}--\ref{tab:seed-lure-paired} give seed counts and paired intervals for the classification anchors; the ACSIncome $10/10$ count is backed by the selector artifact.
+    Bold marks the strongest ``accuracy up, reliability down'' pattern.
+  }
+  \label{tab:core-cases}
+\end{table}
+
+\subsection{Selector and Veto Checks Change the Reliability Verdict}
+Table~\ref{tab:selector-comparison} makes the comparison semantics explicit.
+The top panel reports absolute held-out metrics for selectors applied to the two Camelyon17 trajectories.
+The bottom panel reports delta-from-baseline selector verdicts for frozen CivilComments and ACSIncome.
+The reported-policy column tells the reader where each row's metrics come from: the baseline run, the same suppressive run, a mixed rule that keeps the suppressive checkpoint when admitted and falls back otherwise, or a pure baseline fallback when no suppressive checkpoint is admissible.
+The suppressive-admit column records that diagnostic verdict separately.
+
+On the Camelyon anchors, validation-loss-only is safer than proxy-only, but it does not recover the baseline.
+Two appendix diagnostics sharpen this point.
+First, the Camelyon workflow hazard is visible in standard metrics: Appendix Table~\ref{tab:camelyon-selector-diagnostics} shows harmful held-out loss and reported ECE movement, not only a worse teacher-tail stress diagnostic.
+Second, the ERM selector result is stable beyond the main P95 stress test.
+On the same suppressive trajectory, proxy-best is worse than validation-loss-best at P95 and P97 on held-out loss, ECE, and the teacher-tail diagnostic; at P99 the contrast attenuates, with loss and Brier favoring proxy-best while ECE and teacher-tail still worsen (Appendix Table~\ref{tab:camelyon-erm-selector-dose}).
+Validation-accuracy selection gives the same practical warning, and the leave-one-hospital-out ERM check gives the same standard-metric loss direction across all five held-out folds (Appendix Tables~\ref{tab:camelyon-valacc-selector}--\ref{tab:camelyon-loo-selector-standard}).
+The analogous finetune same-trajectory contrast is mixed, so finetuning remains a workflow-level hazard anchor.
+The $1.25\times$ veto is therefore only an empirical admissibility diagnostic; the practical recommendation is still dual reporting of proxy-selected and validation-loss-selected checkpoints.
+
+Camelyon17 finetuning gives the largest mean accuracy-up / reliability-down pattern.
+Proxy-only selection raises mean held-out accuracy from $0.683$ to $0.708$, but held-out loss worsens from $0.902$ to $1.520$, the teacher-tail stress diagnostic rises from $7.25$ to $13.48$, and validation-side ECE rises from $0.0308$ to $0.0522$.
+The paired intervals remain harmful on loss ($[+0.331,+0.926]$), tail ($[+3.49,+9.07]$), and validation-side ECE ($[+0.018,+0.025]$).
+So the main claim in this anchor is a baseline-referenced workflow hazard: reliability degrades under proxy-selected suppressive finetuning, not selector-only causality.
+The accuracy increase is descriptive rather than interval-stable, and the fixed-horizon tail check is qualitative only.
+
+On frozen CivilComments, proxy-only and validation-loss-only give the same harmful standard-metric verdict in the bundled summary.
+The reversal appears only when a baseline-calibrated validation-loss admissibility rule vetoes the suppressive run and falls back to baseline.
+This is the paper's clearest baseline-calibrated run-level admissibility reversal on a fixed suppressive trajectory.
+The paired intervals remain harmful on overall loss ($[+0.100,+0.107]$), official worst-group loss ($[+1.785,+1.871]$), and ECE ($[+0.068,+0.071]$).
+
+On ACSIncome, validation-loss-only reduces the winsorization damage ($+0.023$ raw MSE, $+0.282$ tail MSE), but the $1.25\times$ validation-loss veto is slack and coincides with proxy-only.
+This is why we treat the veto as a diagnostic rather than a universal selector.
+We treat ACSIncome as a narrower regression support case rather than as a co-equal anchor with the two Camelyon suites and frozen CivilComments.
+Appendix Table~\ref{tab:guardrail-uncertainty} gives paired intervals for the proxy-only $\rightarrow$ veto reduction on the two Camelyon anchors, and those intervals remain positive for loss and tail reduction at the shown operating point.
+
+\begin{table}[t]
+  \centering
+  \footnotesize
+  \setlength{\tabcolsep}{2.5pt}
+  \input{tables/table_selector_comparison}
+  \caption{
+    Selector comparison with semantics made explicit.
+    Top panel: absolute held-out metrics for the two Camelyon17 trajectories.
+    Bottom panel: delta-from-baseline selector verdicts for frozen CivilComments and ACSIncome.
+    The reported-policy column identifies whether the shown metrics come from the undistorted baseline run, the same suppressive trajectory, a mixed report that keeps the suppressive checkpoint when admissible and falls back otherwise, or a pure baseline fallback.
+    The suppressive-admit column is the diagnostic verdict for the suppressive run itself; baseline rows are not applicable.
+    On frozen CivilComments, the baseline-referenced validation-loss admissibility diagnostic turns the same suppressive trajectory from admitted to vetoed; on ACSIncome, validation loss is milder but the $1.25\times$ veto is slack.
+  }
+  \label{tab:selector-comparison}
+\end{table}
+
+\subsection{When the Failure Persists and When It Does Not}
+CelebA ERM shows that not every hazard is persistent: worst-group loss increases by $+2.21$ and the teacher-tail stress diagnostic by $+11.32$ under proxy-only selection, but the fixed-horizon comparison reverses sign on both.
+Camelyon17 ERM remains harmful at the fixed horizon, so that case is not just an early-stopping artifact.
+Camelyon17 finetuning also keeps harmful fixed-horizon loss, though the fixed-horizon mean loss increase is smaller than at the selected checkpoint ($+0.491$ versus $+0.619$).
+Its fixed-horizon tail result should be read only qualitatively because a few seeds explode at epoch~10 (Appendix Table~\ref{tab:persistence-support-app}).
+Appendix Table~\ref{tab:persistence-support-app} makes the selected-versus-fixed comparison explicit for every row we still label persistent, including frozen CivilComments and ACSIncome at its matched final epoch.
+Appendix Table~\ref{tab:rw-persistence-bridge} and Figure~\ref{fig:rw-persistence-bridge-app} provide the supporting mechanism bridge: CelebA's suppressive orientation relaxes ($\Delta R_w=+0.102$), while Camelyon17's entrenches ($\Delta R_w=-0.091$).
+That bridge is supporting rather than claim-bearing, but it explains why CelebA should be read as a true transient counterexample rather than as a contradiction of the main thesis.
+
+\subsection{The Failure Is Not Unique to Soft Clipping}
+A ten-seed hard-bootstrap corroboration on the same Camelyon17 ERM stack addresses the concern that the result is specific to soft clipping at P95.
+Relative to val-loss-only selection inside the same bootstrap runs, proxy-only improves the bootstrap proxy by about $0.010$ but worsens held-out hospital-2 loss by $+0.0109$, the teacher-tail stress diagnostic by $+1.37$, and ECE by $+0.0110$ on average (Appendix Table~\ref{tab:bootstrap-camelyon-support}).
+Appendix Table~\ref{tab:camelyon-dose-response-app} adds a same-stack suppression-strength stress test on the two Camelyon anchors.
+In the baseline-referenced selected-checkpoint workflow view, Camelyon17 ERM loss / tail harm weakens from P95 to P97 to P99 ($+0.055/+5.50$, $+0.052/+5.16$, $+0.008/+1.76$).
+Finetuning remains materially harmful across all three selected regimes.
+Together with the same-trajectory P95/P97 diagnostics, P95 is best read as the designated strong stress-test setting rather than as a knife-edge selector artifact.
+Appendix Table~\ref{tab:camelyon-erm-selector-dose} separately reports the same-trajectory selector-dose diagnostic, where P95/P97 show clean selector-only harm and P99 attenuates.
+This is supporting rather than core evidence because the fixed $1.25\times$ guardrail is slack on this family, but it directly shows that the selector mismatch is not unique to one clipping rule.
+
+\subsection{The Hazard Concentrates in Suppressive Objectives}
+As supporting mechanism evidence, Figure~\ref{fig:mechanism} shows that the direction of tail movement is not uniform across objective families on the same Camelyon17 ERM stack: soft clipping has $R_w<1$ and positive tail deltas, while label smoothing and focal loss have $R_w>1$ and negative tail deltas.
+On this tested Camelyon17 objective-family control, early $R_w$ (epochs 1--5) is a useful same-stack warning statistic for the sign of the final selected tail delta, with $97/100$ seed-level sign accuracy (Appendix Table~\ref{tab:rw-predictive-summary} and Figure~\ref{fig:rw-predictive-summary-app}).
+A hard-bootstrap corroboration ($R_w\approx 0.57$, Appendix Table~\ref{tab:bootstrap-camelyon-support}) confirms the pattern for a second suppressive family, and the same split survives into end-to-end finetuning (Appendix Table~\ref{tab:objfam-finetune-support}).
+On this tested same-stack control suite, the pattern argues against the interpretation that any deviation from cross-entropy worsens reliability; what matters is whether the objective suppresses or amplifies the tail.
+
+The evaluation criterion changes not only how one run looks, but also how objective families rank on the same stack.
+Table~\ref{tab:ranking-reversal} shows this effect directly on the same Camelyon17 stacks using common metrics.
+On frozen Camelyon17 ERM, SoftClip~P95 is the only method shown with a positive mean accuracy delta ($+0.001$), yet it has the worst teacher-tail diagnostic ($+5.50$), a $9.6$ CVaR swing from the best teacher-tail method (Focal~4, $-4.11$).
+On end-to-end finetuning, SoftClip attains the highest mean accuracy ($+0.047$) but also the worst held-out loss ($+0.221$) and worst teacher-tail diagnostic ($+6.63$), while label smoothing and focal are lower on held-out loss and the teacher-tail diagnostic.
+The point is not that one family is universally best.
+It is that accuracy-first reading and loss/tail-aware reading can favor different methods on the same stack.
+
+\begin{table}[t]
+  \centering
+  \small
+  \begin{tabular}{@{}llrrr@{}}
+    \toprule
+    Setting & Method & $\Delta$Loss$\downarrow$ & $\Delta$Acc$\uparrow$ & $\Delta$Tail$\downarrow$ \\
+    \midrule
+    \multirow{3}{*}{\shortstack[l]{Frozen\\ERM}}
+      & SoftClip P95    & $+0.055$ & $+0.001$ & $\mathbf{+5.50}$ \\
+      & Label Smooth 0.10 & --- & $-0.002$ & $-2.44$ \\
+      & Focal 4         & --- & $-0.004$ & $\mathbf{-4.11}$ \\
+    \midrule
+    \multirow{3}{*}{\shortstack[l]{Separate\\finetune\\control}}
+      & SoftClip P95    & $+0.221$ & $\mathbf{+0.047}$ & $+6.63$ \\
+      & Label Smooth 0.10 & $-0.276$ & $+0.029$ & $\mathbf{-2.65}$ \\
+      & Focal 2         & $\mathbf{-0.280}$ & $-0.026$ & $-2.53$ \\
+    \bottomrule
+  \end{tabular}
+  \caption{
+    Within-sweep method-ranking illustration under different reporting criteria.
+    Frozen-ERM rows are relative to the ERM baseline.
+    End-to-end finetune rows come from a separate Camelyon17 objective-family control sweep and are relative to that sweep's own baseline finetune checkpoint; they are included for within-table method ranking only and are not numerically comparable to the main selector-anchor finetune sweep in Tables~\ref{tab:core-cases} and \ref{tab:selector-comparison}.
+    On frozen ERM, the only method shown here with a positive mean accuracy delta is also the worst on the teacher-tail diagnostic, with a $9.6$ CVaR swing.
+    On finetuning, the method with the best mean accuracy has the worst loss and teacher-tail diagnostic; label smoothing wins on loss on $10/10$ seeds.
+    Bold marks the extreme in each column.
+  }
+  \label{tab:ranking-reversal}
+\end{table}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\columnwidth]{fig_mechanism_orientation}
+  \caption{
+    Same-stack objective-family mechanism on Camelyon17 ERM.
+    The vertical boundary at $\log_{10} R_w = 0$ separates tail suppression ($R_w<1$) from tail upweighting ($R_w>1$).
+    Soft clipping lies on the suppressive side and inflates the tail, while focal loss and label smoothing lie on the upweighting side and improve it.
+  }
+  \label{fig:mechanism}
+\end{figure}

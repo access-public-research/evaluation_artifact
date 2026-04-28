@@ -1,0 +1,524 @@
+\section{Appendix}
+\label{app:extra}
+
+\subsection{Mechanistic Formalization}
+\label{app:theory-bridge}
+This appendix gives the assumptions and proofs for the three compact propositions stated in Setup.
+The goal is not a general theorem about deep networks under shift.
+It is to formalize the selector mismatch created by suppressive weighting, explain why the validation-loss guardrail helps, and give a principled bridge from the empirical time courses to the transient-versus-persistent split.
+
+\paragraph{Proposition 1 (Local lure under suppressive weighting).}
+Assume a suppressive objective whose high-loss slope ratio is $\alpha \in (0,1)$.
+Let $A_c>0$ denote core improvement mass and $A_t>0$ denote tail damage mass over a short interval.
+Then there exists a non-empty region of update directions for which the suppressive proxy improves while standard risk worsens, namely $\alpha A_t < A_c < A_t$.
+
+\emph{Proof.}
+For soft clipping with threshold $\tau$ and slope $\alpha \in (0,1]$,
+\[
+\tilde L = L - (1-\alpha)(L-\tau)_+,
+\]
+so clipping removes upper-tail loss mass directly.
+When $\tau=\mathrm{VaR}_q(L)$, the same monotonicity gives a compressed proxy tail
+\[
+\mathrm{CVaR}_q(\tilde L) = \tau + \alpha\big(\mathrm{CVaR}_q(L)-\tau\big),
+\]
+which is why the proxy can look improved even when the underlying standard-loss tail has not.
+
+\paragraph{Local lure condition.}
+Let $A_c>0$ denote core improvement mass and $A_t>0$ denote tail damage mass over a short interval.
+Then standard risk and suppressive proxy move as
+\[
+\Delta R \approx -A_c + A_t,
+\qquad
+\Delta P \approx -A_c + \alpha A_t.
+\]
+Whenever
+\[
+\alpha A_t < A_c < A_t,
+\]
+the proxy still improves while the standard risk worsens.
+So the local lure region is non-empty whenever $\alpha<1$.
+It widens as $\alpha$ decreases, which is why stronger suppression creates more room for proxy-only selection to move toward less reliable checkpoints.
+\hfill$\square$
+
+\paragraph{Proposition 2 (Baseline-referenced guardrail bound).}
+Assume the guardrail enforces
+\[
+L_{\mathrm{val}}(\hat\theta_{\mathrm{guard}}) \le \rho L_{\mathrm{val}}(\hat\theta_{\mathrm{base}})
+\]
+and that validation and deployment losses satisfy
+\[
+\sup_t \left|L_{\mathrm{test}}(\theta_t)-L_{\mathrm{val}}(\theta_t)\right| \le \varepsilon
+\]
+over the candidate checkpoints.
+Then
+\[
+L_{\mathrm{test}}(\hat\theta_{\mathrm{guard}})
+\le
+\rho\,L_{\mathrm{test}}(\hat\theta_{\mathrm{base}})
++
+(\rho+1)\varepsilon.
+\]
+
+\emph{Proof.}
+By the uniform closeness assumption,
+\[
+L_{\mathrm{test}}(\hat\theta_{\mathrm{guard}})
+\le
+L_{\mathrm{val}}(\hat\theta_{\mathrm{guard}})+\varepsilon
+\le
+\rho\,L_{\mathrm{val}}(\hat\theta_{\mathrm{base}})+\varepsilon.
+\]
+Applying the same bound to the baseline checkpoint gives
+\[
+L_{\mathrm{val}}(\hat\theta_{\mathrm{base}})
+\le
+L_{\mathrm{test}}(\hat\theta_{\mathrm{base}})+\varepsilon,
+\]
+so
+\[
+L_{\mathrm{test}}(\hat\theta_{\mathrm{guard}})
+\le
+\rho\,L_{\mathrm{test}}(\hat\theta_{\mathrm{base}})
++
+(\rho+1)\varepsilon.
+\]
+This does not make the guardrail optimal, but it does show why the rule is not arbitrary: the budget caps deployment loss relative to baseline up to validation-to-test mismatch, while proxy-only selection has no analogous guarantee without assuming that the suppressive proxy stays aligned with standard reliability metrics.
+\hfill$\square$
+
+\paragraph{Proposition 3 (Transient versus persistent in a two-phase toy).}
+Let $H_A\ge 0$ denote the excess standard-loss harm accumulated during an early suppressive phase, and let $H_B\ge 0$ denote the later recovery.
+Then the net hazard is persistent when $H_A > H_B$ and transient when $H_B \ge H_A$.
+
+\emph{Proof.}
+By construction, the two-phase toy decomposes the total standard-loss effect into an early excess-harm term and a later recovery term.
+The sign of the net effect is therefore the sign of $H_A-H_B$.
+If $H_A > H_B$, the run remains worse than baseline at the matched horizon; if $H_B \ge H_A$, the excess harm has been offset and the matched-horizon hazard disappears.
+\hfill$\square$
+
+Figure~\ref{fig:theory-bridge-app} illustrates both the local lure region and this two-phase transient-versus-persistent picture.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\columnwidth]{fig_theory_bridge}
+  \caption{
+    Mechanistic formalization.
+    Left: the local lure region where the suppressive proxy still improves while standard risk worsens.
+    Right: a two-phase toy showing how later recovery yields a transient hazard while entrenched suppression yields a persistent one.
+  }
+  \label{fig:theory-bridge-app}
+\end{figure}
+
+\subsection{Persistence Bridge via $R_w(t)$}
+Table~\ref{tab:rw-persistence-bridge} and Figure~\ref{fig:rw-persistence-bridge-app} provide the empirical bridge for the transient-versus-persistent taxonomy.
+The main discriminator is not a single endpoint value of $R_w$, but whether suppressive orientation relaxes or becomes more entrenched over training, so we use the early-to-late trend in $R_w$ together with the tail-core clip-gap trend as the primary persistence surrogates.
+
+\begin{table}[h]
+  \centering
+  \small
+  \resizebox{\columnwidth}{!}{\input{tables/table_rw_persistence_bridge}}
+  \caption{
+    Time-course bridge for transient versus persistent hazards.
+    CelebA relaxes over training ($\Delta R_w > 0$ and decreasing tail-core clip gap), while Camelyon17 becomes more entrenched ($\Delta R_w < 0$ and increasing clip gap).
+  }
+  \label{tab:rw-persistence-bridge}
+\end{table}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\columnwidth]{fig_rw_persistence_bridge}
+  \caption{
+    Early-versus-late suppressive orientation on the two main time-course anchors.
+    The trajectories make the transient-versus-persistent split visually explicit:
+    CelebA relaxes, while Camelyon17 entrenches.
+  }
+  \label{fig:rw-persistence-bridge-app}
+\end{figure}
+
+\subsection{Core-Case Uncertainty}
+Table~\ref{tab:core-case-uncertainty} gives paired $95\%$ bootstrap intervals for the three seed-matched hazard anchors used most heavily in the main text.
+For the Camelyon17 suites, the supporting diagnostic column is teacher-difficulty tail CVaR; for CivilComments, the reliability column is official WILDS worst-group loss.
+
+\begin{table}[h]
+  \centering
+  \small
+  \resizebox{\columnwidth}{!}{\input{tables/table_core_case_uncertainty}}
+  \caption{
+    Paired bootstrap intervals for the main hazard anchors.
+    These intervals complement the selected-checkpoint deltas in Table~\ref{tab:core-cases} by making the uncertainty on held-out loss, reliability, and calibration explicit.
+  }
+  \label{tab:core-case-uncertainty}
+\end{table}
+
+\subsection{Tail-Bank Protocol and Per-Bank Robustness}
+\label{app:tail-bank-robustness}
+Because the teacher-tail stress diagnostic is supporting fixed-bank evidence on the vision anchors, we make the bank construction explicit here.
+The two fixed teacher-difficulty banks are produced once per stack by \texttt{src/scripts/build\_conf\_eval\_banks.py}.
+For Camelyon17, bank A and bank B come from two frozen ERM teacher runs (seed 0 and seed 1, recorded in \texttt{artifacts/partitions\_eval/camelyon17\_resnet50/teacher\_difficulty/meta.json}).
+Within each bank, examples are assigned to $K=64$ quantile cells by per-example teacher cross-entropy loss, with a minimum evaluation cell size of 20 enforced downstream by \texttt{src/scripts/phase1\_eval.py}.
+Those bank assignments are fixed before selector comparison and are not redefined per checkpoint.
+Table~\ref{tab:camelyon-per-bank-robustness-app} and Table~\ref{tab:camelyon-finetune-per-bank-robustness-app} then rerun the selected-checkpoint comparison separately on banks A and B using \texttt{src/scripts/analyze\_per\_bank\_robustness.py}.
+For Camelyon17 ERM, the harmful direction holds cleanly on both banks at P95, P97, and P99.
+For finetuning, the selected-checkpoint bankwise direction remains at P95, P97, and P99 as well: the harmful mean tail direction holds on both banks, with slightly weaker decoupling fractions at P95 on both banks and P97 on bank B.
+
+\begin{table}[h]
+  \centering
+  \small
+  \resizebox{\columnwidth}{!}{\input{tables/table_camelyon17_per_bank_robustness_v32_20260422}}
+  \caption{
+    Camelyon17 ERM per-bank robustness for the teacher-difficulty tail metric.
+    Rows report mean proxy and tail deltas relative to the ERM baseline separately on banks A and B.
+    The harmful teacher-difficulty tail direction holds on both banks, so the main P95 result is not driven by averaging across a single favorable bank.
+    For ERM, the bankwise tail deltas coincide after rounding in the saved artifact, while proxy deltas differ by bank.
+  }
+  \label{tab:camelyon-per-bank-robustness-app}
+\end{table}
+
+\begin{table}[h]
+  \centering
+  \small
+  \resizebox{\columnwidth}{!}{\input{tables/table_camelyon17_finetune_selected_per_bank_robustness_v33_20260423}}
+  \caption{
+    Camelyon17 finetune selected-checkpoint per-bank robustness for the teacher-difficulty tail metric.
+    The harmful tail direction remains on both banks at P95, P97, and P99.
+    P95 and P97 are slightly less uniform than the ERM anchor on one of the two bankwise consistency fractions, while P99 remains fully harmful on both banks.
+  }
+  \label{tab:camelyon-finetune-per-bank-robustness-app}
+\end{table}
+
+\subsection{Persistent-Case Fixed-Horizon Support}
+\label{app:persistence-support}
+Table~\ref{tab:persistence-support-app} exposes the matched fixed-horizon comparison for every case we still label persistent in the main paper.
+For the classification anchors, the matched horizons are epoch 30 (Camelyon17 ERM and frozen CivilComments) and epoch 10 (Camelyon17 finetuning), matching the main-text setup.
+For ACSIncome, all runs share the same 50-epoch training horizon, so the fixed-horizon comparison uses the final epoch.
+The goal is not to claim identical magnitudes between selected and fixed views; it is to show that the harmful loss / reliability direction survives the matched-horizon check for every row that retains the persistent label.
+For Camelyon17 finetuning, the fixed10 teacher-difficulty tail diagnostic is markedly more outlier-sensitive than the selected-checkpoint view, so we use it only as a qualitative persistence check rather than as a clean magnitude claim.
+
+\begin{table}[h]
+  \centering
+  \small
+  \resizebox{\columnwidth}{!}{\input{tables/table_persistence_support_v32_20260422}}
+  \caption{
+    Fixed-horizon support for every row still labeled persistent.
+    ``Selected'' is the main-text proxy-selected comparison; ``fixed'' evaluates the same baseline/suppressive pair at the matched horizon instead of at the selected epoch.
+    For ACSIncome, the matched fixed horizon is the common final epoch 50.
+    $\dagger$ The finetune fixed10 teacher-difficulty tail diagnostic is outlier-sensitive: a few seeds explode at epoch 10, so we use that entry only as a qualitative persistence check rather than as a clean magnitude comparison.
+  }
+  \label{tab:persistence-support-app}
+\end{table}
+
+\subsection{Suppression-Strength Dose Response on Camelyon}
+\label{app:camelyon-dose-response}
+Table~\ref{tab:camelyon-dose-response-app} adds a direct suppression-strength stress test on the two strongest Camelyon anchors.
+For ERM, weakening the clipping threshold from P95 to P97 to P99 reduces the baseline-referenced selected-checkpoint harm smoothly in both held-out loss and teacher-difficulty tail CVaR, so the main P95 result is not a knife-edge artifact of one particular threshold.
+For finetuning, the selected-checkpoint harm remains large across all three regimes, and the bankwise selected-checkpoint comparison continues to show harmful tail movement on both banks (Table~\ref{tab:camelyon-finetune-per-bank-robustness-app}).
+The matched fixed10 finetune view is materially noisier, so we do not present the finetune dose-response as a monotone law; the supportable conclusion is narrower: once suppressive finetuning is allowed to select by its own proxy, the selected-checkpoint hazard persists beyond a single P95 setting.
+
+\begin{table}[h]
+  \centering
+  \small
+  \resizebox{\columnwidth}{!}{\input{tables/table_camelyon_dose_response_v33_20260423}}
+  \caption{
+    Camelyon suppression-strength dose response on the selected checkpoints.
+    Frac clip reports the mean validation clipping fraction at the selected epoch.
+    In the baseline-referenced selected-checkpoint workflow view, ERM loss / tail harm weakens as clipping relaxes from P95 to P97 to P99.
+    Table~\ref{tab:camelyon-erm-selector-dose} separately reports the same-trajectory selector-dose diagnostic.
+    On finetuning, the selected-checkpoint hazard remains large across all three tested clipping thresholds, so P95 should be read as the designated strong stress-test setting rather than as a unique knife-edge.
+  }
+  \label{tab:camelyon-dose-response-app}
+\end{table}
+
+\subsection{Guardrail Uncertainty}
+\label{app:guardrail}
+Table~\ref{tab:guardrail-uncertainty} reports paired bootstrap intervals for the improvement achieved by the guardrail relative to proxy-only selection.
+The intervals are computed on seed-matched proxy-only versus guardrail selections.
+
+\begin{table}[h]
+  \centering
+  \small
+  \resizebox{\columnwidth}{!}{\input{tables/table_guardrail_uncertainty}}
+  \caption{
+    Paired bootstrap intervals for proxy-only $\rightarrow$ guardrail changes.
+    Positive loss/tail reductions mean the guardrail removes harm relative to proxy-only selection.
+  }
+  \label{tab:guardrail-uncertainty}
+\end{table}
+
+\subsection{Guardrail Budget Sweep Detail}
+Table~\ref{tab:guardrail-budget-app} retains the full budget sweep that sits behind the main-text selector comparison.
+It shows why the main paper centers the selector comparison on the $1.25\times$ operating point as a middle diagnostic budget rather than presenting it as a universal constant.
+
+\begin{table}[h]
+  \centering
+  \small
+  \resizebox{\columnwidth}{!}{\input{tables/table_guardrail_budget_sweep}}
+  \caption{
+    Full budget sweep on the two Camelyon17 anchor suites.
+    The $1.10\times$ budget is essentially a veto, $1.50\times$ is materially looser, and $1.25\times$ is the middle illustrative diagnostic budget used in the main text.
+  }
+  \label{tab:guardrail-budget-app}
+\end{table}
+
+\subsection{Adaptive Baseline-Only Guardrail Sensitivity}
+\label{app:adaptive-guardrail}
+To address reviewer-facing concerns about $\rho$, we also checked a fully validation-only adaptive heuristic.
+Instead of using the fixed $1.25\times$ budget from Equation~\ref{eq:guardrail}, it sets the admissible threshold to $\mu+2\sigma$ from the final stable baseline-loss window and then applies proxy-based selection only within that feasible set.
+Table~\ref{tab:adaptive-guardrail-app} shows that the result is conservative rather than contradictory: on Camelyon17 ERM it becomes a pure veto, while on finetuning it narrows but does not eliminate proxy-only damage.
+We therefore treat adaptive baseline-only budgets as a sensitivity analysis, not as a replacement for the illustrative fixed-budget operating point used in the main selector comparison.
+
+\begin{table}[h]
+  \centering
+  \small
+  \resizebox{\columnwidth}{!}{\input{tables/table_adaptive_guardrail_summary}}
+  \caption{
+    Baseline-only adaptive guardrail sensitivity on the Camelyon17 selector anchors.
+    The adaptive threshold is set from final baseline validation-loss fluctuations alone ($\mu+2\sigma$; last five epochs on 30-epoch ERM and last three epochs on 10-epoch finetuning).
+    Deltas are measured relative to the baseline-selected checkpoint.
+    The heuristic is conservative on ERM and still directionally safer than proxy-only on finetuning, but it is not as effective as the illustrative fixed $1.25\times$ operating point from the main text.
+  }
+  \label{tab:adaptive-guardrail-app}
+\end{table}
+
+\subsection{Public-Practice Audit of Scalarized or Under-Specified Selection}
+\label{app:tooling-audit}
+We audited $10$ adjacent published papers with released artifacts, spanning benchmark/selection artifacts and shaped-objective or robust-learning repos (DomainBed, WILDS, SWAD, SubpopBench, ERM++, group DRO \citep{sagawa2020groupdro}, To Smooth or Not? \citep{wei2022smoothnoisy}, LS-PLL \citep{gong2024lspll}, Symmetric Cross Entropy \citep{wang2019symmetriccrossentropy}, and SGN \citep{englesson2024robustclassificationregression}).
+The sample is illustrative only, chosen to span adjacent released benchmark/selection artifacts and suppressive-or-robust objective repos rather than to estimate frequency or representativeness.
+Table~\ref{tab:tooling-audit} shows the pattern: $8/10$ expose checkpoint choice through a single best-model scalar, and none exposes a default reliability-aware multi-metric selector or checks alignment with held-out loss, calibration, or group-sensitive reliability.
+
+\begin{table}[h]
+  \centering
+  \small
+  \resizebox{\columnwidth}{!}{\input{tables/table_public_tooling_audit}}
+  \caption{
+    Compact audit of checkpoint-selection defaults in adjacent published papers with released artifacts.
+    The sample spans benchmark/selection artifacts and shaped-objective or robust-learning repos.
+    This is a purposive relevance audit rather than a prevalence estimate; the $8/10$ count should not be read as a population rate.
+    The common pattern is not a specific metric, but that checkpoint choice is scalarized or left under-specified by default rather than exposed through a reliability-aware multi-metric selector.
+  }
+  \label{tab:tooling-audit}
+\end{table}
+
+\subsection{End-to-End CivilComments Support}
+\label{app:civilcomments-text-e2e}
+As a targeted scope check, we also reran CivilComments end-to-end with DistilBERT finetuning on an official-group-aware skewed validation surface emphasizing minority-identity positive examples.
+Table~\ref{tab:civilcomments-text-e2e} reports the ten-seed selector comparison.
+Relative to the baseline-selected checkpoint, proxy-only soft clipping worsens overall loss by $+0.155$, official WILDS worst-group loss by $+1.007$, and ECE by $+0.0533$; validation-loss-only remains worse than baseline, while the $1.25\times$ guardrail acts as a pure veto on all $10/10$ seeds.
+
+Unlike the frozen-embedding CivilComments result, fixed-horizon official worst-group persistence is mixed in this end-to-end text stack: at epoch 10, soft clipping is still worse on overall loss and ECE, but only $5/10$ seeds are worse on official worst-group loss and worst-group accuracy is often higher ($8/10$).
+So this extension stays in the appendix; its value is narrower, namely that the selected-checkpoint loss / calibration hazard survives end-to-end text finetuning even when the fixed-horizon worst-group signal is mixed, consistent with early suppressive $R_w$ relaxing toward $1$ later in training (Figure~\ref{fig:civilcomments-text-mechanism-app}).
+
+\begin{table}[h]
+  \centering
+  \small
+  \resizebox{0.92\columnwidth}{!}{\input{tables/table_civilcomments_text_e2e}}
+  \caption{
+    End-to-end CivilComments selector comparison on the official-group-aware validation surface.
+    Deltas are measured relative to the baseline-selected checkpoint.
+    Proxy-only soft clipping worsens overall loss and official WILDS worst-group loss, while the $1.25\times$ guardrail acts as a pure veto and falls back to baseline on all ten seeds.
+    Rows are backed by the saved selector-summary artifact listed in the supplement ledger.
+  }
+  \label{tab:civilcomments-text-e2e}
+\end{table}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\columnwidth]{civilcomments_text_mechanism_wgminor_10s_20260331_ext}
+  \caption{
+    End-to-end CivilComments mechanism on the official-group-aware validation surface.
+    Left: early $R_w$ is suppressive before relaxing toward $1$ later in training.
+    Right: the tail-core clip-exposure gap remains large, showing that the selected checkpoints still sit in a genuinely suppressive regime.
+  }
+  \label{fig:civilcomments-text-mechanism-app}
+\end{figure}
+
+\subsection{ACSIncome Huber Dose-Response}
+\label{app:acsincome-huber}
+On the same ACSIncome regression stack, Huber loss at the P95 residual threshold provides a milder suppressive objective ($R_w = 0.53$, vs.\ $0.41$ for winsorization).
+The selection hazard is weaker and shifts toward the tail channel: proxy-only selection worsens raw held-out MSE on $3/10$ seeds and tail MSE on $9/10$ seeds.
+The mean $\Delta$\,tail MSE is $+0.051$ with $95\%$ CI $[+0.028, +0.073]$ (excludes zero), while the mean $\Delta$\,held-out MSE is slightly negative at $-0.0031$ with $95\%$ CI $[-0.0053, -0.0008]$.
+This is consistent with Proposition~1's dose-response picture: Huber preserves a weaker but non-zero tail signal, and the ordering $R_w^{\text{wins}} = 0.41 < R_w^{\text{huber}} = 0.53$ maps to a much stronger winsorization hazard.
+
+\subsection{Seed-Matched Lure Checks}
+The main paper reports the strongest seed-level counts in prose.
+Table~\ref{tab:seed-lure-dominance} gives the full dominance counts, while Table~\ref{tab:seed-lure-paired} gives paired mean deltas with bootstrap intervals.
+For Camelyon17, the reliability diagnostic is teacher-difficulty tail CVaR; for CivilComments, it is official WILDS worst-group loss.
+
+\begin{table}[h]
+  \centering
+  \small
+  \resizebox{\columnwidth}{!}{\input{tables/table_acceptance_stepup_dominance}}
+  \caption{
+    Seed-level lure counts.
+    ``Reliability worse'' means higher teacher-difficulty tail CVaR on Camelyon17 and higher official WILDS worst-group loss on CivilComments.
+  }
+  \label{tab:seed-lure-dominance}
+\end{table}
+
+\begin{table}[h]
+  \centering
+  \small
+  \resizebox{\columnwidth}{!}{\input{tables/table_acceptance_stepup_paired}}
+  \caption{
+    Paired mean deltas for the main lure checks.
+    ``Reliability'' denotes teacher-difficulty tail CVaR on Camelyon17 and official WILDS worst-group loss on CivilComments; calibration is reported through both ECE and Brier.
+  }
+  \label{tab:seed-lure-paired}
+\end{table}
+
+\subsection{Camelyon Standard-Metric, Selector-Dose, and Leave-One-Hospital Diagnostics}
+\label{app:camelyon-selector-diagnostics}
+Table~\ref{tab:camelyon-selector-diagnostics} adds two targeted diagnostics for the Camelyon anchors.
+The workflow rows show that the Camelyon reliability signal is not carried only by teacher-difficulty tail CVaR: on ERM, held-out loss, ECE, and Brier all worsen; on finetuning, held-out loss and validation-side ECE worsen while Brier is neutral.
+The same-trajectory rows compare proxy-best with validation-loss-best inside the same suppressive trajectory, with no fallback.
+This selector-only contrast is clean on Camelyon17 ERM and mixed on finetuning, so the finetuning claim remains primarily baseline-referenced workflow evidence.
+
+\begin{table}[h]
+  \centering
+  \scriptsize
+  \resizebox{\columnwidth}{!}{\input{tables/table_camelyon_selector_diagnostics}}
+  \caption{
+    Camelyon standard-metric triangulation and same-trajectory selector-only contrasts.
+    Workflow rows compare the proxy-selected suppressive checkpoint with the baseline-selected undistorted checkpoint.
+    Same-trajectory rows compare proxy-best with validation-loss-best on the same suppressive P95 trajectory and do not use fallback.
+    $\Delta$Tail is teacher-difficulty tail CVaR, used here as a fixed-bank stress diagnostic.
+    For Camelyon17 finetune rows, ECE/Brier are validation-side calibration diagnostics from the saved finetune selector-calibration artifact; the ERM rows use held-out/test calibration.
+    Workflow-row intervals are regenerated in this standard-metric triangulation artifact; small endpoint differences from Table~\ref{tab:core-case-uncertainty} reflect separate bootstrap resampling of the same seed-matched deltas.
+  }
+  \label{tab:camelyon-selector-diagnostics}
+\end{table}
+
+Table~\ref{tab:camelyon-erm-selector-dose} extends the Camelyon17 ERM same-trajectory selector diagnostic beyond the P95 stress setting.
+Holding the suppressive objective and trajectory fixed, proxy-best selection is worse than validation-loss-best selection at P95 and P97 on held-out loss, ECE, and the fixed-bank teacher-tail diagnostic.
+At P99 the result attenuates and becomes mixed: standard loss and Brier no longer worsen, but ECE and teacher-tail still do.
+This is why we treat P95/P97 as clean selector-only evidence and P99 as an attenuation check rather than as a contradiction.
+
+\begin{table}[h]
+  \centering
+  \scriptsize
+  \resizebox{\columnwidth}{!}{\input{tables/table_camelyon_erm_selector_dose}}
+  \caption{
+    Camelyon17 ERM same-trajectory selector-dose diagnostic.
+    Deltas are proxy-best minus validation-loss-best on the same suppressive trajectory, so this isolates selector choice within a fixed objective/trajectory rather than a baseline-referenced workflow comparison.
+    P95 and P97 show clean selector-only harm on held-out loss, ECE, and the fixed-bank teacher-tail diagnostic.
+    P99 is attenuated and mixed: loss and Brier no longer worsen, but ECE and teacher-tail still degrade.
+  }
+  \label{tab:camelyon-erm-selector-dose}
+\end{table}
+
+Table~\ref{tab:camelyon-valacc-selector} checks validation-accuracy selection, a common scalarized checkpoint rule.
+The comparison is validation-accuracy-best minus validation-loss-best on the same Camelyon17 ERM suppressive trajectory.
+It is not a new workflow-generalization claim; it shows that the same practical selector warning is not limited to the soft-clipped proxy name.
+
+\begin{table}[h]
+  \centering
+  \scriptsize
+  \resizebox{\columnwidth}{!}{\input{tables/table_camelyon_valacc_selector_sensitivity}}
+  \caption{
+    Camelyon17 ERM validation-accuracy selector sensitivity.
+    Deltas are validation-accuracy-best minus validation-loss-best on the same suppressive trajectory.
+    P95, P97, and P99 all worsen held-out loss, ECE, and the fixed-bank teacher-tail diagnostic in $10/10$ seeds.
+    Brier is neutral or favorable to validation-accuracy selection, so the claim is restricted to loss, calibration by ECE, and the teacher-tail stress diagnostic.
+  }
+  \label{tab:camelyon-valacc-selector}
+\end{table}
+
+Table~\ref{tab:camelyon-loo-selector-standard} repeats a standard-metric selector-only check over leave-one-hospital-out Camelyon17 ERM folds.
+Because the comparison is proxy-best minus validation-loss-best on the same suppressive trajectory, it supports selector-only robustness.
+We do not use it to claim that proxy-minus-baseline workflow harm is uniform across hospitals.
+
+\begin{table}[h]
+  \centering
+  \scriptsize
+  \resizebox{\columnwidth}{!}{\input{tables/table_camelyon_loo_selector_standard_metrics}}
+  \caption{
+    Leave-one-hospital-out Camelyon17 ERM selector-only standard-metric check.
+    Deltas are proxy-best minus validation-loss-best on the same suppressive trajectory, averaged over five held-out hospital folds.
+    These rows use standard held-out metrics only and do not use the teacher-tail diagnostic.
+    They are included as a selector-only robustness check, not as evidence that the baseline-referenced proxy-minus-baseline workflow hazard generalizes uniformly across hospitals.
+  }
+  \label{tab:camelyon-loo-selector-standard}
+\end{table}
+
+\subsection{Objective-Family Numerical Controls}
+Table~\ref{tab:mechanism-table} gives the numerical values behind Figure~\ref{fig:mechanism}.
+
+\begin{table}[h]
+  \centering
+  \small
+  \resizebox{\columnwidth}{!}{\input{tables/table_mechanism_orientation}}
+  \caption{
+    Same-stack objective-family controls on Camelyon17 ERM.
+    Soft clipping suppresses the tail ($R_w<1$), while focal loss and label smoothing upweight it ($R_w>1$).
+    The $R_w$ values here are selected-checkpoint orientation values; Appendix Table~\ref{tab:rw-predictive-summary} and Figure~\ref{fig:rw-predictive-summary-app} separately report early-window $R_w$ for the warning-statistic analysis.
+  }
+  \label{tab:mechanism-table}
+\end{table}
+
+\subsection{Hard-Bootstrap Corroboration}
+Table~\ref{tab:bootstrap-camelyon-support} gives the fuller second-family selector study on the same Camelyon17 ERM stack using hard bootstrapped cross-entropy with $\beta=0.60$, a standard suppressive objective from the noisy-label literature.
+The core selector mismatch survives this extension.
+Relative to val-loss-only selection inside the same bootstrap runs, proxy-only improves the bootstrap proxy by about $0.010$ but worsens held-out hospital-2 loss by $+0.0109$, teacher-difficulty tail CVaR by $+1.37$, and ECE by $+0.0110$ on average across ten seeds.
+The selected checkpoints remain suppressive ($R_w \approx 0.567$, early $R_w \approx 0.605$).
+
+The fixed $1.25\times$ guardrail is effectively slack on this family, while the within-run oracle-loss selector lands much earlier (mean epoch $6.4$ versus $15.2$ for proxy-only) and is lower on held-out loss, teacher-difficulty tail CVaR, and ECE.
+Unlike the main P95 soft-clipping anchor, this bootstrap corroboration is not a stronger fixed-horizon pathology: relative to fixed epoch 30, the selected bootstrap checkpoint is actually better on proxy, held-out loss, teacher-difficulty tail CVaR, and ECE.
+So we use it as supporting evidence against the ``only soft clipping'' objection rather than as a replacement for the main hazard anchors.
+
+\begin{table}[h]
+  \centering
+  \small
+  \resizebox{0.92\columnwidth}{!}{\input{tables/table_bootstrap_selector_comparison_extended}}
+  \caption{
+    Hard-bootstrap selector extension on Camelyon17 ERM ($\beta=0.60$, ten seeds).
+    Deltas are measured relative to the baseline-selected checkpoint.
+    Proxy-only and val-loss-only are selectors on the same bootstrap runs; oracle loss is the best held-out-loss epoch within those same runs.
+    The selector-level hazard is still the proxy-only versus safer-selector gap:
+    proxy-only is slightly better on its own bootstrap proxy but materially worse on held-out loss, teacher-difficulty tail CVaR, and ECE.
+    The fixed $1.25\times$ guardrail is included for completeness and is effectively slack on this family.
+  }
+  \label{tab:bootstrap-camelyon-support}
+\end{table}
+
+\subsection{Early Warning Value of $R_w$}
+Table~\ref{tab:rw-predictive-summary} and Figure~\ref{fig:rw-predictive-summary-app} show that the same Camelyon17 ERM family-control stack already contains a practical early-warning signal.
+Using the rule ``warn about harmful tail direction iff $R_w<1$,'' early $R_w$ computed well before final selection gives a strong same-stack warning about whether the eventual selected checkpoint will inflate or reduce the tail on the tested stack.
+
+\begin{table}[h]
+  \centering
+  \small
+  \resizebox{0.82\columnwidth}{!}{\input{tables/table_rw_predictive_summary}}
+  \caption{
+    Early $R_w$ as a same-stack warning for final selected-checkpoint tail direction on the Camelyon17 ERM objective-family stack.
+    ``Regime'' aggregates the ten-seed mean for each family setting, and the sign rule warns about harmful tail direction when $R_w<1$.
+    The warning is stable across short early windows.
+  }
+  \label{tab:rw-predictive-summary}
+\end{table}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\columnwidth]{camelyon17_rw_predictive_summary_20260329}
+  \caption{
+    Early $R_w$ as a same-stack warning for final selected $\Delta$Tail on the Camelyon17 ERM objective-family stack.
+    Each point is a ten-seed regime mean with $95\%$ mean confidence bars.
+    The horizontal and vertical reference lines mark zero tail change and $R_w=1$ respectively.
+  }
+  \label{fig:rw-predictive-summary-app}
+\end{figure}
+
+\subsection{End-to-End Objective-Family Support}
+Table~\ref{tab:objfam-finetune-support} summarizes the selected-checkpoint end-to-end Camelyon17 controls behind the mechanism discussion.
+It is included to show that the same evaluation protocol yields a harmful suppressive family and comparison families with lower held-out loss and teacher-tail diagnostics.
+
+\begin{table}[h]
+  \centering
+  \small
+  \resizebox{\columnwidth}{!}{\input{tables/table_objfam_finetune_support}}
+  \caption{
+    Selected-checkpoint end-to-end objective-family support on a separate Camelyon17 finetune-control sweep.
+    Deltas are measured relative to that sweep's own baseline finetune checkpoint.
+    This table supports the method-ranking comparison in Table~\ref{tab:ranking-reversal} and is not numerically comparable to the main selector-anchor finetune sweep in Tables~\ref{tab:core-cases} and \ref{tab:selector-comparison}.
+    Soft clipping is the harmful suppressive family; label smoothing is the cleanest counterexample; focal is mixed.
+  }
+  \label{tab:objfam-finetune-support}
+\end{table}

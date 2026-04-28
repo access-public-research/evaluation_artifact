@@ -1,0 +1,4 @@
+# RCGDRO regime config (proxy-trained)
+name: rcgdro
+objective: rcgdro
+eta: 0.1

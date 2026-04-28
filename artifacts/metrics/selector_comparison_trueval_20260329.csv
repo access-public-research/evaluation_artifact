@@ -1,0 +1,9 @@
+suite,suite_label,selection_policy,selector_label,accept_rate,delta_loss,delta_acc,delta_tail
+camelyon_erm_p95,Camelyon17 ERM,baseline,Baseline,1.0,0.0,0.0,0.0
+camelyon_erm_p95,Camelyon17 ERM,proxy_only,Proxy-only,1.0,0.0553146303895537,0.0009852564253297,5.501472663879394
+camelyon_erm_p95,Camelyon17 ERM,guardrail,1.25x guardrail,0.7,0.0258461970495623,-0.0016166200296282,2.51318473815918
+camelyon_erm_p95,Camelyon17 ERM,val_loss_only,Validation-loss,1.0,0.0352899397292495,-0.0023737860653232,3.492360973358154
+camelyon_finetune_p95,Camelyon17 Finetune,baseline,Baseline,1.0,0.0,0.0,0.0
+camelyon_finetune_p95,Camelyon17 Finetune,proxy_only,Proxy-only,1.0,0.6185242155409866,0.0251087544383568,6.2263586044311525
+camelyon_finetune_p95,Camelyon17 Finetune,val_loss_only,Val-loss-only,1.0,0.6088803221801042,-0.0060585040092176,2.8022512197494507
+camelyon_finetune_p95,Camelyon17 Finetune,guardrail,1.25x guardrail,0.4,0.0679471421565743,0.0096926658358219,0.4595245242118835

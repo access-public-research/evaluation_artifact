@@ -1,0 +1,44 @@
+\section{Introduction}
+Under distribution shift, evaluation depends not only on which metrics are reported, but also on which checkpoint is chosen for reporting, comparison, and deployment.
+Recent work has shown that model-selection rules and stopping criteria can materially change out-of-distribution conclusions \citep{gulrajani2020domainbed,cha2021swad,arpit2022ensembleaverages,yang2023changeishard,teterwak2025ermpp,naganuma2025pretrainedmodelselection,berta2025refinethencalibrate}.
+Here we study one concrete part of that protocol: \emph{checkpoint selection}.
+We therefore treat the suppressive proxy-selected reporting workflow as the evaluation choice and ask what reliability claim it actually supports.
+
+Many modern pipelines optimize a shaped objective rather than plain cross-entropy or raw MSE \citep{lin2017focalloss,reed2014bootstrapping,zhang2018generalizedcrossentropy}.
+We focus on one subset, which we call \emph{suppressive}: objectives or target transforms that reduce gradient pressure on high-loss examples.
+Soft clipping is a controlled classification example, and winsorized targets in heavy-tailed regression are a natural regression example.
+Once chosen, such an objective induces its own validation score, which we call the \emph{proxy}.
+The resulting workflow is simple: train with the shaped objective, pick the checkpoint with the best validation proxy, and report headline held-out metrics.
+
+Our question is whether that workflow remains trustworthy under shift.
+For suppressive objectives, it often does not.
+The proxy-favored checkpoint can look best on the proxy, and in some cases even on held-out accuracy, while doing worse on held-out loss, calibration, and group- or tail-sensitive reliability.
+
+The claim is specific: under suppressive objectives, proxy-selected reporting can make a less reliable checkpoint look like the successful one.
+We use two comparison units.
+In baseline-referenced comparisons, we compare the suppressive proxy-selected checkpoint with the checkpoint selected under the undistorted objective.
+In within-trajectory comparisons, we compare different selectors on the same suppressive run.
+Only the second comparison isolates selector choice alone, so most of our main evidence is workflow-level rather than selector-only.
+That distinction matters because the clearest same-run reversal appears on frozen CivilComments, where the same suppressive trajectory is admitted under proxy selection but rejected by a validation-loss veto calibrated to the baseline checkpoint.
+The largest mean accuracy-up / reliability-down pattern appears on Camelyon17 finetuning, where proxy-only selection raises mean held-out accuracy while worsening held-out loss, calibration, and the teacher-tail stress diagnostic.
+
+Appendix~\ref{app:tooling-audit} gives an illustrative, non-prevalence relevance check for scalarized checkpoint defaults in adjacent released artifacts.
+
+The expected part is that suppressing high-loss examples can hurt tail-sensitive metrics.
+The evaluation hazard is that scalarized checkpoint selection can hide that damage and legitimize the checkpoint that caused it.
+
+We study this mainly on two Camelyon17 hospital-shift anchors, with narrower support cases on CelebA subgroup shift, frozen CivilComments, and ACSIncome regression.
+Camelyon17 provides the core persistent evidence, CelebA a transient contrast, CivilComments the clearest non-vision admissibility reversal under the official WILDS evaluation, and ACSIncome a regression scope check.
+Supporting hard-bootstrap, same-stack family controls, and a time-course bridge sharpen scope and mechanism without changing the thesis.
+
+Prior work already established that selector choice matters under shift \citep{gulrajani2020domainbed,cha2021swad,arpit2022ensembleaverages,yang2023changeishard,teterwak2025ermpp,naganuma2025pretrainedmodelselection,berta2025refinethencalibrate}.
+Our narrower contribution is to show a specific reporting failure: suppressive proxy-selected workflows can report checkpoints that look attractive on the proxy or on accuracy while failing standard held-out reliability checks.
+Within-trajectory selector disagreement is the sharpest evidence, and baseline-referenced comparisons show what a suppressive pipeline can present as a reported win.
+The rest of the paper tests when this hazard persists, when a validation-loss diagnostic helps, and whether the risky regime is tied to suppression rather than to objective shaping broadly.
+
+\paragraph{Contributions.}
+The paper makes three claims.
+First, checkpoint selection is part of the evaluation protocol: under objectives that downweight high-loss examples, proxy-selected reporting can make less reliable checkpoints look successful under shift.
+Second, the effect is not carried only by the teacher-defined hard-example diagnostic: the main Camelyon and CivilComments evidence is held-out loss, calibration, and official WILDS worst-group loss, with the teacher-tail metric used as supporting fixed-bank stress evidence.
+Third, the practical implication is minimal: report both proxy-selected and validation-loss-selected checkpoints, and treat harmful disagreement on held-out reliability metrics as an unvalidated reliability claim.
+Most evidence is workflow-level, where objective, trajectory, and selector change together; selector-only conclusions are restricted to explicitly labeled same-trajectory selector and admissibility analyses.

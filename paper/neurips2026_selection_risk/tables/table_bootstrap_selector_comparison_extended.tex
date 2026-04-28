@@ -1,0 +1,11 @@
+\begin{tabular}{lcccc}
+  \toprule
+  Selector & $\Delta$Held-out loss$\downarrow$ & $\Delta$Held-out acc$\uparrow$ & $\Delta$Tail CVaR$\downarrow$ & $\Delta$ECE$\downarrow$ \\
+  \midrule
+  Baseline & +0.000 & +0.000 & +0.000 & +0.000 \\
+  Proxy-only & +0.016 & -0.003 & +1.892 & +0.008 \\
+  Val-loss-only & +0.005 & -0.002 & +0.519 & -0.003 \\
+  1.25x guardrail & +0.016 & -0.003 & +1.892 & +0.008 \\
+  Oracle loss & -0.000 & +0.003 & +0.921 & +0.001 \\
+  \bottomrule
+\end{tabular}

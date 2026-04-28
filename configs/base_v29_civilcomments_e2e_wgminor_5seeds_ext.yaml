@@ -1,0 +1,49 @@
+# CivilComments end-to-end DistilBERT finetune extension to 5 seeds with the official-group-aware validation surface.
+project:
+  root: .
+  artifacts_dir: ${project.root}/artifacts
+  runs_dir: ${project.root}/runs
+  figures_dir: ${project.root}/figures
+
+paths:
+  wilds_data_dir: ${project.root}/data
+
+data:
+  fractions:
+    train: 1.0
+    val: 1.0
+    test: 1.0
+  subset_seed: 0
+
+compute:
+  device: cuda
+  num_workers: 0
+  amp: true
+
+embeddings:
+  backbone: distilbert-base-uncased
+
+training:
+  seeds: [0,1,2,3,4]
+  # Reuse the finished 3-seed tag so the extension evaluates across all five seeds.
+  tag_suffix: v29e2e_cc_wgminor_3s_10ep_20260330
+
+finetune:
+  batch_size: 16
+  eval_batch_size: 32
+  epochs: 10
+  lr: 2e-5
+  weight_decay: 0.01
+  grad_clip: 1.0
+
+validation:
+  skewed_val:
+    enabled: true
+    source_split: val
+    seed: 0
+    size: 2000
+    worst_group_frac: 0.15
+    worst_group_source: train
+    worst_group_id: null
+    label_noise: 0.0
+    artifact_name_override: civilcomments_distilbert-base-uncased_wgminorpos15_v1

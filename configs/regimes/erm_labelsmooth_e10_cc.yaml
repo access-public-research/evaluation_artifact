@@ -1,0 +1,4 @@
+# CivilComments ERM with label smoothing (epsilon=0.10)
+name: erm_labelsmooth_e10_cc
+objective: erm
+label_smoothing: 0.10

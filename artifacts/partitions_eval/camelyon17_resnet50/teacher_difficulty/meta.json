@@ -1,0 +1,16 @@
+{
+  "family": "teacher_difficulty",
+  "prefix": "diff",
+  "num_partitions": 1,
+  "num_cells": 64,
+  "teacher_runs": [
+    "runs/camelyon17/erm/seed0/h0_do0.0_lr0.001_wd0.0001_bs512_ep30",
+    "runs/camelyon17/erm/seed1/h0_do0.0_lr0.001_wd0.0001_bs512_ep30"
+  ],
+  "within_pred_label": false,
+  "splits": [
+    "train",
+    "val_skew",
+    "validation"
+  ]
+}

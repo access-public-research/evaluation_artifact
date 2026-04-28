@@ -1,0 +1,36 @@
+\documentclass{article}
+
+\PassOptionsToPackage{numbers}{natbib}
+\usepackage[eandd]{neurips_2026}
+
+\input{extra_pkgs}
+
+\graphicspath{{figures/}{../../figures/}{../../artifacts/metrics/}}
+
+\title{When Proxy-Selected Checkpoints Hide Reliability Failures under Shift}
+\author{Anonymous Authors}
+
+\begin{document}
+
+\maketitle
+
+\input{sections_ed/00_abstract}
+\input{sections_ed/01_intro}
+\input{sections_ed/02_related_work}
+\input{sections_ed/03_setup}
+\input{sections/04_experiments}
+\input{sections_ed/05_results}
+
+\FloatBarrier
+\bibliographystyle{plainnat}
+\bibliography{bibliography}
+
+\appendix
+\input{sections/07_appendix}
+\input{sections/08_broader_impact}
+\input{sections/09_reproducibility}
+\FloatBarrier
+\clearpage
+\input{checklist}
+
+\end{document}

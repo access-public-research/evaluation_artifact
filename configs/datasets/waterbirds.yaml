@@ -1,0 +1,5 @@
+# Waterbirds dataset config
+name: waterbirds
+wilds_dataset: waterbirds
+data_dir: wilds/data
+spurious_metadata_field: background

@@ -1,0 +1,5 @@
+# RCGDRO with clipped loss proxy objective
+name: rcgdro_clip
+objective: rcgdro
+eta: 0.1
+clip_loss: 0.356649

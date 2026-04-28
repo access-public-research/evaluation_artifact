@@ -1,0 +1,4 @@
+# ERM with focal loss gamma=2.0 (CelebA)
+name: erm_focal_g2_celeba
+objective: erm
+focal_gamma: 2.0

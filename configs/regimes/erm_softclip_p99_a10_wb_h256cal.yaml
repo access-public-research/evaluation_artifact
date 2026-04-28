@@ -1,0 +1,5 @@
+# ERM with soft-clipped loss (Waterbirds matched h256 P99, alpha=0.10)
+name: erm_softclip_p99_a10_wb_h256cal
+objective: erm
+clip_loss: 1.4442696095
+clip_alpha: 0.10

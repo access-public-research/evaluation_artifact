@@ -1,0 +1,19 @@
+level,contrast,metric,mean,ci_low,ci_high,n,harm_count,harmful_direction
+P95,same trajectory: val-accuracy - val-loss,Validation accuracy,0.008799999999999997,0.007150000000000001,0.010299999999999998,10,10,positive
+P95,same trajectory: val-accuracy - val-loss,Loss,0.0230530759936897,0.016578360860083723,0.0296441273536374,10,10,positive
+P95,same trajectory: val-accuracy - val-loss,Acc,0.004946269428833449,0.003558915512497961,0.00632069038493184,10,0,negative
+P95,same trajectory: val-accuracy - val-loss,ECE,0.0072111799309795,0.005950555084775985,0.008435755359358445,10,10,positive
+P95,same trajectory: val-accuracy - val-loss,Brier,-0.001959389586009209,-0.003078886656957731,-0.0009126331449231352,10,2,positive
+P95,same trajectory: val-accuracy - val-loss,Teacher-tail CVaR,2.3916794300079345,2.0784042721986773,2.720911415219306,10,10,positive
+P97,same trajectory: val-accuracy - val-loss,Validation accuracy,0.007550000000000034,0.006500000000000039,0.00850000000000004,10,10,positive
+P97,same trajectory: val-accuracy - val-loss,Loss,0.026896295433302724,0.023427584288796082,0.03028317811447224,10,10,positive
+P97,same trajectory: val-accuracy - val-loss,Acc,0.006632257154278376,0.005318973828391305,0.008193647565076253,10,0,negative
+P97,same trajectory: val-accuracy - val-loss,ECE,0.011667124944856699,0.010273905182563917,0.013213317421830403,10,10,positive
+P97,same trajectory: val-accuracy - val-loss,Brier,-0.002711782615770901,-0.0036604393257814423,-0.0018043693648777726,10,0,positive
+P97,same trajectory: val-accuracy - val-loss,Teacher-tail CVaR,2.9249466776847837,2.7016032844781868,3.193100361526012,10,10,positive
+P99,same trajectory: val-accuracy - val-loss,Validation accuracy,0.00814999999999999,0.006499999999999973,0.009799999999999998,10,10,positive
+P99,same trajectory: val-accuracy - val-loss,Loss,0.02581409122649909,0.019264930855290054,0.031146293001909037,10,10,positive
+P99,same trajectory: val-accuracy - val-loss,Acc,0.002307945540480172,0.0008652738260398963,0.0038587544383568337,10,3,negative
+P99,same trajectory: val-accuracy - val-loss,ECE,0.02209476595735995,0.017764534024026765,0.025642985009710517,10,10,positive
+P99,same trajectory: val-accuracy - val-loss,Brier,0.00020019676559204224,-0.000817777201521585,0.0012426987638165746,10,5,positive
+P99,same trajectory: val-accuracy - val-loss,Teacher-tail CVaR,2.8950973987579345,2.359603451192379,3.3250021043419844,10,10,positive

@@ -1,0 +1,5 @@
+# CivilComments-calibrated ERM with soft-clipped loss (P95, alpha=0.10)
+name: erm_softclip_p95_a10_cc
+objective: erm
+clip_loss: 1.6436494136
+clip_alpha: 0.10

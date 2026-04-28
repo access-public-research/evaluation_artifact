@@ -1,0 +1,5 @@
+# RCGDRO with clipped loss proxy objective (higher proxy pressure)
+name: rcgdro_clip_high
+objective: rcgdro
+eta: 0.5
+clip_loss: 0.356649

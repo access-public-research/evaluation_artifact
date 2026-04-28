@@ -1,0 +1,91 @@
+# Supplement Commands
+
+These commands are intended to be run from the extracted supplement root.
+They regenerate the listed command-backed claim-bearing paper-facing outputs from the saved artifacts included in the bundle.
+The supplement is not a full training rerun package.
+
+## Minimal Python Environment
+
+Install the minimal dependencies for the bundled artifact-backed scripts:
+
+```bash
+python -m pip install -r paper/neurips2026_selection_risk/supplement/requirements.txt
+```
+
+## Basic Layout Smoke Test
+
+From the extracted supplement root:
+
+```bash
+python -c "from pathlib import Path; [Path(p).exists() or (_ for _ in ()).throw(AssertionError(p)) for p in ['supplement/README.md','src/scripts/make_core_case_summary.py','artifacts/metrics/core_case_summary_20260424.csv']]; print('basic supplement layout OK')"
+```
+
+## Rebuild the PDF
+
+The PDF rebuild requires a standard TeX toolchain with `latexmk`, `pdflatex`, and `bibtex`
+(for example TeX Live or MiKTeX).
+
+```bash
+cd paper/neurips2026_selection_risk
+latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
+```
+
+The archive includes `main.bbl`; if BibTeX is unavailable but `pdflatex` is installed,
+reviewers can still rebuild from the included bibliography output by running `pdflatex`
+twice from `paper/neurips2026_selection_risk`.
+
+If running the remaining commands in the same shell, return to the extracted supplement root first:
+
+```bash
+cd ../..
+```
+
+## Regenerate Listed Paper-Facing Figures
+
+From the supplement root:
+
+```bash
+python -m src.scripts.make_main_divergence_figure_ed
+python -m src.scripts.make_main_mechanism_figure
+python -m src.scripts.make_theory_bridge_figures
+```
+
+Some appendix diagnostic figures are included as saved outputs because their full
+regeneration requires heavier intermediate arrays or external benchmark assets
+that are outside this minimal review bundle.
+
+## Regenerate Listed Paper-Facing Tables from Saved Artifacts
+
+From the supplement root:
+
+```bash
+python -m src.scripts.make_core_case_summary
+python -m src.scripts.make_true_selector_comparison --stamp 20260329
+python -m src.scripts.make_civilcomments_selector_comparison
+python -m src.scripts.make_acceptance_stepup_tables --date_tag 20260328
+python -m src.scripts.make_camelyon_selector_diagnostics
+python -m src.scripts.make_camelyon_erm_selector_dose
+python -m src.scripts.make_camelyon_valacc_selector_sensitivity
+python -m src.scripts.make_camelyon_loo_selector_standard_metrics
+python -m src.scripts.make_bootstrap_camelyon_support
+python -m src.scripts.make_objfam_finetune_support_table
+python -m src.scripts.analyze_per_bank_robustness --dataset_label Camelyon17 --selected_rows_csv artifacts/metrics/camelyon17_selected_rows_v11erm_softclip_cam_10s_fix_20260325.csv --phase0_csv artifacts/metrics/camelyon17_resnet50_phase0_val_metrics_v11erm_softclip_cam_10s_fix_20260228.csv --phase1_csv artifacts/metrics/camelyon17_resnet50_phase1_pockets_v11erm_softclip_cam_10s_fix_20260228.csv --baseline_regime erm --out_csv artifacts/metrics/camelyon17_per_bank_robustness_v32_20260422.csv --out_tex paper/neurips2026_selection_risk/tables/table_camelyon17_per_bank_robustness_v32_20260422.tex
+python -m src.scripts.analyze_per_bank_robustness --dataset_label "Camelyon17 finetune selected" --selected_rows_csv artifacts/metrics/camelyon17_domain_acc_with_loss_finetune_cam_scivalid10s_p95p97p99_20260423_selected.csv --phase0_csv artifacts/metrics/camelyon17_resnet50_phase0_val_metrics_finetune_cam_scivalid10s_p95p97p99_20260423.csv --phase1_csv artifacts/metrics/camelyon17_resnet50_phase1_pockets_finetune_cam_scivalid10s_p95p97p99_20260423.csv --baseline_regime rcgdro_finetune --out_csv artifacts/metrics/camelyon17_finetune_selected_per_bank_robustness_v33_20260423.csv --out_tex paper/neurips2026_selection_risk/tables/table_camelyon17_finetune_selected_per_bank_robustness_v33_20260423.tex
+python -m src.scripts.make_persistence_support_table
+python -m src.scripts.make_camelyon_dose_response_table --finetune_suffix finetune_cam_scivalid10s_p95p97p99_20260423 --out_csv artifacts/metrics/camelyon_dose_response_summary_v33_20260423.csv --out_tex paper/neurips2026_selection_risk/tables/table_camelyon_dose_response_v33_20260423.tex
+```
+
+These scripts reuse the included saved summary/seed tables when present and therefore do not rerun model training.
+
+The remaining static support tables are not advertised as separate command-line entry points.
+Some are CSV-backed static TeX summaries; others are qualitative/manual audit summaries.
+Their provenance status is documented in `supplement/STATIC_SUPPORT_TABLES.md`, and available support CSVs are listed in `supplement/DATA_ARTIFACT_LEDGER.csv`.
+In particular, `table_civilcomments_text_e2e.tex` and `table_rw_predictive_summary.tex` are backed by the corresponding CivilComments end-to-end and early-`R_w` CSV artifacts in the ledger; `table_objfam_finetune_support.tex` is regenerated by `make_objfam_finetune_support_table` from the bundled Camelyon17 finetune-control summary artifacts.
+
+## Scope Notes
+
+- The supplement regenerates the listed command-backed claim-bearing paper-facing outputs from saved repository artifacts.
+- The Python commands above are the intended minimal reproducibility check for the bundled saved artifacts; they do not rerun full training or every saved appendix figure.
+- Static support/audit tables are documented in `supplement/STATIC_SUPPORT_TABLES.md`; they are not separate guaranteed command-line entry points.
+- Benchmark datasets are not redistributed.
+- The supplement intentionally excludes raw benchmark data, pretrained weights, and full retraining outputs. Full end-to-end reruns require the external benchmarks and the broader project environment.

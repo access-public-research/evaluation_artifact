@@ -1,0 +1,26 @@
+# Camelyon17 DAOS-v2 regime:
+# DistortionMass controller + secondary tail guard
+# to reduce clipped-tail starvation while preserving OOD gains.
+name: rcgdro_softclip_daos2_p95_a10_cam
+objective: rcgdro
+eta: 0.1
+clip_loss: 0.6429402083
+clip_alpha: 0.10
+dynamic_clip:
+  enabled: true
+  target_distortion_mass: 0.015
+  alpha_init: 0.10
+  alpha_min: 0.10
+  alpha_max: 1.00
+  ema_beta: 0.70
+  warmup_epochs: 1
+  monotone_relax: true
+  max_alpha_step: 0.15
+  eps: 1.0e-8
+  secondary_tail_guard:
+    enabled: true
+    tail_q: 0.10
+    max_rho_cvar_clip: 0.75
+    max_tail_cvar_delta: 0.25
+    relax_step: 0.10
+    warmup_epochs: 2

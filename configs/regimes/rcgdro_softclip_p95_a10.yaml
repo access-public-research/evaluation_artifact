@@ -1,0 +1,6 @@
+# RCGDRO with soft clipped loss proxy objective (P95, alpha=0.10)
+name: rcgdro_softclip_p95_a10
+objective: rcgdro
+eta: 0.1
+clip_loss: 0.810722
+clip_alpha: 0.1

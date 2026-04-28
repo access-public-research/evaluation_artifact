@@ -1,0 +1,16 @@
+\begin{tabular}{@{}p{1.75cm}p{1.25cm}p{3.55cm}cc@{}}
+  \toprule
+  Artifact & Family & Exposed best-model rule & \shortstack[c]{Scalarized\\default?} & \shortstack[c]{Loss/calib\\cross-check?} \\
+  \midrule
+  DomainBed & DG & top \texttt{val\_acc} & Yes & No \\
+  \shortstack[l]{WILDS\\ runner} & shift & \shortstack[l]{best epoch by\\\texttt{val\_metric}} & Yes & No \\
+  group\_DRO & \shortstack[l]{robust\\rwgt.} & \shortstack[l]{worst-group /\\avg.\ val acc} & Yes & No \\
+  SWAD & DG & in-domain val acc & Yes & No \\
+  SubpopBench & subgroup & \shortstack[l]{val worst-group /\\worst-class acc} & Yes & No \\
+  ERM++ & DG & highest val acc & Yes & No \\
+  \shortstack[l]{To Smooth or\\ Not?} & \shortstack[l]{label\\smooth.} & held-out acc & Yes & No \\
+  LS-PLL & \shortstack[l]{partial\\labels} & test acc & Yes & No \\
+  \shortstack[l]{Symmetric\\ CE} & \shortstack[l]{noisy\\labels} & \shortstack[l]{epochwise\\\texttt{val\_loss}} & Yes & No \\
+  SGN & \shortstack[l]{noisy\\labels} & \shortstack[l]{no default\\best-model rule} & No & No \\
+  \bottomrule
+\end{tabular}

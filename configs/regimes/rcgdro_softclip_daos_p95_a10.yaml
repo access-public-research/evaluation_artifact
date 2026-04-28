@@ -1,0 +1,19 @@
+# CelebA DAOS regime:
+# start from P95 soft clipping and adapt clip_alpha online
+# to keep DistortionMass near target budget.
+name: rcgdro_softclip_daos_p95_a10
+objective: rcgdro
+eta: 0.1
+clip_loss: 0.810722
+clip_alpha: 0.10
+dynamic_clip:
+  enabled: true
+  target_distortion_mass: 0.03
+  alpha_init: 0.10
+  alpha_min: 0.05
+  alpha_max: 1.00
+  ema_beta: 0.80
+  warmup_epochs: 1
+  monotone_relax: true
+  max_alpha_step: 0.10
+  eps: 1.0e-8
