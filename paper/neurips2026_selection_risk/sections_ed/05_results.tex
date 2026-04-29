@@ -60,6 +60,7 @@ On the same suppressive trajectory, proxy-best is worse than validation-loss-bes
 Validation-accuracy selection gives the same practical warning, and the leave-one-hospital-out ERM check gives the same standard-metric loss direction across all five held-out folds (Appendix Tables~\ref{tab:camelyon-valacc-selector}--\ref{tab:camelyon-loo-selector-standard}).
 The analogous finetune same-trajectory contrast is mixed, so finetuning remains a workflow-level hazard anchor.
 The $1.25\times$ veto is therefore only an empirical admissibility diagnostic; the practical recommendation is still dual reporting of proxy-selected and validation-loss-selected checkpoints.
+When no comparable non-suppressive baseline run is available, the baseline-calibrated veto should not be read as an admissibility claim; the safer operational recommendation is dual reporting of proxy-selected and validation-loss-selected checkpoints.
 
 Camelyon17 finetuning gives the largest mean accuracy-up / reliability-down pattern.
 Proxy-only selection raises mean held-out accuracy from $0.683$ to $0.708$, but held-out loss worsens from $0.902$ to $1.520$, the teacher-tail stress diagnostic rises from $7.25$ to $13.48$, and validation-side ECE rises from $0.0308$ to $0.0522$.

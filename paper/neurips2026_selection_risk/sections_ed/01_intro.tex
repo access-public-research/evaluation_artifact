@@ -3,6 +3,7 @@ Under distribution shift, evaluation depends not only on which metrics are repor
 Recent work has shown that model-selection rules and stopping criteria can materially change out-of-distribution conclusions \citep{gulrajani2020domainbed,cha2021swad,arpit2022ensembleaverages,yang2023changeishard,teterwak2025ermpp,naganuma2025pretrainedmodelselection,berta2025refinethencalibrate}.
 Here we study one concrete part of that protocol: \emph{checkpoint selection}.
 We therefore treat the suppressive proxy-selected reporting workflow as the evaluation choice and ask what reliability claim it actually supports.
+Thus, we study checkpoint selection as an evaluation-practice failure mode: the question is not which optimizer is best, but what reliability claim a proxy-selected report can support under shift.
 
 Many modern pipelines optimize a shaped objective rather than plain cross-entropy or raw MSE \citep{lin2017focalloss,reed2014bootstrapping,zhang2018generalizedcrossentropy}.
 We focus on one subset, which we call \emph{suppressive}: objectives or target transforms that reduce gradient pressure on high-loss examples.
