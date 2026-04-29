@@ -1,4 +1,4 @@
-\begin{thebibliography}{35}
+\begin{thebibliography}{37}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -75,6 +75,14 @@ Morris~H. DeGroot and Stephen~E. Fienberg.
 \newblock The comparison and evaluation of forecasters.
 \newblock \emph{The Statistician}, 32\penalty0 (1/2):\penalty0 12--22, 1983.
 \newblock \doi{10.2307/2987588}.
+
+\bibitem[Ding et~al.(2021)Ding, Hardt, Miller, and Schmidt]{ding2021folktables}
+Frances Ding, Moritz Hardt, John Miller, and Ludwig Schmidt.
+\newblock Retiring adult: New datasets for fair machine learning.
+\newblock In \emph{Advances in Neural Information Processing Systems},
+  volume~34, 2021.
+\newblock URL
+  \url{https://proceedings.neurips.cc/paper/2021/hash/32e54441e6382a7fbacbbbaf3c450059-Abstract.html}.
 
 \bibitem[Englesson and
   Azizpour(2024)]{englesson2024robustclassificationregression}
@@ -183,6 +191,13 @@ Tsung-Yi Lin, Priya Goyal, Ross Girshick, Kaiming He, and Piotr Doll{\'a}r.
 \newblock In \emph{Proceedings of the IEEE International Conference on Computer
   Vision (ICCV)}, pages 2980--2988, 2017.
 \newblock \doi{10.1109/ICCV.2017.324}.
+
+\bibitem[Liu et~al.(2015)Liu, Luo, Wang, and Tang]{liu2015celeba}
+Ziwei Liu, Ping Luo, Xiaogang Wang, and Xiaoou Tang.
+\newblock Deep learning face attributes in the wild.
+\newblock In \emph{Proceedings of the IEEE International Conference on Computer
+  Vision (ICCV)}, pages 3730--3738, 2015.
+\newblock \doi{10.1109/ICCV.2015.425}.
 
 \bibitem[Manheim and Garrabrant(2018)]{manheim2018categorizinggoodhart}
 David Manheim and Scott Garrabrant.

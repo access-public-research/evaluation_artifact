@@ -1,6 +1,7 @@
 # ACSIncome Claim-Bearing Artifacts
 
 These files were imported from the completed ACSIncome continuation workspace so that the paper's regression claims are fully backed by in-repo artifacts.
+In these artifacts, `test_tail_mse` is raw MSE on held-out examples whose un-winsorized target lies above the training-set P95 target threshold, matching the winsorization cutoff used for the suppressive regression proxy.
 
 ## Main paper provenance
 

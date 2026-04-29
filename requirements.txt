@@ -1,3 +1,18 @@
+# Core ML
+torch
+torchvision
+
+# Datasets
+wilds
+
+# Science stack
 numpy
+scipy
 pandas
+scikit-learn
+
+# Utilities
+pyyaml
+tqdm
 matplotlib
+seaborn

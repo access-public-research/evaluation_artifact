@@ -10,22 +10,23 @@ It is to formalize the selector mismatch created by suppressive weighting, expla
 \paragraph{Proposition 1 (Local lure under suppressive weighting).}
 Assume a suppressive objective whose high-loss slope ratio is $\alpha \in (0,1)$.
 Let $A_c>0$ denote core improvement mass and $A_t>0$ denote tail damage mass over a short interval.
-Then there exists a non-empty region of update directions for which the suppressive proxy improves while standard risk worsens, namely $\alpha A_t < A_c < A_t$.
+For local loss tradeoffs in which the core improvement is on examples below the clipping threshold and the tail damage is on examples above it, there is a non-empty region in which the suppressive proxy improves while standard risk worsens, namely $\alpha A_t < A_c < A_t$.
 
 \emph{Proof.}
 For soft clipping with threshold $\tau$ and slope $\alpha \in (0,1]$,
 \[
-\tilde L = L - (1-\alpha)(L-\tau)_+,
+\tilde{\ell} = \ell - (1-\alpha)(\ell-\tau)_+,
 \]
-so clipping removes upper-tail loss mass directly.
-When $\tau=\mathrm{VaR}_q(L)$, the same monotonicity gives a compressed proxy tail
+so clipping removes upper-tail loss mass directly at the per-example level.
+When $\tau=\mathrm{VaR}_q(\ell)$, the same monotonicity gives a compressed proxy tail
 \[
-\mathrm{CVaR}_q(\tilde L) = \tau + \alpha\big(\mathrm{CVaR}_q(L)-\tau\big),
+\mathrm{CVaR}_q(\tilde{\ell}) = \tau + \alpha\big(\mathrm{CVaR}_q(\ell)-\tau\big),
 \]
 which is why the proxy can look improved even when the underlying standard-loss tail has not.
 
 \paragraph{Local lure condition.}
 Let $A_c>0$ denote core improvement mass and $A_t>0$ denote tail damage mass over a short interval.
+The short-interval approximation assumes that the core improvement mass lies below the clipping threshold, where the proxy slope is $1$, and the tail damage mass lies above it, where the proxy slope is $\alpha$.
 Then standard risk and suppressive proxy move as
 \[
 \Delta R \approx -A_c + A_t,
@@ -50,7 +51,7 @@ and that validation and deployment losses satisfy
 \[
 \sup_t \left|L_{\mathrm{test}}(\theta_t)-L_{\mathrm{val}}(\theta_t)\right| \le \varepsilon
 \]
-over the candidate checkpoints.
+over the candidate suppressive checkpoints and also for the baseline checkpoint $\hat\theta_{\mathrm{base}}$.
 Then
 \[
 L_{\mathrm{test}}(\hat\theta_{\mathrm{guard}})
@@ -449,6 +450,7 @@ Table~\ref{tab:mechanism-table} gives the numerical values behind Figure~\ref{fi
   \caption{
     Same-stack objective-family controls on Camelyon17 ERM.
     Soft clipping suppresses the tail ($R_w<1$), while focal loss and label smoothing upweight it ($R_w>1$).
+    Focal 1/2/4 denote focal-loss focusing parameter $\gamma=1,2,4$.
     The $R_w$ values here are selected-checkpoint orientation values; Appendix Table~\ref{tab:rw-predictive-summary} and Figure~\ref{fig:rw-predictive-summary-app} separately report early-window $R_w$ for the warning-statistic analysis.
   }
   \label{tab:mechanism-table}

@@ -39,8 +39,9 @@ Within-trajectory selector disagreement & selector / admissibility rule on one s
 \end{center}
 
 \paragraph{Reliability metrics.}
-We evaluate checkpoints in two ways: a held-out loss on the deployment split (worst-group loss on CelebA, hospital-2 loss on Camelyon17, overall loss plus official WILDS worst-group loss on CivilComments, raw MSE on ACSIncome) and a tail-sensitive diagnostic (teacher-difficulty $\mathrm{CVaR}_{0.1}$ on the vision anchors, tail MSE on ACSIncome).
+We evaluate checkpoints by held-out loss on the deployment split (CelebA worst-group loss, Camelyon17 hospital-2 loss, CivilComments overall and official WILDS worst-group loss, ACSIncome raw MSE) and by a tail-sensitive diagnostic (vision teacher-difficulty $\mathrm{CVaR}_{0.1}$, ACSIncome tail MSE).
 For the vision suites, teacher-difficulty $\mathrm{CVaR}_{0.1}$ is computed on two fixed teacher-difficulty evaluation banks (A/B), each with $K=64$ cells and minimum cell size $20$, and then averaged across banks, so the tail comparison is not redefined per checkpoint.
+For ACSIncome, tail MSE is raw MSE on held-out examples above the training-set P95 target threshold.
 We refer to this vision metric as the teacher-tail stress diagnostic.
 It is a diagnostic stress-test metric for the tested vision stacks rather than a universal tail-risk definition.
 It is not intended to identify clinical subgroups or replace WILDS-style group metrics; it tests whether proxy selection shifts risk into a fixed teacher-defined hard-example slice.
@@ -84,6 +85,7 @@ R_w =
 \frac{\mathbb{E}[g_i^{\mathrm{obj}}\mid \mathrm{tail}] / \mathbb{E}[g_i^{\mathrm{CE}}\mid \mathrm{tail}]}
 {\mathbb{E}[g_i^{\mathrm{obj}}\mid \mathrm{core}] / \mathbb{E}[g_i^{\mathrm{CE}}\mid \mathrm{core}]},
 \end{equation}
-where $R_w<1$ indicates relative tail suppression and $R_w>1$ indicates relative tail upweighting.
+where $g_i$ is scalar per-example logit-gradient magnitude; tail/core are the top decile of the fixed teacher-difficulty validation bank on the Camelyon17 family-control stack and its complement.
+Thus $R_w<1$ indicates relative tail suppression and $R_w>1$ indicates relative tail upweighting.
 We use $R_w$ as an operational same-stack warning statistic, not as a theorem about all shaped objectives or a causal proof by itself.
 Practically, $R_w<1$ early in training is treated as a warning that proxy-only checkpoint selection may be misaligned with downstream reliability criteria on the tested family-control stack.
