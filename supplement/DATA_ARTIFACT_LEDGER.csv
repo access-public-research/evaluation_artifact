@@ -100,3 +100,6 @@ supplement/STATIC_SUPPORT_TABLES.md,Provenance note for static support and audit
 artifacts/metrics/camelyon17_gce_q07_10s_selector_analysis_20260430.csv,Per-seed saved metrics for the Camelyon17 ERM GCE q=0.7 extension,make_gce_q07_extension_table
 artifacts/metrics/camelyon17_gce_q07_10s_selector_summary_20260430.csv,Paired contrast summary for the Camelyon17 ERM GCE q=0.7 extension,make_gce_q07_extension_table
 paper/neurips2026_selection_risk/tables/table_gce_q07_extension.tex,Appendix table generated from the Camelyon17 ERM GCE q=0.7 extension artifacts,Appendix Table GCE q=0.7
+artifacts/metrics/camelyon17_baseline_fixed_loss_tail_softclip_gce_rows_20260430.csv,Per-seed teacher-free baseline-fixed held-out loss-tail rows for SoftClip P95 and GCE q=0.7,make_baseline_fixed_loss_tail_table
+artifacts/metrics/camelyon17_baseline_fixed_loss_tail_softclip_gce_summary_20260430.csv,Summary of teacher-free baseline-fixed held-out loss-tail deltas for SoftClip P95 and GCE q=0.7,make_baseline_fixed_loss_tail_table
+paper/neurips2026_selection_risk/tables/table_baseline_fixed_loss_tail.tex,Appendix table generated from the teacher-free baseline-fixed held-out loss-tail summary,Appendix Table baseline-fixed loss tail

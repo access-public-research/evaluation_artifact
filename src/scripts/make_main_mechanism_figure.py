@@ -19,6 +19,7 @@ def _load_points() -> pd.DataFrame:
     soft_acc = pd.read_csv(ROOT / "artifacts/metrics/camelyon17_resnet50_domain_acc_with_loss_selected_summary_v11erm_softclip_cam_10s_fix_20260325.csv")
     focal = pd.read_csv(ROOT / "artifacts/metrics/camelyon17_focal_effect_size_n10_20260304.csv")
     smooth = pd.read_csv(ROOT / "artifacts/metrics/camelyon17_labelsmooth_effect_size_n10_20260304.csv")
+    gce = pd.read_csv(ROOT / "artifacts/metrics/camelyon17_gce_q07_10s_selector_summary_20260430.csv")
 
     soft = soft[soft["regime"].isin(["erm_softclip_p95_a10_cam", "erm_softclip_p97_a10_cam", "erm_softclip_p99_a10_cam"])]
     soft = (
@@ -46,6 +47,20 @@ def _load_points() -> pd.DataFrame:
 
     orient = orient[["regime", "family", "R_w"]].copy()
     merged = pd.concat([soft, focal, smooth], ignore_index=True).merge(orient, on="regime", how="inner")
+    gce_row = gce[gce["contrast"].eq("GCE proxy-best $-$ ERM baseline-selected")].iloc[0]
+    gce_point = pd.DataFrame(
+        [
+            {
+                "regime": "erm_gce_q07_cam",
+                "delta_proxy": float(gce_row["delta_gce_proxy_mean"]),
+                "delta_tail": float(gce_row["delta_tail_worst_cvar_mean"]),
+                "delta_acc": float(gce_row["delta_test_acc_mean"]),
+                "family": "GCE",
+                "R_w": float(gce_row["mean_rw_a"]),
+            }
+        ]
+    )
+    merged = pd.concat([merged, gce_point], ignore_index=True)
     label_map = {
         "erm_softclip_p95_a10_cam": "SoftClip P95",
         "erm_softclip_p97_a10_cam": "SoftClip P97",
@@ -57,6 +72,7 @@ def _load_points() -> pd.DataFrame:
         "erm_focal_g1_cam": "Focal 1",
         "erm_focal_g2_cam": "Focal 2",
         "erm_focal_g4_cam": "Focal 4",
+        "erm_gce_q07_cam": "GCE q=0.7",
     }
     merged["label"] = merged["regime"].map(label_map)
     return merged
@@ -86,17 +102,18 @@ def _write_tex(path: Path, df: pd.DataFrame) -> None:
 
 def main() -> None:
     df = _load_points()
-    colors = {"SoftClip": "#D55E00", "LabelSmooth": "#009E73", "Focal": "#0072B2"}
-    markers = {"SoftClip": "X", "LabelSmooth": "o", "Focal": "D"}
+    colors = {"SoftClip": "#D55E00", "GCE": "#8C6D1F", "LabelSmooth": "#009E73", "Focal": "#0072B2"}
+    markers = {"SoftClip": "X", "GCE": "P", "LabelSmooth": "o", "Focal": "D"}
     offsets = {
         "SoftClip P95": (12, 10),
         "SoftClip P99": (12, 8),
+        "GCE q=0.7": (10, 10),
         "LS 0.10": (-34, 10),
         "LS 0.20": (-34, -12),
         "Focal 1": (8, 10),
         "Focal 4": (8, 10),
     }
-    label_points = {"SoftClip P95", "SoftClip P99", "LS 0.10", "LS 0.20", "Focal 1", "Focal 4"}
+    label_points = {"SoftClip P95", "SoftClip P99", "GCE q=0.7", "LS 0.10", "LS 0.20", "Focal 1", "Focal 4"}
 
     fig, ax = plt.subplots(figsize=(7.45, 4.5))
     x_vals = np.log10(df["R_w"].to_numpy(dtype=float))

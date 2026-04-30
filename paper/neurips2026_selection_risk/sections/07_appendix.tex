@@ -500,6 +500,23 @@ We use $q=0.7$ as a single mid-range corroborating setting rather than a tuned G
   \label{tab:gce-q07-extension}
 \end{table}
 
+\subsection{Teacher-Free Held-Out Loss-Tail Check}
+Table~\ref{tab:baseline-fixed-loss-tail} gives a teacher-free stress check for the two strongest suppressive Camelyon17 ERM cases.
+For each seed and objective, we fix the top $10\%$ of held-out hospital-2 examples by the baseline-selected checkpoint's ordinary cross-entropy loss, then evaluate the proxy-selected checkpoint on that same slice.
+This does not identify a semantic subgroup, but it shows that the loss-tail movement is not only an artifact of the teacher-difficulty bank construction.
+
+\begin{table}[h]
+  \centering
+  \small
+  \resizebox{\columnwidth}{!}{\input{tables/table_baseline_fixed_loss_tail}}
+  \caption{
+    Teacher-free held-out loss-tail check on Camelyon17 ERM.
+    The fixed loss-tail is the top decile of hospital-2 examples by ordinary cross-entropy under the corresponding baseline-selected checkpoint; the same fixed slice is then evaluated under the proxy-selected suppressive checkpoint.
+    Intervals are paired 95\% bootstrap intervals over ten seeds.
+  }
+  \label{tab:baseline-fixed-loss-tail}
+\end{table}
+
 \subsection{Early Warning Value of $R_w$}
 Table~\ref{tab:rw-predictive-summary} and Figure~\ref{fig:rw-predictive-summary-app} show that the same Camelyon17 ERM family-control stack already contains a practical early-warning signal.
 Using the rule ``warn about harmful tail direction iff $R_w<1$,'' early $R_w$ computed well before final selection gives a strong same-stack warning about whether the eventual selected checkpoint will inflate or reduce the tail on the tested stack.
