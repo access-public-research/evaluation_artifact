@@ -441,7 +441,18 @@ We do not use it to claim that proxy-minus-baseline workflow harm is uniform acr
 \end{table}
 
 \subsection{Objective-Family Numerical Controls}
-Table~\ref{tab:mechanism-table} gives the numerical values behind Figure~\ref{fig:mechanism}.
+Figure~\ref{fig:mechanism} and Table~\ref{tab:mechanism-table} give the mechanism view and numerical values behind the objective-family discussion.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\columnwidth]{fig_mechanism_orientation}
+  \caption{
+    Same-stack objective-family mechanism on Camelyon17 ERM.
+    The vertical boundary at $\log_{10} R_w = 0$ separates tail suppression ($R_w<1$) from tail upweighting ($R_w>1$).
+    Focal numbers denote $\gamma$; soft clipping and GCE lie on the suppressive side and inflate the tail, while focal loss and label smoothing lie on the upweighting side and improve it.
+  }
+  \label{fig:mechanism}
+\end{figure}
 
 \begin{table}[h]
   \centering

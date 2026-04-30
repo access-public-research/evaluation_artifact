@@ -115,13 +115,13 @@ Appendix Table~\ref{tab:camelyon-erm-selector-dose} separately reports the same-
 This is supporting rather than core evidence because the fixed $1.25\times$ guardrail is slack on this family, but it shows that the selector mismatch is not unique to one clipping rule.
 
 \subsection{The Hazard Concentrates in Suppressive Objectives}
-As supporting mechanism evidence, Figure~\ref{fig:mechanism} shows that tail movement is not uniform across objective families on the same Camelyon17 ERM stack: soft clipping has $R_w<1$ and positive tail deltas, while label smoothing and focal loss have $R_w>1$ and negative tail deltas.
+As supporting mechanism evidence, Appendix Figure~\ref{fig:mechanism} and Table~\ref{tab:mechanism-table} show that tail movement is not uniform across objective families on the same Camelyon17 ERM stack: soft clipping and GCE have $R_w<1$ and positive tail deltas, while label smoothing and focal loss have $R_w>1$ and negative tail deltas.
 On this tested stack, early $R_w$ (epochs 1--5) predicts the sign of the final selected tail delta with $97/100$ seed-level sign accuracy (Appendix Table~\ref{tab:rw-predictive-summary} and Figure~\ref{fig:rw-predictive-summary-app}).
 The GCE corroboration ($R_w=0.339$, Appendix Table~\ref{tab:gce-q07-extension}), hard-bootstrap corroboration ($R_w\approx 0.57$, Appendix Table~\ref{tab:bootstrap-camelyon-support}), and end-to-end finetune controls (Appendix Table~\ref{tab:objfam-finetune-support}) support the same suppress-versus-upweight split.
 The point is not that any deviation from cross-entropy worsens reliability; it is whether the objective suppresses or amplifies the tail.
 
 The evaluation criterion also changes how objective families rank (Table~\ref{tab:ranking-reversal}).
-On frozen Camelyon17 ERM, SoftClip~P95 is the only shown method with positive mean accuracy ($+0.001$), yet it has the worst teacher-tail diagnostic ($+5.50$), a $9.6$ CVaR swing from Focal~4 ($-4.11$).
+On frozen Camelyon17 ERM, the positive-accuracy rows are the suppressive SoftClip and GCE checks; GCE~$q=0.7$ has the largest teacher-tail increase ($+5.84$), a $10.0$ CVaR swing from Focal~4 ($-4.11$).
 On end-to-end finetuning, SoftClip has the highest mean accuracy ($+0.047$) but the worst held-out loss ($+0.221$) and teacher-tail diagnostic ($+6.63$), while label smoothing and focal are lower on loss and tail.
 Thus accuracy-first and loss/tail-aware readings can favor different methods on the same stack.
 
@@ -132,10 +132,11 @@ Thus accuracy-first and loss/tail-aware readings can favor different methods on 
     \toprule
     Setting & Method & $\Delta$Loss$\downarrow$ & $\Delta$Acc$\uparrow$ & $\Delta$Tail$\downarrow$ \\
     \midrule
-    \multirow{3}{*}{\shortstack[l]{Frozen\\ERM}}
-      & SoftClip P95    & $+0.055$ & $+0.001$ & $\mathbf{+5.50}$ \\
-      & Label Smooth 0.10 & --- & $-0.002$ & $-2.44$ \\
-      & Focal 4         & --- & $-0.004$ & $\mathbf{-4.11}$ \\
+    \multirow{4}{*}{\shortstack[l]{Frozen\\ERM}}
+    & SoftClip P95    & $+0.055$ & $+0.001$ & $\mathbf{+5.50}$ \\
+    & GCE $q=0.7$     & $+0.045$ & $\mathbf{+0.004}$ & $\mathbf{+5.84}$ \\
+    & Label Smooth 0.10 & --- & $-0.002$ & $-2.44$ \\
+    & Focal 4         & --- & $-0.004$ & $\mathbf{-4.11}$ \\
     \midrule
     \multirow{3}{*}{\shortstack[l]{Separate\\finetune\\control}}
       & SoftClip P95    & $+0.221$ & $\mathbf{+0.047}$ & $+6.63$ \\
@@ -147,19 +148,8 @@ Thus accuracy-first and loss/tail-aware readings can favor different methods on 
     Within-sweep method-ranking illustration under different reporting criteria.
     Frozen-ERM rows are relative to the ERM baseline; separate finetune-control rows are relative to that sweep's own baseline finetune checkpoint and are for within-table ranking only.
     Focal numbers denote $\gamma$.
-    On frozen ERM, the only positive-accuracy row is also worst on teacher-tail; on finetuning, the best-accuracy row is worst on loss and teacher-tail, while label smoothing wins on loss on $10/10$ seeds.
+    On frozen ERM, the positive-accuracy rows are suppressive and tail-worsening; on finetuning, the best-accuracy row is worst on loss and teacher-tail, while label smoothing wins on loss on $10/10$ seeds.
     Bold marks the extreme in each column.
   }
   \label{tab:ranking-reversal}
 \end{table}
-
-\begin{figure}[t]
-  \centering
-  \includegraphics[width=\columnwidth]{fig_mechanism_orientation}
-  \caption{
-    Same-stack objective-family mechanism on Camelyon17 ERM.
-    The vertical boundary at $\log_{10} R_w = 0$ separates tail suppression ($R_w<1$) from tail upweighting ($R_w>1$).
-    Focal numbers denote $\gamma$; soft clipping lies on the suppressive side and inflates the tail, while focal loss and label smoothing lie on the upweighting side and improve it.
-  }
-  \label{fig:mechanism}
-\end{figure}
