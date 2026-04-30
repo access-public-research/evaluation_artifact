@@ -102,8 +102,10 @@ Appendix Table~\ref{tab:rw-persistence-bridge} and Figure~\ref{fig:rw-persistenc
 
 \subsection{The Failure Is Not Unique to Soft Clipping}
 Two ten-seed noisy-label-objective checks on the same Camelyon17 ERM stack address the concern that the result is specific to soft clipping at P95.
-Relative to val-loss-only selection inside the same bootstrap runs, proxy-only improves the bootstrap proxy by about $0.010$ but worsens held-out hospital-2 loss by $+0.0109$, teacher-tail by $+1.37$, and ECE by $+0.0110$ (Appendix Table~\ref{tab:bootstrap-camelyon-support}).
-Generalized cross-entropy with $q=0.7$ gives a stronger same-trajectory check: proxy-best improves the GCE validation proxy by $0.0146$ while worsening held-out loss by $+0.0181$, ECE by $+0.0129$, and teacher-tail by $+3.05$ on $10/10$ seeds (Appendix Table~\ref{tab:gce-q07-extension}).
+Generalized cross-entropy (GCE) with $q=0.7$ gives the strongest corroboration: it is suppressive on this stack at the selected checkpoint ($R_w=0.339$), but it is a standard noisy-label objective rather than a hand-designed clipping stress test.
+On the same GCE trajectories, proxy-best selects later checkpoints than validation-loss selection (mean epoch $14.4$ versus $3.3$), lowers the GCE validation proxy by $0.0146$ (95\% CI $[-0.0175,-0.0116]$), and raises held-out accuracy by $+0.0098$ ($[+0.0076,+0.0118]$), yet worsens held-out hospital-2 loss by $+0.0181$ ($[+0.0136,+0.0233]$), ECE by $+0.0129$ ($[+0.0104,+0.0153]$), and teacher-tail by $+3.05$ ($[+2.50,+3.60]$) on $10/10$ seeds (Appendix Table~\ref{tab:gce-q07-extension}).
+Baseline-referenced and fixed-epoch-30 GCE contrasts preserve the accuracy-up / reliability-down direction, so this corroboration is not specific to controlled soft clipping.
+Hard bootstrapping gives a smaller second noisy-label check: relative to val-loss-only selection inside the same bootstrap runs, proxy-only improves the bootstrap proxy by about $0.010$ but worsens held-out hospital-2 loss by $+0.0109$, teacher-tail by $+1.37$, and ECE by $+0.0110$ (Appendix Table~\ref{tab:bootstrap-camelyon-support}).
 Appendix Table~\ref{tab:camelyon-dose-response-app} adds a same-stack suppression-strength stress test on the two Camelyon anchors.
 In the baseline-referenced selected-checkpoint workflow view, Camelyon17 ERM loss / tail harm weakens from P95 to P97 to P99 ($+0.055/+5.50$, $+0.052/+5.16$, $+0.008/+1.76$).
 Finetuning remains materially harmful across all three selected regimes.
@@ -114,7 +116,7 @@ This is supporting rather than core evidence because the fixed $1.25\times$ guar
 \subsection{The Hazard Concentrates in Suppressive Objectives}
 As supporting mechanism evidence, Figure~\ref{fig:mechanism} shows that tail movement is not uniform across objective families on the same Camelyon17 ERM stack: soft clipping has $R_w<1$ and positive tail deltas, while label smoothing and focal loss have $R_w>1$ and negative tail deltas.
 On this tested stack, early $R_w$ (epochs 1--5) predicts the sign of the final selected tail delta with $97/100$ seed-level sign accuracy (Appendix Table~\ref{tab:rw-predictive-summary} and Figure~\ref{fig:rw-predictive-summary-app}).
-A hard-bootstrap corroboration ($R_w\approx 0.57$, Appendix Table~\ref{tab:bootstrap-camelyon-support}) and end-to-end finetune controls (Appendix Table~\ref{tab:objfam-finetune-support}) support the same suppress-versus-upweight split.
+The GCE corroboration ($R_w=0.339$, Appendix Table~\ref{tab:gce-q07-extension}), hard-bootstrap corroboration ($R_w\approx 0.57$, Appendix Table~\ref{tab:bootstrap-camelyon-support}), and end-to-end finetune controls (Appendix Table~\ref{tab:objfam-finetune-support}) support the same suppress-versus-upweight split.
 The point is not that any deviation from cross-entropy worsens reliability; it is whether the objective suppresses or amplifies the tail.
 
 The evaluation criterion also changes how objective families rank (Table~\ref{tab:ranking-reversal}).

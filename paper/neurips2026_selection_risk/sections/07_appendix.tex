@@ -485,6 +485,7 @@ So we use it as supporting evidence against the ``only soft clipping'' objection
 Table~\ref{tab:gce-q07-extension} gives a second standard noisy-label objective check on the Camelyon17 ERM stack.
 Generalized cross-entropy with $q=0.7$ is suppressive on this stack, and the objective-aligned proxy selector moves to later checkpoints than validation-loss selection.
 The result is supporting evidence, not a new optimizer comparison: it shows that the soft-clipping hazard also appears for a standard suppressive objective family.
+We use $q=0.7$ as a single mid-range corroborating setting rather than a tuned GCE sweep.
 
 \begin{table}[h]
   \centering
