@@ -423,6 +423,24 @@ It is not a new workflow-generalization claim; it shows that the same practical 
   \label{tab:camelyon-valacc-selector}
 \end{table}
 
+Table~\ref{tab:camelyon-selector-averaging} adds a deliberately narrow post-hoc averaging sensitivity, not a benchmark of SWAD or other averaging protocols.
+Validation-accuracy selection and a last-5 checkpoint average remain worse than validation-loss selection on held-out loss, ECE, and the teacher-tail diagnostic for both SoftClip P95 and GCE $q=0.7$.
+A validation-loss-neighborhood average mitigates held-out loss and ECE and leaves tail movement neutral, so averaging is best read here as a mitigation around the validation-loss rule rather than evidence that proxy-selected reporting is reliable.
+
+\begin{table}[h]
+  \centering
+  \scriptsize
+  \resizebox{\columnwidth}{!}{\input{tables/table_camelyon_selector_averaging_sensitivity}}
+  \caption{
+    Narrow Camelyon17 ERM selector and checkpoint-averaging sensitivity.
+    Rows report policy minus validation-loss-best on the same objective family and trajectory.
+    ``Last-5 avg.'' averages the final five checkpoints; ``Val-loss-neigh. avg.'' averages a five-epoch window centered on the validation-loss-best checkpoint, clipped to the available epoch range.
+    Harm counts are ordered as loss/ECE/tail over ten seeds.
+    This is a sensitivity check on released runs, not a full modern averaging-selector benchmark.
+  }
+  \label{tab:camelyon-selector-averaging}
+\end{table}
+
 Table~\ref{tab:camelyon-loo-selector-standard} repeats a standard-metric selector-only check over leave-one-hospital-out Camelyon17 ERM folds.
 Because the comparison is proxy-best minus validation-loss-best on the same suppressive trajectory, it supports selector-only robustness.
 We do not use it to claim that proxy-minus-baseline workflow harm is uniform across hospitals.

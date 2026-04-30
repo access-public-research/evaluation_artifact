@@ -66,6 +66,7 @@ python -m src.scripts.make_acceptance_stepup_tables --date_tag 20260328
 python -m src.scripts.make_camelyon_selector_diagnostics
 python -m src.scripts.make_camelyon_erm_selector_dose
 python -m src.scripts.make_camelyon_valacc_selector_sensitivity
+python -m src.scripts.make_camelyon_selector_averaging_sensitivity
 python -m src.scripts.make_camelyon_loo_selector_standard_metrics
 python -m src.scripts.make_bootstrap_camelyon_support
 python -m src.scripts.make_gce_q07_extension_table

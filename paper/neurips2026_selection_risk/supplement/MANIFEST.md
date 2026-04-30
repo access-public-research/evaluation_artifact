@@ -11,6 +11,7 @@ Archive-root directories:
 - `artifacts/metrics/`: saved CSV/JSON summaries needed by the listed paper-facing scripts.
 - `artifacts/metrics/camelyon_erm_selector_dose_*`: saved Camelyon17 ERM selector-dose rows and generated summaries.
 - `artifacts/metrics/camelyon_valacc_selector_sensitivity_*`: saved Camelyon17 ERM validation-accuracy selector sensitivity rows and generated summaries.
+- `artifacts/metrics/camelyon_modern_selector_sensitivity_*`: saved Camelyon17 ERM selector and checkpoint-averaging sensitivity rows and generated summaries.
 - `artifacts/metrics/camelyon_loo_selector_standard_metrics_*`: saved leave-one-hospital-out Camelyon selector-only rows and generated summaries.
 - `artifacts/metrics/camelyon17_bootstrap_selector_*`: saved hard-bootstrap selector summaries supporting the Appendix A.16 corroboration table.
 - `artifacts/metrics/camelyon17_gce_q07_10s_selector_*`: saved generalized-cross-entropy selector rows and summaries supporting the Appendix GCE corroboration table.

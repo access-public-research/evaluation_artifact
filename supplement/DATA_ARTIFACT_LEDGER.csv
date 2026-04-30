@@ -103,3 +103,6 @@ paper/neurips2026_selection_risk/tables/table_gce_q07_extension.tex,Appendix tab
 artifacts/metrics/camelyon17_baseline_fixed_loss_tail_softclip_gce_rows_20260430.csv,Per-seed teacher-free baseline-fixed held-out loss-tail rows for SoftClip P95 and GCE q=0.7,make_baseline_fixed_loss_tail_table
 artifacts/metrics/camelyon17_baseline_fixed_loss_tail_softclip_gce_summary_20260430.csv,Summary of teacher-free baseline-fixed held-out loss-tail deltas for SoftClip P95 and GCE q=0.7,make_baseline_fixed_loss_tail_table
 paper/neurips2026_selection_risk/tables/table_baseline_fixed_loss_tail.tex,Appendix table generated from the teacher-free baseline-fixed held-out loss-tail summary,Appendix Table baseline-fixed loss tail
+artifacts/metrics/camelyon_modern_selector_sensitivity_rows_20260430.csv,Per-seed Camelyon17 SoftClip/GCE selector and checkpoint-averaging sensitivity rows,make_camelyon_selector_averaging_sensitivity
+artifacts/metrics/camelyon_modern_selector_sensitivity_summary_20260430.csv,Summary of Camelyon17 selector and checkpoint-averaging sensitivity deltas,make_camelyon_selector_averaging_sensitivity
+paper/neurips2026_selection_risk/tables/table_camelyon_selector_averaging_sensitivity.tex,Appendix table generated from the Camelyon17 selector and checkpoint-averaging sensitivity summary,Appendix Table selector averaging sensitivity
