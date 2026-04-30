@@ -13,7 +13,8 @@ Archive-root directories:
 - `artifacts/metrics/camelyon_valacc_selector_sensitivity_*`: saved Camelyon17 ERM validation-accuracy selector sensitivity rows and generated summaries.
 - `artifacts/metrics/camelyon_loo_selector_standard_metrics_*`: saved leave-one-hospital-out Camelyon selector-only rows and generated summaries.
 - `artifacts/metrics/camelyon17_bootstrap_selector_*`: saved hard-bootstrap selector summaries supporting the Appendix A.16 corroboration table.
-- `artifacts/metrics/camelyon*_finetune*_objfam*`: saved and derived Camelyon17 finetune-control summaries backing the method-ranking rows in Table 3 and Appendix Table 24.
+- `artifacts/metrics/camelyon17_gce_q07_10s_selector_*`: saved generalized-cross-entropy selector rows and summaries supporting the Appendix GCE corroboration table.
+- `artifacts/metrics/camelyon*_finetune*_objfam*`: saved and derived Camelyon17 finetune-control summaries backing the method-ranking rows in Table 3 and the appendix objective-family finetune support table.
 - `artifacts/metrics/acs_income/`: saved ACSIncome regression summaries.
 - `artifacts/partitions_eval/`: compact fixed-bank metadata and cell-assignment arrays for the teacher-defined hard-example CVaR diagnostic.
 - `figures/`: small root-level CSV summaries used by the mechanism-figure script.

@@ -1,0 +1,4 @@
+# ERM with generalized cross-entropy q=0.70 (Camelyon17)
+name: erm_gce_q07_cam
+objective: erm
+gce_q: 0.70

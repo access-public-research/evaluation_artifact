@@ -76,10 +76,10 @@ artifacts/metrics/camelyon_loo_selector_standard_metrics_fold_summary_20260424.c
 artifacts/metrics/camelyon_loo_selector_standard_metrics_fold_pooled_summary_20260424.csv,Leave-one-hospital-out Camelyon selector-only fold-level summary,table_camelyon_loo_selector_standard_metrics.tex
 artifacts/metrics/camelyon17_bootstrap_selector_summary_extended_20260331.csv,Hard-bootstrap selector summary behind Appendix A.16 corroboration table,make_bootstrap_camelyon_support
 artifacts/metrics/camelyon17_bootstrap_selector_rows_extended_20260331.csv,Hard-bootstrap selected checkpoint rows behind the selector summary,Appendix A.16 provenance
-artifacts/metrics/camelyon17_domain_acc_with_loss_finetune_cam_objfam_scivalid10s_20260327d_selected_summary.csv,Camelyon17 finetune-control selected held-out loss/accuracy summary backing Table 3 and Appendix Table 24,make_objfam_finetune_support_table
-artifacts/metrics/camelyon17_effect_size_finetune_cam_objfam_scivalid10s_20260327d.csv,Camelyon17 finetune-control selected teacher-tail summary backing Table 3 and Appendix Table 24,make_objfam_finetune_support_table
-artifacts/metrics/camelyon_finetune_objfam_selected_calibration_20260328_summary.csv,Camelyon17 finetune-control selected calibration summary backing Table 3 and Appendix Table 24,make_objfam_finetune_support_table
-artifacts/metrics/camelyon_finetune_objfam_table24_support_20260427.csv,Derived Camelyon17 finetune-control deltas backing Table 3 and Appendix Table 24,table_objfam_finetune_support.tex
+artifacts/metrics/camelyon17_domain_acc_with_loss_finetune_cam_objfam_scivalid10s_20260327d_selected_summary.csv,Camelyon17 finetune-control selected held-out loss/accuracy summary backing Table 3 and the appendix objective-family finetune support table,make_objfam_finetune_support_table
+artifacts/metrics/camelyon17_effect_size_finetune_cam_objfam_scivalid10s_20260327d.csv,Camelyon17 finetune-control selected teacher-tail summary backing Table 3 and the appendix objective-family finetune support table,make_objfam_finetune_support_table
+artifacts/metrics/camelyon_finetune_objfam_selected_calibration_20260328_summary.csv,Camelyon17 finetune-control selected calibration summary backing Table 3 and the appendix objective-family finetune support table,make_objfam_finetune_support_table
+artifacts/metrics/camelyon_finetune_objfam_table24_support_20260427.csv,Derived Camelyon17 finetune-control deltas backing Table 3 and the appendix objective-family finetune support table,table_objfam_finetune_support.tex
 artifacts/metrics/celeba_test_wg_selected_with_loss_summary_erm_softclip_celeba_10s_20260325.csv,CelebA selected held-out subgroup loss and accuracy summary for the transient Table 1 row,make_core_case_summary
 artifacts/metrics/celeba_effect_size_erm_softclip_celeba_10s_20260325.csv,CelebA selected teacher-tail summary for the transient Table 1 row,make_core_case_summary
 artifacts/metrics/celeba_selected_calibration_p95_20260327_summary.csv,CelebA selected ECE summary for the transient Table 1 row,make_core_case_summary
@@ -97,3 +97,6 @@ paper/neurips2026_selection_risk/tables/guardrail_budget_sweep.csv,CSV backing t
 paper/neurips2026_selection_risk/tables/table_adaptive_guardrail_summary.tex,Static adaptive guardrail sensitivity support table,Appendix Table 12 static support
 paper/neurips2026_selection_risk/tables/table_public_tooling_audit.tex,Static purposive public-practice audit summary,Appendix Table 13 static support
 supplement/STATIC_SUPPORT_TABLES.md,Provenance note for static support and audit tables,supplement documentation
+artifacts/metrics/camelyon17_gce_q07_10s_selector_analysis_20260430.csv,Per-seed saved metrics for the Camelyon17 ERM GCE q=0.7 extension,make_gce_q07_extension_table
+artifacts/metrics/camelyon17_gce_q07_10s_selector_summary_20260430.csv,Paired contrast summary for the Camelyon17 ERM GCE q=0.7 extension,make_gce_q07_extension_table
+paper/neurips2026_selection_risk/tables/table_gce_q07_extension.tex,Appendix table generated from the Camelyon17 ERM GCE q=0.7 extension artifacts,Appendix Table GCE q=0.7

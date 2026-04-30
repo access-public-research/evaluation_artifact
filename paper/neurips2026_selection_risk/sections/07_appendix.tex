@@ -481,6 +481,24 @@ So we use it as supporting evidence against the ``only soft clipping'' objection
   \label{tab:bootstrap-camelyon-support}
 \end{table}
 
+\subsection{Generalized Cross-Entropy Corroboration}
+Table~\ref{tab:gce-q07-extension} gives a second standard noisy-label objective check on the Camelyon17 ERM stack.
+Generalized cross-entropy with $q=0.7$ is suppressive on this stack, and the objective-aligned proxy selector moves to later checkpoints than validation-loss selection.
+The result is supporting evidence, not a new optimizer comparison: it shows that the soft-clipping hazard also appears for a standard suppressive objective family.
+
+\begin{table}[h]
+  \centering
+  \scriptsize
+  \resizebox{\columnwidth}{!}{\input{tables/table_gce_q07_extension}}
+  \caption{
+    Generalized cross-entropy (GCE, $q=0.7$) extension on Camelyon17 ERM, ten seeds.
+    Negative $\Delta$GCE proxy means the GCE objective-aligned validation score improves.
+    The same-trajectory comparison is GCE proxy-best minus GCE validation-loss-best; all three contrasts worsen held-out loss, ECE, and teacher-tail in $10/10$ seeds.
+    Epochs report mean selected epoch for the first and second policy in each contrast.
+  }
+  \label{tab:gce-q07-extension}
+\end{table}
+
 \subsection{Early Warning Value of $R_w$}
 Table~\ref{tab:rw-predictive-summary} and Figure~\ref{fig:rw-predictive-summary-app} show that the same Camelyon17 ERM family-control stack already contains a practical early-warning signal.
 Using the rule ``warn about harmful tail direction iff $R_w<1$,'' early $R_w$ computed well before final selection gives a strong same-stack warning about whether the eventual selected checkpoint will inflate or reduce the tail on the tested stack.
