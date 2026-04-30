@@ -69,6 +69,7 @@ L_{\mathrm{val}}(\theta_t) \le \rho \, L_{\mathrm{val}}(\hat{\theta}_{\mathrm{ba
 If no checkpoint from the suppressive run satisfies the budget, we fall back to the baseline checkpoint.
 We report a small budget sweep $\rho \in \{1.10,1.25,1.50\}$ and treat $\rho=1.25$ as an empirical operating point rather than a derived constant.
 When fallback happens, we report the suppressive-run admissibility verdict separately from the fallback performance so the veto is read as a diagnostic rather than as a same-trajectory selector win.
+When checkpoints are already saved, dual reporting adds no retraining cost: select the proxy-best and validation-loss-best checkpoints from the same trajectory, report both on held-out loss, calibration, and the relevant tail/group metric, and use the baseline-calibrated veto only when a trusted undistorted reference run exists.
 If no trusted undistorted reference run exists, the baseline-calibrated veto should be marked unavailable rather than retrofitted; the safe recommendation is then dual reporting of proxy-best and validation-loss-best checkpoints.
 If the reference run is itself suppressive, the budget is only relative to that suppressive reference and should not be read as a standard-risk cap against an undistorted baseline.
 Appendix~\ref{app:adaptive-guardrail} also reports an adaptive threshold that uses only baseline validation-loss fluctuations.

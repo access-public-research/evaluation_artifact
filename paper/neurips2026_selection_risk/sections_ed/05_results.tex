@@ -86,6 +86,7 @@ Appendix Table~\ref{tab:guardrail-uncertainty} gives paired intervals for the pr
   \caption{
     Selector comparison with semantics made explicit.
     Top panel: absolute held-out metrics for the two Camelyon17 trajectories; bottom panel: delta-from-baseline verdicts for frozen CivilComments and ACSIncome.
+    Selection epochs are shown only for the Camelyon absolute checkpoint rows; the frozen CivilComments and ACSIncome rows are compact delta-from-baseline verdict summaries.
     Reported policy identifies whether metrics come from the baseline run, the same suppressive trajectory, an admit-or-fallback mixed report, or pure baseline fallback.
     Suppressive-admit is the diagnostic verdict for the suppressive run; baseline rows are not applicable.
     Frozen CivilComments changes from admitted to vetoed under the validation-loss admissibility diagnostic; on ACSIncome, validation loss is milder but the $1.25\times$ veto is slack.
