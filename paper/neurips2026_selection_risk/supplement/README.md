@@ -15,6 +15,7 @@ The bundle is intentionally narrow and supports artifact-backed verification of 
 - no exploratory rebuttal-only outputs
 
 The final packaged archive for submission is the anonymized supplement ZIP uploaded alongside the PDF.
+Internal labels of the form `rcgdro_*` are legacy run-family identifiers for Camelyon selector/finetune artifacts; they are not a separate method claim and do not identify authors or institutions.
 
 Expected archive-root layout:
 
