@@ -150,6 +150,7 @@ Thus accuracy-first and loss/tail-aware readings can favor different methods on 
     Frozen-ERM rows are relative to the ERM baseline; separate finetune-control rows are relative to that sweep's own baseline finetune checkpoint and are for within-table ranking only.
     Focal numbers denote $\gamma$.
     On frozen ERM, the positive-accuracy rows are suppressive and tail-worsening; on finetuning, the best-accuracy row is worst on loss and teacher-tail, while label smoothing wins on loss on $10/10$ seeds.
+    Dashes mark held-out loss entries not stored in the original frozen-family static artifact; the shared stored ranking fields for those rows are accuracy and teacher-tail.
     Bold marks the extreme in each column.
   }
   \label{tab:ranking-reversal}

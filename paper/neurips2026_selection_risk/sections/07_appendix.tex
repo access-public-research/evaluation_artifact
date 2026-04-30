@@ -478,7 +478,7 @@ Figure~\ref{fig:mechanism} and Table~\ref{tab:mechanism-table} give the mechanis
   \resizebox{\columnwidth}{!}{\input{tables/table_mechanism_orientation}}
   \caption{
     Same-stack objective-family controls on Camelyon17 ERM.
-    Soft clipping suppresses the tail ($R_w<1$), while focal loss and label smoothing upweight it ($R_w>1$).
+    Soft clipping and GCE suppress the tail ($R_w<1$), while focal loss and label smoothing upweight it ($R_w>1$).
     Focal 1/2/4 denote focal-loss focusing parameter $\gamma=1,2,4$.
     The $R_w$ values here are selected-checkpoint orientation values; Appendix Table~\ref{tab:rw-predictive-summary} and Figure~\ref{fig:rw-predictive-summary-app} separately report early-window $R_w$ for the warning-statistic analysis.
   }

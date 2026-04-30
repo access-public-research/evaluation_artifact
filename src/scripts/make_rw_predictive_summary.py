@@ -142,6 +142,8 @@ def _family_from_regime(regime: str) -> str:
 
 
 def _short_label(regime: str, row: pd.Series) -> str:
+    if str(regime) == "rcgdro":
+        return "ERM baseline"
     fam = _family_from_regime(regime)
     if fam == "softclip":
         if "p95" in regime:
@@ -380,7 +382,8 @@ def main() -> None:
     fig, ax = plt.subplots(figsize=(6.8, 4.8), dpi=180)
     colors = {"softclip": "#b35a1f", "labelsmooth": "#2f7d4a", "focal": "#2864c7"}
     markers = {"softclip": "o", "labelsmooth": "s", "focal": "^"}
-    for _, row in summary_df.iterrows():
+    plot_df = summary_df[summary_df["family"] != "other"].copy()
+    for _, row in plot_df.iterrows():
         fam = str(row["family"])
         ax.errorbar(
             row["early_rw_mean"],

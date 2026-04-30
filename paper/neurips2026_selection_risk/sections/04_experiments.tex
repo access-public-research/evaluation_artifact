@@ -28,6 +28,5 @@ This matters because the CelebA ERM result is transient while the Camelyon17 cas
 
 \paragraph{Sample sizes and controls.}
 The core ERM, objective-family, and finetuning sweeps use $n=10$ seeds.
-The objective-family control section compares soft clipping, focal loss \citep{lin2017focalloss}, and label smoothing on the same Camelyon17 ERM stack, with end-to-end Camelyon17 finetune controls summarized in the appendix.
-Appendix Table~\ref{tab:bootstrap-camelyon-support} adds a ten-seed hard-bootstrap corroboration on the same Camelyon17 ERM stack.
+The objective-family control section compares soft clipping, GCE $q=0.7$, focal loss \citep{lin2017focalloss}, and label smoothing on the same Camelyon17 ERM stack, with hard-bootstrap, teacher-free held-out loss-tail, checkpoint-averaging, and end-to-end Camelyon17 finetune controls summarized in the appendix.
 Additional sweep detail, uncertainty summaries, and supporting adaptive controls are moved to the appendix.
