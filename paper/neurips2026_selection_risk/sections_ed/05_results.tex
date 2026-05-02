@@ -59,7 +59,7 @@ Appendix Table~\ref{tab:camelyon-erm-selector-dose} varies the SoftClip threshol
 Appendix Table~\ref{tab:camelyon-valacc-selector} shows that validation-accuracy selection gives the same warning.
 Appendix Table~\ref{tab:camelyon-selector-averaging} adds a same-trajectory selector audit on Camelyon17 ERM: for both SoftClip P95 and GCE ($q=0.7$), proxy-best is worse than validation-loss-best on held-out loss, ECE, and the teacher-tail stress diagnostic in $10/10$ seeds; last-5 averaging remains harmful, while validation-loss-neighborhood averaging mitigates loss/ECE and leaves tail movement neutral.
 Appendix Table~\ref{tab:camelyon-loo-selector-standard} repeats the standard-metric loss direction across all five leave-one-hospital-out folds.
-The analogous finetune same-trajectory contrast is mixed, so finetuning remains a workflow-level hazard anchor.
+The main SoftClip finetune same-trajectory contrast is mixed, so that headline remains workflow-level; Appendix Table~\ref{tab:camelyon-gce-finetune-selector} adds a separate end-to-end GCE ($q=0.7$) selector audit where proxy-best improves the validation proxy and validation accuracy but worsens held-out loss and a fixed teacher-free held-out loss-tail relative to validation-loss-best, with held-out accuracy and calibration mixed.
 The $1.25\times$ veto is therefore only an empirical admissibility diagnostic; when no comparable non-suppressive baseline run is available, the safer operational recommendation is dual reporting of proxy-selected and validation-loss-selected checkpoints.
 
 Camelyon17 finetuning gives the largest mean accuracy-up / reliability-down pattern.

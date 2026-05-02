@@ -106,3 +106,6 @@ paper/neurips2026_selection_risk/tables/table_baseline_fixed_loss_tail.tex,Appen
 artifacts/metrics/camelyon_modern_selector_sensitivity_rows_20260430.csv,Per-seed Camelyon17 SoftClip/GCE selector and checkpoint-averaging sensitivity rows,make_camelyon_selector_averaging_sensitivity
 artifacts/metrics/camelyon_modern_selector_sensitivity_summary_20260430.csv,Summary of Camelyon17 selector and checkpoint-averaging sensitivity deltas,make_camelyon_selector_averaging_sensitivity
 paper/neurips2026_selection_risk/tables/table_camelyon_selector_averaging_sensitivity.tex,Appendix table generated from the Camelyon17 selector and checkpoint-averaging sensitivity summary,Appendix Table selector averaging sensitivity
+artifacts/metrics/camelyon17_gce_finetune_selector_rows_20260501.csv,Per-seed end-to-end Camelyon17 GCE q=0.7 finetune selector-audit rows,make_camelyon17_gce_finetune_selector_table
+artifacts/metrics/camelyon17_gce_finetune_selector_summary_20260501.csv,Summary of end-to-end Camelyon17 GCE q=0.7 finetune proxy-best minus validation-loss-best deltas,make_camelyon17_gce_finetune_selector_table
+paper/neurips2026_selection_risk/tables/table_camelyon17_gce_finetune_selector.tex,Appendix table generated from the end-to-end Camelyon17 GCE finetune selector summary,Appendix Table end-to-end GCE finetune selector audit

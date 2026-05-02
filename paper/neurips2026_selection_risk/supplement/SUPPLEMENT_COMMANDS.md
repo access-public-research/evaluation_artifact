@@ -70,6 +70,7 @@ python -m src.scripts.make_camelyon_selector_averaging_sensitivity
 python -m src.scripts.make_camelyon_loo_selector_standard_metrics
 python -m src.scripts.make_bootstrap_camelyon_support
 python -m src.scripts.make_gce_q07_extension_table
+python -m src.scripts.make_camelyon17_gce_finetune_selector_table
 python -m src.scripts.make_baseline_fixed_loss_tail_table
 python -m src.scripts.make_objfam_finetune_support_table
 python -m src.scripts.analyze_per_bank_robustness --dataset_label Camelyon17 --selected_rows_csv artifacts/metrics/camelyon17_selected_rows_v11erm_softclip_cam_10s_fix_20260325.csv --phase0_csv artifacts/metrics/camelyon17_resnet50_phase0_val_metrics_v11erm_softclip_cam_10s_fix_20260228.csv --phase1_csv artifacts/metrics/camelyon17_resnet50_phase1_pockets_v11erm_softclip_cam_10s_fix_20260228.csv --baseline_regime erm --out_csv artifacts/metrics/camelyon17_per_bank_robustness_v32_20260422.csv --out_tex paper/neurips2026_selection_risk/tables/table_camelyon17_per_bank_robustness_v32_20260422.tex

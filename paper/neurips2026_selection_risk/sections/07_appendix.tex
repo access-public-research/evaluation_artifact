@@ -371,7 +371,8 @@ For Camelyon17, the reliability diagnostic is teacher-difficulty tail CVaR; for 
 Table~\ref{tab:camelyon-selector-diagnostics} adds two targeted diagnostics for the Camelyon anchors.
 The workflow rows show that the Camelyon reliability signal is not carried only by teacher-difficulty tail CVaR: on ERM, held-out loss, ECE, and Brier all worsen; on finetuning, held-out loss and validation-side ECE worsen while Brier is neutral.
 The same-trajectory rows compare proxy-best with validation-loss-best inside the same suppressive trajectory, with no fallback.
-This selector-only contrast is clean on Camelyon17 ERM and mixed on finetuning, so the finetuning claim remains primarily baseline-referenced workflow evidence.
+This SoftClip P95 selector-only contrast is clean on Camelyon17 ERM and mixed on the main finetuning anchor, so the SoftClip finetuning headline remains primarily baseline-referenced workflow evidence.
+Table~\ref{tab:camelyon-gce-finetune-selector} reports a separate end-to-end GCE ($q=0.7$) finetune selector audit with clean held-out-loss and fixed loss-tail degradation relative to validation-loss-best.
 
 \begin{table}[h]
   \centering
@@ -386,6 +387,25 @@ This selector-only contrast is clean on Camelyon17 ERM and mixed on finetuning, 
     Workflow-row intervals are regenerated in this standard-metric triangulation artifact; small endpoint differences from Table~\ref{tab:core-case-uncertainty} reflect separate bootstrap resampling of the same seed-matched deltas.
   }
   \label{tab:camelyon-selector-diagnostics}
+\end{table}
+
+Table~\ref{tab:camelyon-gce-finetune-selector} adds a narrow end-to-end same-trajectory selector audit using GCE ($q=0.7$) on Camelyon17 finetuning.
+The comparison is proxy-best minus validation-loss-best on the same ten GCE finetune trajectories.
+It supports the loss/tail selector warning beyond the frozen-ERM stack: proxy-best improves the objective-aligned validation proxy and validation accuracy, but worsens held-out hospital-2 loss and a teacher-free held-out loss-tail.
+Held-out accuracy, ECE, and Brier are mixed, so we do not use this table as a held-out accuracy or calibration claim.
+
+\begin{table}[h]
+  \centering
+  \scriptsize
+  \resizebox{\columnwidth}{!}{\input{tables/table_camelyon17_gce_finetune_selector}}
+  \caption{
+    End-to-end GCE ($q=0.7$) same-trajectory selector audit on Camelyon17 finetuning.
+    Deltas are proxy-best minus validation-loss-best on the same ten GCE finetune trajectories.
+    Negative proxy means the objective-aligned validation score improves.
+    Proxy-best improves the GCE validation proxy and validation accuracy, but worsens ordinary validation CE, held-out hospital-2 loss, and a fixed teacher-free held-out loss-tail.
+    Held-out accuracy, ECE, and Brier are mixed, so this table is used only as loss/tail same-trajectory selector support, not as a held-out-accuracy or calibration claim.
+  }
+  \label{tab:camelyon-gce-finetune-selector}
 \end{table}
 
 Table~\ref{tab:camelyon-erm-selector-dose} extends the Camelyon17 ERM same-trajectory selector diagnostic beyond the P95 stress setting.
